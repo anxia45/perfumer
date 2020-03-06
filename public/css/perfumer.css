@@ -97,6 +97,8 @@
 	width: 100%;
 	margin: 10px 0;
 	float: left;
+	padding-bottom:10px ;
+	border-bottom: 1px solid #e8e8e8;
 }
 
 .item .imgborder {

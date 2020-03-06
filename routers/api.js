@@ -30,21 +30,10 @@ router.get('/perfumer', function(req, res, next) {
 	res.render('frontend/perfumer');
 })
 
-router.get('/perfumercon/:id', function(req, res, next) {
-	var pc_id = req.params.id;
-	console.log(pc_id)
-	var sqlAll = 'select * from perfumercon a inner join perfumer b on a.pc_id =b.pc_id where b.pc_id =' + pc_id;
-	pool.query(sqlAll, function(err, data) {
-		if (err) {
-			console.log(err);
-		} else {
-			responseData.url = 'frontend/perfumercon';
-			responseData.msg = data;
-			res.json(responseData);
-			// res.render('frontend/perfumercon');
-		}
-	});
+router.get('/perfumercon', function(req, res, next) {
+	res.render('frontend/perfumercon');
 })
+
 router.get('/login', function(req, res, next) {
 	res.render('frontend/login');
 })
@@ -91,10 +80,11 @@ router.post('/login', function(req, res, next) {
 			} else {
 				var response = data[0];
 				if (response.user_name == name && response.user_pwd == pwd) {
-					responseData.pre = '登录成功',
-						responseData.msg = user,
-						req.session.user = user,
-						res.json(responseData)
+					responseData.pre = '登录成功';
+						responseData.msg = user;
+						req.session.user = user;
+						// login_data();
+						res.json(responseData);
 					return;
 				} else {
 					responseData.code = -2
@@ -107,10 +97,17 @@ router.post('/login', function(req, res, next) {
 	})
 });
 // ----------------------------------------退出登录---------------------------------------//
-router.post('/logout', function(req, res, next) {
-	req.session.user_name = null
-	responseData.msg = '删除成功'
-	res.json(responseData);
+router.get('/logout', function(req, res, next) {
+	// 销毁session
+	req.session.destroy(function (err) {
+		if (err) {
+			console.log(err);
+		} else {
+			responseData.msg = '退出登录成功'
+			res.json(responseData);
+		}
+	})
+
 })
 // ---------------------------------------注册------------------------------------------//
 router.post('/register', function(req, res, next) {
@@ -352,22 +349,18 @@ router.post('/perfumer', function(req, res, next) {
 	})
 })
 
-// 调香师详细内容
-router.post('/perfumercon1/:id', function(req, res, next) {
-	console.log(111);
-	var id = req.body.pc_id;
-	console.log(id);
-	// var sqlAll = 'select * from perfumer';
-	// pool.query(sqlAll, function(err, data) {
-	// 	if (err) {
-	// 		console.log(err);
-	// 	} else {
-	// 		console.log('查询成功');
-	// 		responseData.msg = data
-	// 		res.json(responseData);
-	// 	}
-	// })
-	// var sqlAll = 'select * from perfumercon a inner join perfumer b on a.pc_id =b.pc_id where b.pc_id =2;'
+// 调香师详细页
+router.post('/perfumercon1', function(req, res, next) {
+	var id = JSON.stringify(req.body).substr(2, 1);
+	var sqlAll = "select * from perfumercon a inner join perfumer b on a.pc_id =b.pc_id where b.pc_id ='" + id + "'";
+	pool.query(sqlAll, function(err, data) {
+		if (err) {
+			console.log(err);
+		} else {
+			responseData.msg = data;
+			res.json(responseData);
+		}
+	})
 })
 
 

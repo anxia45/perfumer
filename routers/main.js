@@ -9,6 +9,11 @@ router.get('/backstage',function(req,res,next){
 	res.render('backstage/index');
 })
 //------------------------------------------后端管理--------------------------------------//
+// 用户
+router.get('/user', function(req, res, next) {
+	res.render('backstage/user');
+});
+
 // 首页
 router.get('/homepage', function(req, res, next) {
 	res.render('backstage/homepage');
@@ -53,15 +58,19 @@ router.get('/smell', function(req, res, next) {
 router.get('/perfumer', function(req, res, next) {
 	res.render('backstage/perfumer');
 });
-
+// 调香师
+router.get('/perfumercon', function(req,res,next) {
+		res.render('backstage/perfumercon');
+});
 // 登录
 router.get('/login', function(req, res, next) {
 	res.render('backstage/login');
 });
 
-// 用户
-router.get('/user', function(req, res, next) {
-	res.render('backstage/user');
-});
+// ===============================================================
+// 测试
+router.get('/file',function(req,res,next){
+	res.render('backstage/file');
+})
 
 module.exports = router;

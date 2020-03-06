@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var pool = require('../db/DBConfig.js');
+var multiparty = require('multiparty');
 
 // 统一格式返回
 var responseData;
@@ -69,7 +70,7 @@ router.post('/usersadd', function(req, res, next) {
 	var telStr = /^[1](([3][0-9])|([4][5-9])|([5][0-3,5-9])|([6][5,6])|([7][0-8])|([8][0-9])|([9][1,8,9]))[0-9]{8}$/;
 	// 密码正则表达式
 	var pwdStr = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[^]{8,16}$/;
-	// /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[\s\S]{8,16}$/   
+	// /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[\s\S]{8,16}$/
 	// [\s\S] 中的\s空白符，\S非空白符，所以[\s\S]是任意字符。也可以用 [\d\D]、[\w\W]来表示
 	// 非空判断
 	if (name == '' || pwd == '' || phone == '') {
@@ -533,18 +534,19 @@ router.post('/searchper', function(req, res, next) {
 	})
 })
 // 添加
+
 router.post('/perfumerAdd', function(req, res, next) {
 	var pc_img = req.body.pc_img;
 	var pc_name = req.body.pc_name;
-	var pc_url = req.body.pc_url;
+	var pc_introduce = req.body.pc_introduce;
 	var data = {
 		pc_img: pc_img,
 		pc_name: pc_name,
-		pc_url: pc_url
+		pc_introduce: pc_introduce
 	};
 
 	// 判断是否为空
-	if (pc_img == '' || pc_name == '' || pc_url == '') {
+	if (pc_img == '' || pc_name == '' || pc_introduce == '') {
 		responseData.code = 1,
 			responseData.msg = '内容不能为空';
 		res.json(responseData);
@@ -580,15 +582,15 @@ router.post('/perfumerupdate', function(req, res, next) {
 	var pc_id = req.body.pc_id;
 	var pc_img = req.body.pc_img;
 	var pc_name = req.body.pc_name;
-	var pc_url = req.body.pc_url;
+	var pc_introduce = req.body.pc_introduce;
 	// 判断是否为空
-	if (pc_id == '' || pc_img == '' || pc_name == '' || pc_url == '') {
+	if (pc_id == '' || pc_img == '' || pc_name == '' || pc_introduce == '') {
 		responseData.code = 1,
 			responseData.msg = '内容不能为空';
 		res.json(responseData);
 		return;
 	}
-	var sqlupdate = "update perfumer set pc_img = '" + pc_img + "',pc_name = '" + pc_name + "',pc_url = '" + pc_url +
+	var sqlupdate = "update perfumer set pc_img = '" + pc_img + "',pc_name = '" + pc_name + "',pc_introduce = '" + pc_introduce +
 		"' where pc_id ='" + pc_id + "'";
 	pool.query(sqlupdate, function(err, data) {
 		if (err) {
@@ -612,6 +614,101 @@ router.get('/perfumerdelete/:id', function(req, res, next) {
 			res.json(responseData);
 		} else {
 			responseData.msg = '删除成功';
+			res.json(responseData);
+		}
+	})
+})
+// ===========================================调香师详情页==============================================
+//查询
+router.post('/perfumercon',function (req,res,next) {
+	var sqlAll = "select * from perfumercon a join perfumer b on a.pc_id =b.pc_id";
+	pool.query(sqlAll,function (err,data) {
+		if (err) {
+			responseData.code = -1;
+			responseData.msg = '查询失败';
+			res.json(responseData);
+		} else {
+			responseData.msg = data;
+			res.json(responseData);
+		}
+	})
+})
+// 搜索
+router.post('/searchpercon', function(req, res, next) {
+	// 模糊查询两种方法直接在SQL语句后加 mysql.escape("%"+req.body.name+"%")
+	// sql += " WHERE product_name LIKE "+mysql.escape("%"+req.body.name+"%")
+	var sqlsearch = "select * from perfumercon a join perfumer b on a.pc_id =b.pc_id "
+	if (req.body.pf_name) {
+		sqlsearch += " where pf_name like ?"; //'%1%';"
+	}
+
+	// sql+= ' limit ? offset ?';
+	// let param = [ "%"+req.body.name+"%",pageNum, (page - 1) * pageNum ]
+
+	var data = ["%" + req.body.pf_name + "%"]
+	pool.query(sqlsearch, data, function(err, data) {
+		if (err) {
+			console.log(err);
+		} else {
+			responseData.msg = data
+			res.json(responseData);
+		}
+	})
+})
+// 查询下拉选择框
+router.post('/perfumerconselect',function (req,res,nexxt) {
+
+})
+// 添加
+router.post('/perfumerconAdd', function(req, res, next) {
+	var addpfname = req.body.addpfname;
+	var addpfimg = req.body.addpfimg;
+	var addpfnum = req.body.addpfnum;
+	var addpfscore = req.body.addpfscore;
+	var addpffirst = req.body.addpffirst;
+	var addpfin = req.body.addpfin;
+	var addpfafter = req.body.addpfafter;
+	var addpfsmell = req.body.addpfsmell;
+	var data = {
+		addpfname: addpfname,
+		addpfimg: addpfimg,
+		addpfnum: addpfnum,
+		addpfscore: addpfscore,
+		addpffirst: addpffirst,
+		addpfin: addpfin,
+		addpfafter: addpfafter,
+		addpfsmell: addpfsmell
+	};
+
+	// 判断是否为空
+	if (addpfname == '' || addpfimg == '' || addpfnum == '' || addpfscore == '') {
+		responseData.code = 1,
+			responseData.msg = '内容不能为空';
+		res.json(responseData);
+		return;
+	}
+	var sqlAdd = 'insert into perfumercon set ?';
+	pool.query(sqlAdd, data, function(err, data) {
+		if (err) {
+			responseData.code = -1;
+			responseData.msg = '添加失败';
+			res.json(responseData);
+		} else {
+			responseData.msg = '添加成功';
+			res.json(responseData);
+		}
+	})
+})
+
+// 查看
+router.get('/perfumerconId', function(req, res, next) {
+	var id = JSON.stringify(req.query).substr(2,1);
+	var sqlAll = "select * from perfumercon a join perfumer b on a.pc_id =b.pc_id where b.pc_id ='"+id+"'";
+	pool.query(sqlAll, function(err, data) {
+		if (err) {
+			console.log(err);
+		} else {
+			responseData.msg = data;
 			res.json(responseData);
 		}
 	})

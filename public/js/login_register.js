@@ -14,7 +14,8 @@ $(function() {
 					alert(data.pre);
 					setTimeout(function() {
 						$('#userpwd').val('');
-						window.sessionStorage.setItem("user_name",user_name);
+						sessionStorage.setItem("user_name",user_name);
+						login_data();
 						location.href = '/'
 					}, 1000)
 				} else if (data.code == 1) {

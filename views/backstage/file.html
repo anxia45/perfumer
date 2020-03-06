@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>文件上传</title>
+		<link rel="stylesheet" type="text/css" href="/public/bootstrap-3.3.7/css/bootstrap.min.css" />
+	</head>
+	<body>
+		<form action="/uploads" method="post" enctype="multipart/form-data">
+			<input type="text" name = "name" id="name">
+		      <input type="file" class="files" id="pic" name="pic">
+		      <input type="submit" class="uploadFile" value="文件上传">
+		</form>
+	</body>
+	<script src="/public/js/jquery-3.3.1.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/public/bootstrap-3.3.7/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+</html>

@@ -57,6 +57,13 @@ table tbody td {
 table tbody td img {
 	width: 30px;
 }
+table td {
+	max-width:10px;
+	white-space:nowrap;overflow:hidden;text-overflow: ellipsis;
+}
+#detailform img {
+	width: 80px;
+}
 
 /* 底部分页 */
 #pagination {
@@ -70,4 +77,7 @@ table tbody td img {
 
  .display {
 	 display: none;
+ }
+ textarea {
+	 resize: none;
  }

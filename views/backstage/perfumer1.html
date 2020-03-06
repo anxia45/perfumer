@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>调香师</title>
+		<link rel="stylesheet" type="text/css" href="/public/bootstrap-3.3.7/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="/public/fonticon/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="/public/css/table.css" />
+	</head>
+	<body>
+		<div class="col-md-9">
+			<button type="button" class="btn btn-danger btn-xs active" data-toggle="modal" data-target="#addModal">
+				<a href="#"><i class="iconfont icon-tianjia"></i>添加</a>
+			</button>
+		</div>
+		<div class="col-md-3">
+			<form id="searchform" class="bs-example bs-example-form" role="form">
+				<input type="search" id="pc_name" class="input" name="pc_name" placeholder="请输入姓名" />
+				<button type="button" class="btn btn-success btn-sm" id="search">搜索</button>
+			</form>
+		</div>
+		<table id="table" border="1" cellspacing="0" cellpadding="0">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>图片</th>
+					<th>姓名</th>
+					<th>简介</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody></tbody>
+		</table>
+		<!-- 添加 -->
+		<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel">添加</h4>
+					</div>
+					<div class="modal-body">
+						<form id="addform" class="form-horizontal" role="form">
+							<div class="form-group">
+								<label class="col-sm-2 control-label">图片:</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" name="pc_img" placeholder="请输入图片地址" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">姓名:</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" name="pc_name" placeholder="请输入姓名" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">简介:</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" name="pc_introduce" placeholder="请输入简介内容" />
+								</div>
+							</div>
+							<div class="text-right">
+								<button type="button" class="btn btn1 btn-success" id="add">添加</button>
+								<button type="button" class="btn btn1 btn-danger" data-dismiss="modal">关闭</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+<!--		查看-->
+		<div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title">查看</h4>
+					</div>
+					<div class="modal-body">
+						<form id="detailform" class="form-horizontal" role="form">
+							<div class="form-group display">
+								<label for="detailpcid" class="col-sm-2 control-label">ID:</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" id="detailpcid" value="" readonly="readonly" placeholder="请输入ID" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="detailpcname" class="col-sm-2 control-label">姓名:</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" id="detailpcname" value="" readonly="readonly" placeholder="请输入姓名" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="detailpcimg" class="col-sm-2 control-label">照片:</label>
+								<div class="col-sm-10">
+									<img width="80px;" src="" alt="暂无图片" id="detailpcimg">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="detailpcintroduce" class="col-sm-2 control-label">简介:</label>
+								<div class="col-sm-10">
+									<textarea id="detailpcintroduce" readonly="readonly" cols="68" rows="13" value=""></textarea>
+								</div>
+							</div>
+							<div class="text-right">
+								<button type="button" class="btn btn1 btn-danger" data-dismiss="modal">关闭</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 修改 -->
+		<div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title">修改</h4>
+					</div>
+					<div class="modal-body">
+						<form id="updateform" class="form-horizontal" role="form">
+							<div class="form-group display">
+								<label for="pcid" class="col-sm-2 control-label">ID:</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" name="pc_id" id="pcid" value="" placeholder="请输入ID" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="pcimg" class="col-sm-2 control-label">图片:</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" name="pc_img" id="pcimg" value="" placeholder="请输入图片地址" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="pc_name" class="col-sm-2 control-label">姓名:</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" name="pc_name" id="pcname" value="" placeholder="请输入姓名" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="pcurl" class="col-sm-2 control-label">地址:</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" name="pc_url" id="pcurl" value="" placeholder="请输入地址" />
+								</div>
+							</div>
+							<div class="text-right">
+								<button type="button" class="btn btn1 btn-success" id="update">修改</button>
+								<button type="button" class="btn btn1 btn-danger" data-dismiss="modal">关闭</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="/public/js/jquery-3.3.1.min.js"></script>
+		<script src="/public/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+		<script type="text/javascript">
+			$(function() {
+				var ht = ''
+				// 查询
+				$.ajax({
+					type: 'post',
+					url: '/api/perfumer',
+					dataType: 'json',
+					success: function(data) {
+						if (data.code == 0) {
+							console.log(data.msg)
+							for (var i = 0; i < data.msg.length; i++) {
+								ht += "<tr>" +
+									"<td >" + data.msg[i].pc_id + "</td>" +
+									"<td ><img src=" + data.msg[i].pc_img + "></td>" +
+									"<td >" + data.msg[i].pc_name + "</td>" +
+									"<td id='introduce' >" + data.msg[i].pc_introduce + "</td>" +
+									"<td >" +
+									"<button id='detail' data-id='" + data.msg[i].pc_id +
+									"' class='btn btn-xs btn-success' data-toggle='modal' data-target='#detailModal'><a href='javascript:;'><i class='iconfont icon-sousuo'></i>查看</a></button>" +
+									"<button id='delete' data-id='" + data.msg[i].pc_id +
+									"' class='btn btn-xs btn-success' data-toggle='modal' data-target='#updateModal'><a href='javascript:;'><i class='iconfont icon-web-icon-'></i>修改</a></button>" +
+									"<button id='delete' data-id='" + data.msg[i].pc_id +
+									"' class='btn btn-xs btn-danger'><a href='#'><i class='iconfont icon-shanchu'></i>删除</a></button>" +
+									"</td>" +
+									"</tr>";
+							}
+							$('tbody').append(ht);
+						}
+					}
+				})
+			})
+
+			// 搜索
+			$('#search').click(function() {
+				var data = $('#searchform').serialize();
+				if ($('.input').val() == '') {
+					alert('内容不能为空')
+					return false;
+				} else {
+					var ht = ''
+					$.ajax({
+						url: '/admin/searchper',
+						type: 'post',
+						dataType: 'json',
+						data: data,
+						success: function(data) {
+							if (data.code == 0) {
+								for (var i = 0; i < data.msg.length; i++) {
+									ht += "<tr>" +
+										"<td >" + data.msg[i].pc_id + "</td>" +
+										"<td ><img src=" + data.msg[i].pc_img + "></td>" +
+										"<td >" + data.msg[i].pc_name + "</td>" +
+										"<td >" + data.msg[i].pc_url + "</td>" +
+										"<td >" +
+										"<button id='update' data-id='" + data.msg[i].pc_id +
+										"' class='btn btn-xs btn-success' data-toggle='modal' data-target='#updateModal'><a href='#'><i class='iconfont icon-web-icon-'></i>修改</a></button>" +
+										"<button id='delete' data-id='" + data.msg[i].pc_id +
+										"' class='btn btn-xs btn-danger'><a href='#'><i class='iconfont icon-shanchu'></i>删除</a></button>" +
+										"</td>" +
+										"</tr>";
+								}
+								$('tbody').html(ht);
+								$('.input').val('');
+							}
+						}
+					})
+				}
+			})
+			// 添加
+			$("#add").click(function() {
+				var data = $("#addform").serialize();
+				$.ajax({
+					url: '/admin/perfumerAdd',
+					type: 'post',
+					dataType: 'json',
+					data: data,
+					success: function(data) {
+						if (data.code == 0) {
+							alert(data.msg);
+							setTimeout(function() {
+								// 刷新模态框，不然会保留上次填写的数据
+								$("#addModal").on("hidden.bs.modal", function() {
+									$(this).removeData("bs.modal");
+								})
+								$('#addform input').val('');
+								location.reload();
+							}, 1000)
+						} else if (data.code == 1) {
+							alert(data.msg);
+						} else if (data.code == -1) {
+							alert(data.msg);
+							// 刷新模态框，不然会保留上次填写的数据
+							$("#addModal").on("hidden.bs.modal", function() {
+								$(this).removeData("bs.modal");
+							})
+							$('#addform input').val('');
+						}
+					}
+				})
+			})
+			// 查看
+			$(document).on('click', '#detail', function() {
+				var id = $(this).attr("data-id");
+				$.ajax({
+					url: '/admin/perfumerId/' + id,
+					type: 'post',
+					dataType: 'json',
+					success: function(data) {
+						console.log(data.msg[0])
+						if (data.code == 0) {
+							$("#detailpcid").attr("value", data.msg[0].pc_id);
+							$("#detailpcimg").attr("src", data.msg[0].pc_img);
+							$("#detailpcname").attr("value", data.msg[0].pc_name);
+							document.getElementById("detailpcintroduce").innerHTML = data.msg[0].pc_introduce;
+						}
+					}
+				})
+			})
+			// 查询单条数据
+			$(document).on('click', '#update', function() {
+				var id = $(this).attr("data-id");
+				$.ajax({
+					url: '/admin/perfumerId/' + id,
+					type: 'post',
+					dataType: 'json',
+					success: function(data) {
+						if (data.code == 0) {
+							$("#pcid").attr("value", data.msg[0].pc_id);
+							$("#pcimg").attr("value", data.msg[0].pc_img);
+							$("#pcname").attr("value", data.msg[0].pc_name);
+							$("#pcurl").attr("value", data.msg[0].pc_url);
+						}
+					}
+				})
+			})
+			// 修改
+			$('#update').click(function() {
+				var data = $("#updateform").serialize();
+				console.log(data);
+				$.ajax({
+					url: '/admin/perfumerupdate',
+					type: 'post',
+					dataType: 'json',
+					data: data,
+					success: function(data) {
+						if (data.code == 0) {
+							alert(data.msg)
+							setTimeout(function() {
+								location.reload();
+							}, 1000)
+						} else if (data.code == 1) {
+							alert(data.msg);
+						} else if (data.code == -1) {
+							alert(data.msg);
+						}
+					}
+				})
+			})
+			// 删除
+			$(document).on('click', '#delete', function() {
+				var id = $(this).attr('data-id');
+				$.ajax({
+					url: '/admin/perfumerdelete/' + id,
+					type: 'get',
+					dataType: 'json',
+					success: function(data) {
+						if (data.code == 0) {
+							setTimeout(function() {
+								confirm('确定删除信息吗？');
+								alert(data.msg);
+								location.reload();
+							})
+						} else if (data.code == -1) {
+							alert(data.msg);
+						}
+					}
+				})
+			})
+		</script>
+	</body>
+</html>

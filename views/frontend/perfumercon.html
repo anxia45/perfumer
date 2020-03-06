@@ -2,103 +2,77 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>详细内容</title>
-		<link rel="stylesheet" type="text/css" href="/public/bootstrap-3.3.7/css/bootstrap.min.css"/>
-		<link rel="stylesheet" type="text/css" href="/public/css/perfumer.css"/>
+		<title>调香师的详细内容</title>
+		<link rel="stylesheet" type="text/css" href="/public/bootstrap-3.3.7/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="/public/css/perfumer.css" />
 	</head>
 	<body>
 		<!-- <img style="width: 100%;height: 50px;" src="/public/images/banner.png" > -->
 		<div class="backcolor"></div>
-		<div class="container percon">
-			<div class="row">
-				<div class="col-md-3 img">
-					<img src="/public/images/perfumer/12058684.jpg" >
-				</div>
-				<div class="col-md-9 desc">
-					<h1>Ernest Beaux</h1>
-					<p style="text-indent: 2em;line-height: 30px;">
-						Ernest Beaux (1881 - 1961)于1882年在俄罗斯莫斯科出生。他的父亲是Rallet香水公司
-						的总监，他的弟弟在Alphonse Rallet & Co.公司工作。1902年，他开始在Rallet香水公司
-						的主任A. Lemercier手下学习。5年后的1907年，Ernest顶替了老师，成为了Rallet香水公
-						司的主要调香师。Ernest是拿破仑的狂热者，他在1912年推出香水“Bouquet de Napoleon”。 俄国革命后移民，1920年创造出了举世闻名的香奈儿5号。1961年，Ernest辞去了香奈尔及Bourgeoisie的工作。没过多久，这位伟大的香水大师于1962年逝世。
-					</p>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-3"></div>
-				<div class="col-md-9 works">
-					<h3>TA的作品</h3>
-					<div id="items" class="items">
-						<div class="item">
-							<a href="#" class="imgborder">
-								<img src="https://img.xssdcdn.com/perfume/216503.jpg!m" >
-							</a>
-							<div class="detail">
-								<a href="#">
-									<h2>香奈儿 5号古龙水 Chanel No 5 Eau de Cologne, 1921</h2>
-								</a>
-								<div class="score">
-									<span class="sa8"></span>
-									 8.3 分 68 人评价
-								</div>
-								<div class="info">
-									前调：橙花,依兰,香柠檬,柠檬,醛<br>
-									中调：鸢尾花,茉莉,鸢尾根,玫瑰,铃兰<br>
-									后调：香根草,麝香,檀香木,广藿香,橡木苔,琥珀,香草,麝猫香
-								</div>
-							</div>
-						</div>
-						<div class="item">
-							<a href="#" class="imgborder">
-								<img src="https://img.xssdcdn.com/perfume/725309.jpg!m" >
-							</a>
-							<div class="detail">
-								<a href="#">
-									<h2>香奈儿 5号古龙水 Chanel No 5 Eau de Cologne, 1921</h2>
-								</a>
-								<div class="score">
-									<span class="start0 sa8"></span>
-									 8.3 分 68 人评价
-								</div>
-								<div class="info">
-									前调：橙花,依兰,香柠檬,柠檬,醛<br>
-									中调：鸢尾花,茉莉,鸢尾根,玫瑰,铃兰<br>
-									后调：香根草,麝香,檀香木,广藿香,橡木苔,琥珀,香草,麝猫香
-								</div>
-							</div>
-						</div>
-						<div class="item">
-							<a href="#" class="imgborder">
-								<img src="https://img.xssdcdn.com/perfume/725309.jpg!m" >
-							</a>
-							<div class="detail">
-								<a href="#">
-									<h2>香奈儿 5号古龙水 Chanel No 5 Eau de Cologne, 1921</h2>
-								</a>
-								<div class="score">
-									<span class="start0 sa8"></span>
-									 8.3 分 68 人评价
-								</div>
-								<div class="info">
-									气味：香根草,麝香,檀香木,广藿香,橡木苔,琥珀,香草,麝猫香
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+		<div id="percon" class="container percon">
+			<div id="h_row" class="row"></div>
+			<div id="f_row" class="row"></div>
 		</div>
 		<script src="/public/js/jquery-3.3.1.min.js"></script>
 		<script src="/public/bootstrap-3.3.7/js/bootstrap.min.js"></script>
 		<script type="text/javascript">
-			var id = localStorage.getItem('id');
-			// console.log(id);
+			function getUrlParam(id) {
+				var reg = new RegExp("(^|&)" + id + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+				var r = window.location.search.substr(1).match(reg); //匹配目标参数
+				if (r != null) return unescape(r[2]);
+				return null; //返回参数值
+			}
+			//接收URL中的参数id
+			var id = getUrlParam('id');
 			$.ajax({
-				type: 'get',
-				url: '/api/perfumercon' + id,
+				type: 'post',
+				url: '/api/perfumercon1',
 				dataType: 'json',
+				data: id,
 				success: function(data) {
-					console.log(data);	
+					var h_ht = '';
+					var f_ht = '';
+					if (data.code === 0) {
+						h_ht +=
+							"\t\t\t\t<div class=\"col-md-3 img\">\n" +
+							"\t\t\t\t\t<img src= '" + data.msg[0].pc_img + "' >\n" +
+							"\t\t\t\t</div>\n" +
+							"\t\t\t\t<div class=\"col-md-9 desc\">\n" +
+							"\t\t\t\t\t<h1>" + data.msg[0].pc_name + "</h1>\n" +
+							"\t\t\t\t\t<p style=\"text-indent: 2em;line-height: 30px;\">" + data.msg[0].pc_introduce + "</p>\n" +
+							"\t\t\t\t</div>";
+						for (var i = 0; i < data.msg.length; i++) {
+							f_ht +=
+								"\t\t\t\t<div class=\"col-md-3\"></div>\n" +
+								"\t\t\t\t<div class=\"col-md-9 works\">\n" +
+								"\t\t\t\t\t<h3>TA的作品</h3>\n" +
+								"\t\t\t\t\t<div id=\"items\" class=\"items\">\n" +
+								"\t\t\t\t\t\t<div class=\"item\">\n" +
+								"\t\t\t\t\t\t\t<a href=\"#\" class=\"imgborder\">\n" +
+								"\t\t\t\t\t\t\t\t<img src='" + data.msg[i].pf_img + "' >\n" +
+								"\t\t\t\t\t\t\t</a>\n" +
+								"\t\t\t\t\t\t\t<div class=\"detail\">\n" +
+								"\t\t\t\t\t\t\t\t<a href=\"#\">\n" +
+								"\t\t\t\t\t\t\t\t\t<h2>" + data.msg[i].pf_name + "</h2>\n" +
+								"\t\t\t\t\t\t\t\t</a>\n" +
+								"\t\t\t\t\t\t\t\t<div class=\"score\">\n" +
+								"\t\t\t\t\t\t\t\t\t<span class=\"sa8\"></span>\n" +
+								"\t\t\t\t\t\t\t\t\t " + data.msg[i].pf_score + " 分 " + data.msg[i].pf_num + " 人评价\n" +
+								"\t\t\t\t\t\t\t\t</div>\n" +
+								"\t\t\t\t\t\t\t\t<div class=\"info\">\n" +
+								"\t\t\t\t\t\t\t\t\t前调：" + data.msg[i].pf_first + "<br>\n" +
+								"\t\t\t\t\t\t\t\t\t中调：" + data.msg[i].pf_in + "<br>\n" +
+								"\t\t\t\t\t\t\t\t\t后调：" + data.msg[i].pf_after + "\n" +
+								// 气味：香根草,麝香,檀香木,广藿香,橡木苔,琥珀,香草,麝猫香
+								"\t\t\t\t\t\t\t\t</div>\n" +
+								"\t\t\t\t\t\t\t</div>\n" +
+								"\t\t\t\t\t\t</div>\n" +
+								"\t\t\t\t\t</div>\n" +
+								"\t\t\t\t</div>";
+						}
+						$('#h_row').append(h_ht);
+						$('#f_row').append(f_ht);
+					}
 				}
 			})
 		</script>

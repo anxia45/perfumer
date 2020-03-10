@@ -16,12 +16,12 @@
 	<body>
 		<div class="col-md-9">
 			<button type="button" class="btn btn-danger btn-xs active" data-toggle="modal" data-target="#addModal">
-				<a href="#"><i class="iconfont icon-tianjia"></i>添加品牌</a>
+				<a href="#"><i class="iconfont icon-tianjia"></i>添加</a>
 			</button>
 		</div>
 		<div class="col-md-3">
 			<form id="searchform" class="bs-example bs-example-form" role="form">
-				<input type="search" id="bcc_name_ch" class="input" name="bcc_name_ch" placeholder="请输入品牌名称" />
+				<input type="search" id="searchb_name_ch" class="input" name="b_name_ch" placeholder="请输入品牌名称" />
 				<button type="button" class="btn btn-success btn-sm" id="search">搜索</button>
 			</form>
 		</div>
@@ -32,7 +32,7 @@
 					<th>品牌图片</th>
 					<th>品牌中文名</th>
 					<th>品牌英文名</th>
-					<th>跳转路径</th>
+					<th>品牌简介</th>
 					<th>操作</th>
 				</tr>
 			</thead>
@@ -40,41 +40,40 @@
 		</table>
 
 		<!-- 添加 -->
-		<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabeladd" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-						<h4 class="modal-title" id="myModalLabel">添加</h4>
+						<h4 class="modal-title" id="myModalLabeladd">添加</h4>
 					</div>
 					<div class="modal-body">
 						<form id="addform" class="form-horizontal" role="form">
 							<div class="form-group">
-								<label for="bcc_img" class="col-sm-3 control-label">品牌图片:</label>
+								<label for="b_img" class="col-sm-3 control-label">品牌图片:</label>
 								<div class="col-sm-9">
-									<input type="text" class="form-control" name="bcc_img" placeholder="请输入用品牌图片地址" />
+									<input type="text" class="form-control" name="b_img" id="b_img" placeholder="请输入用品牌图片地址" />
 								</div>
 							</div>
 							<div class="form-group">
-								<label for="bcc_name_ch" class="col-sm-3 control-label">品牌中文名:</label>
+								<label for="b_name_ch" class="col-sm-3 control-label">品牌中文名:</label>
 								<div class="col-sm-9">
-									<input type="text" class="form-control" name="bcc_name_ch" placeholder="请输入品牌中文名" />
+									<input type="text" class="form-control" name="b_name_ch" id="b_name_ch" placeholder="请输入品牌中文名" />
 								</div>
 							</div>
 							<div class="form-group">
-								<label for="bcc_name_eh" class="col-sm-3 control-label">品牌英文名:</label>
+								<label for="b_name_eh" class="col-sm-3 control-label">品牌英文名:</label>
 								<div class="col-sm-9">
-									<input type="text" class="form-control" name="bcc_name_eh" placeholder="请输入品牌英文名" />
+									<input type="text" class="form-control" name="b_name_eh" id="b_name_eh" placeholder="请输入品牌英文名" />
 								</div>
 							</div>
 							<div class="form-group">
-								<label for="bcc_url" class="col-sm-3 control-label">跳转路径:</label>
+								<label for="b_content" class="col-sm-3 control-label">品牌简介:</label>
 								<div class="col-sm-9">
-									<input type="text" class="form-control" name="bcc_url" placeholder="请输入路径" />
+									<input type="text" class="form-control" name="b_content" id="b_content" placeholder="请输入品牌简介内容" />
 								</div>
 							</div>
 							<div class="text-right">
-								<span id="returnMessage" class="glyphicon"> </span>
 								<button type="button" class="btn btn1 btn-success" id="add">添加</button>
 								<button type="button" class="btn btn1 btn-danger" data-dismiss="modal">关闭</button>
 							</div>
@@ -94,37 +93,36 @@
 					<div class="modal-body">
 						<form id="updateform" class="form-horizontal" role="form">
 							<div class="form-group display">
-								<label for="bcc_id" class="col-sm-3 control-label">ID:</label>
+								<label for="ebid" class="col-sm-3 control-label">ID:</label>
 								<div class="col-sm-9">
-									<input type="text" class="form-control" name="bcc_id" id="bccid" placeholder="请输入ID" />
+									<input type="text" class="form-control" name="b_id" id="ebid" placeholder="请输入ID" />
 								</div>
 							</div>
 							<div class="form-group">
-								<label for="bcc_img" class="col-sm-3 control-label">品牌图片:</label>
+								<label for="ebimg" class="col-sm-3 control-label">品牌图片:</label>
 								<div class="col-sm-9">
-									<input type="text" class="form-control" name="bcc_img" id="bccimg" placeholder="请输入用户名称" />
+									<input type="text" class="form-control" name="b_img" id="ebimg" placeholder="请输入用品牌图片地址" />
 								</div>
 							</div>
 							<div class="form-group">
-								<label for="bcc_name_ch" class="col-sm-3 control-label">品牌中文名:</label>
+								<label for="ebnamech" class="col-sm-3 control-label">品牌中文名:</label>
 								<div class="col-sm-9">
-									<input type="text" class="form-control" name="bcc_name_ch" id="bccnamech" value="" placeholder="请输入密码" />
+									<input type="text" class="form-control" name="b_name_ch" id="ebnamech" placeholder="请输入品牌中文名" />
 								</div>
 							</div>
 							<div class="form-group">
-								<label for="bcc_name_eh" class="col-sm-3 control-label">品牌英文名:</label>
+								<label for="ebnameeh" class="col-sm-3 control-label">品牌英文名:</label>
 								<div class="col-sm-9">
-									<input type="text" class="form-control" name="bcc_name_eh" id="bccnameeh" value="" placeholder="请输入密码" />
+									<input type="text" class="form-control" name="b_name_eh" id="ebnameeh" placeholder="请输入品牌英文名" />
 								</div>
 							</div>
 							<div class="form-group">
-								<label for="bcc_url" class="col-sm-3 control-label">跳转路径:</label>
+								<label for="ebcontent" class="col-sm-3 control-label">品牌简介:</label>
 								<div class="col-sm-9">
-									<input type="text" class="form-control" name="bcc_url" id="bccurl" placeholder="请输入路径" />
+									<input type="text" class="form-control" name="b_content" id="ebcontent" placeholder="请输入品牌简介内容" />
 								</div>
 							</div>
 							<div class="text-right">
-								<span id="returnMessage" class="glyphicon"> </span>
 								<button type="button" class="btn btn1 btn-success" id="update">修改</button>
 								<button type="button" class="btn btn1 btn-danger" data-dismiss="modal">关闭</button>
 							</div>
@@ -138,7 +136,7 @@
 		<script type="text/javascript">
 			// 查询
 			$.ajax({
-				url: '/api/brandclasscontent',
+				url: '/api/brand',
 				type: 'post',
 				dataType: 'json',
 				success: function(data) {
@@ -146,15 +144,15 @@
 					if (data.code == 0) {
 						for (var i = 0; i < data.msg.length; i++) {
 							ht += "<tr>" +
-								"<td>" + data.msg[i].bcc_id + "</td>" +
-								"<td ><img src=" + data.msg[i].bcc_img + "></td>" +
-								"<td>" + data.msg[i].bcc_name_ch + "</td>" +
-								"<td>" + data.msg[i].bcc_name_eh + "</td>" +
-								"<td>" + data.msg[i].bcc_url + "</td>" +
+								"<td>" + data.msg[i].b_id + "</td>" +
+								"<td ><img alt='暂无图片' src=" + data.msg[i].b_img + "></td>" +
+								"<td>" + data.msg[i].b_name_ch + "</td>" +
+								"<td>" + data.msg[i].b_name_eh + "</td>" +
+								"<td>" + data.msg[i].b_content + "</td>" +
 								"<td >" +
-								"<button id='update' class='btn btn-xs btn-success' data-id='" + data.msg[i].bcc_id +
+								"<button id='update' class='btn btn-xs btn-success' data-id='" + data.msg[i].b_id +
 								"' data-toggle='modal' data-target='#updateModal'><a href='#'><i class='iconfont icon-web-icon-'></i>修改</a></button>" +
-								"<button id='delete' class='btn btn-xs btn-danger' data-id='" + data.msg[i].bcc_id +
+								"<button id='delete' class='btn btn-xs btn-danger' data-id='" + data.msg[i].b_id +
 								"'><a href='#'><i class='iconfont icon-shanchu'></i>删除</a></button>" +
 								"</td>" +
 								"</tr>";
@@ -180,18 +178,18 @@
 							if (data.code == 0) {
 								for (var i = 0; i < data.msg.length; i++) {
 									ht += "<tr>" +
-										"<td>" + data.msg[i].bcc_id + "</td>" +
-										"<td ><img src=" + data.msg[i].bcc_img + "></td>" +
-										"<td>" + data.msg[i].bcc_name_ch + "</td>" +
-										"<td>" + data.msg[i].bcc_name_eh + "</td>" +
-										"<td>" + data.msg[i].bcc_url + "</td>" +
-										"<td >" +
-										"<button id='update' class='btn btn-xs btn-success' data-id='" + data.msg[i].bcc_id +
-										"' data-toggle='modal' data-target='#updateModal'><a href='#'><i class='iconfont icon-web-icon-'></i>修改</a></button>" +
-										"<button id='delete' class='btn btn-xs btn-danger' data-id='" + data.msg[i].bcc_id +
-										"'><a href='#'><i class='iconfont icon-shanchu'></i>删除</a></button>" +
-										"</td>" +
-										"</tr>";
+											"<td>" + data.msg[i].b_id + "</td>" +
+											"<td ><img alt='暂无图片' src=" + data.msg[i].b_img + "></td>" +
+											"<td>" + data.msg[i].b_name_ch + "</td>" +
+											"<td>" + data.msg[i].b_name_eh + "</td>" +
+											"<td>" + data.msg[i].b_content + "</td>" +
+											"<td >" +
+											"<button id='update' class='btn btn-xs btn-success' data-id='" + data.msg[i].b_id +
+											"' data-toggle='modal' data-target='#updateModal'><a href='#'><i class='iconfont icon-web-icon-'></i>修改</a></button>" +
+											"<button id='delete' class='btn btn-xs btn-danger' data-id='" + data.msg[i].b_id +
+											"'><a href='#'><i class='iconfont icon-shanchu'></i>删除</a></button>" +
+											"</td>" +
+											"</tr>";
 								}
 								$('tbody').html(ht);
 								$('.input').val(""); // 清空
@@ -242,11 +240,11 @@
 					dataType: 'json',
 					success: function(data) {
 						console.log(data);
-						$("#bccid").attr("value", data.msg[0].bcc_id);
-						$("#bccimg").attr("value", data.msg[0].bcc_img);
-						$("#bccnamech").attr("value", data.msg[0].bcc_name_ch);
-						$("#bccnameeh").attr("value", data.msg[0].bcc_name_eh);
-						$("#bccurl").attr("value", data.msg[0].bcc_url);
+						$("#ebid").attr("value", data.msg[0].b_id);
+						$("#ebimg").attr("value", data.msg[0].b_img);
+						$("#ebnamech").attr("value", data.msg[0].b_name_ch);
+						$("#ebnameeh").attr("value", data.msg[0].b_name_eh);
+						$("#ebcontent").attr("value", data.msg[0].b_content);
 					}
 				})
 			})

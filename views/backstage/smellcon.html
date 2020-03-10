@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>调香师内容</title>
+    <title>气味内容</title>
     <link rel="stylesheet" type="text/css" href="/public/bootstrap-3.3.7/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="/public/fonticon/iconfont.css" />
     <link rel="stylesheet" type="text/css" href="/public/css/table.css" />
@@ -15,7 +15,7 @@
 </div>
 <div class="col-md-3">
     <form id="searchform" class="bs-example bs-example-form" role="form">
-        <input type="search" id="pf_name" class="input" name="pf_name" placeholder="请输入香水名" />
+        <input type="search" id="sc_title" class="input" name="sc_title" placeholder="请输入产品名" />
         <button type="button" class="btn btn-success btn-sm" id="search">搜索</button>
     </form>
 </div>
@@ -23,9 +23,9 @@
     <thead>
     <tr>
         <th style="width: 1%">ID</th>
-        <th style="width: 1%">香水名</th>
+        <th style="width: 1%">气味</th>
         <th style="width: 1%">产品图</th>
-        <th style="width: 1%">调香师</th>
+        <th style="width: 2%">产品</th>
         <th style="width: 1%">评价人数</th>
         <th style="width: 1%">评分</th>
         <th style="width: 1%">前调</th>
@@ -48,61 +48,61 @@
             <div class="modal-body">
                 <form id="addform" class="form-horizontal" role="form">
                     <div class="form-group">
-                        <label   class="col-sm-2 control-label">调香师:</label>
+                        <label   class="col-sm-2 control-label">气味:</label>
                         <div class="col-sm-10">
-                            <select class="form-control"  name="addpcname" id="addpcname" >
+                            <select class="form-control"  name="s_name_ch" id="addsnamech" >
                                 <option value="" disabled selected hidden>--请选择--</option>
                             </select>
                         </div>
                     </div>
-                        <div class="form-group">
-                            <label for="addpfname" class="col-sm-2 control-label">香水名:</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" name="addpfname" id="addpfname" value=""  placeholder="请输入香水名" />
-                            </div>
+                    <div class="form-group">
+                        <label for="addscname" class="col-sm-2 control-label">产品名:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="sc_name" id="addscname" value=""  placeholder="请输入产品名" />
                         </div>
-                        <div class="form-group">
-                            <label for="addpfimg" class="col-sm-2 control-label">作品图:</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" name="addpfimg" id="addpfimg" value=""  placeholder="请输入作品图的地址" />
-                            </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="addscimg" class="col-sm-2 control-label">产品图:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="sc_img" id="addscimg" value=""  placeholder="请输入图片地址" />
                         </div>
-                        <div class="form-group">
-                            <label for="detailpfnum" class="col-sm-2 control-label">评价人数:</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" name="addpfnum" id="addpfnum" value="" placeholder="请输入评价人数" />
-                            </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="addscnum" class="col-sm-2 control-label">评价人数:</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" name="sc_num" id="addscnum" value="" placeholder="请输入评价人数" />
                         </div>
-                        <div class="form-group">
-                            <label for="addpfscore" class="col-sm-2 control-label">评分:</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" name="addpfscore" id="addpfscore" value="" placeholder="请输入评分" />
-                            </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="addscscore" class="col-sm-2 control-label">评分:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="sc_score" id="addscscore" value="" placeholder="请输入评分" />
                         </div>
-                        <div class="form-group">
-                            <label for="addpffirst" class="col-sm-2 control-label">前调:</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" name="addpffirst" id="addpffirst" value="" placeholder="请输入前调" />
-                            </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="addscfirst" class="col-sm-2 control-label">前调:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="sc_first" id="addscfirst" value="" placeholder="请输入前调" />
                         </div>
-                        <div class="form-group">
-                            <label for="addpfin" class="col-sm-2 control-label">中调:</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" name="addpfin" id="addpfin" value="" placeholder="请输入中调" />
-                            </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="addscin" class="col-sm-2 control-label">中调:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="sc_in" id="addscin" value="" placeholder="请输入中调" />
                         </div>
-                        <div class="form-group">
-                            <label for="addpfafter" class="col-sm-2 control-label">后调:</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" name="addpfafter" id="addpfafter" value="" placeholder="请输入后调" />
-                            </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="addscafter" class="col-sm-2 control-label">后调:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="sc_after" id="addscafter" value="" placeholder="请输入后调" />
                         </div>
-                        <div class="form-group">
-                            <label for="addpfsmell" class="col-sm-2 control-label">气味:</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" name="addpfsmell" id="addpfsmell" value="" placeholder="请输入气味" />
-                            </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="addscsmell" class="col-sm-2 control-label">气味:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="sc_smell" id="addscsmell" value="" placeholder="请输入气味" />
                         </div>
+                    </div>
                     <div class="text-right">
                         <button type="button" class="btn btn1 btn-success" id="add">添加</button>
                         <button type="button" class="btn btn1 btn-danger" data-dismiss="modal">关闭</button>
@@ -123,69 +123,63 @@
             <div class="modal-body">
                 <form id="detailform" class="form-horizontal" role="form">
                     <div class="form-group">
-                        <label for="detailpfid" class="col-sm-2 control-label">ID:</label>
+                        <label for="scid" class="col-sm-2 control-label">ID:</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="detailpfid" value="" readonly="readonly" placeholder="请输入ID" />
+                            <input type="text" class="form-control"  name="sc_id" id="detailscid" value="" readonly  placeholder="请输入ID" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="detailpcname" class="col-sm-2 control-label">调香师:</label>
+                        <label   class="col-sm-2 control-label">气味:</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="detailpcname" value="" readonly="readonly" placeholder="请输入调香师名称" />
+                            <input type="text" class="form-control" name="s_name_ch" id="detailsnamech" value="" readonly  placeholder="请输入气味" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="detailpcimg" class="col-sm-2 control-label">照片:</label>
-                        <div class="col-sm-5">
-                            <img src="" alt="暂无图片" id="detailpcimg">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="detailpfname" class="col-sm-2 control-label">香水名:</label>
+                        <label for="sctitle" class="col-sm-2 control-label">产品名:</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="detailpfname" value="" readonly="readonly" placeholder="请输入香水名" />
+                            <input type="text" class="form-control" name="sc_name" id="detailsctitle" value="" readonly  placeholder="请输入产品名" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="detailpfimg" class="col-sm-2 control-label">作品图:</label>
-                        <div class="col-sm-5">
-                            <img src="" alt="暂无图片" id="detailpfimg">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="detailpfnum" class="col-sm-2 control-label">评价人数:</label>
+                        <label for="scimg" class="col-sm-2 control-label">产品图:</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="detailpfnum" value="" readonly="readonly" placeholder="请输入评价人数" />
+                            <img src="" alt="暂无图片" name="sc_img" id="detailscimg" >
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="detailpfscore" class="col-sm-2 control-label">评分:</label>
+                        <label for="scnum" class="col-sm-2 control-label">评价人数:</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="detailpfscore" value="" readonly="readonly" placeholder="请输入评分" />
+                            <input type="number" class="form-control" name="sc_num" id="detailscnum" value="" readonly placeholder="请输入评价人数" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="detailpffirst" class="col-sm-2 control-label">前调:</label>
+                        <label for="scscore" class="col-sm-2 control-label">评分:</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="detailpffirst" value="" readonly="readonly" placeholder="请输入前调内容" />
+                            <input type="text" class="form-control" name="sc_score" id="detailscscore" value="" readonly placeholder="请输入评分" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="detailpfin" class="col-sm-2 control-label">中调:</label>
+                        <label for="scfirst" class="col-sm-2 control-label">前调:</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="detailpfin" value="" readonly="readonly" placeholder="请输入中调内容" />
+                            <input type="text" class="form-control" name="sc_first" id="detailscfirst" value="" readonly placeholder="请输入前调" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="detailpfafter" class="col-sm-2 control-label">后调:</label>
+                        <label for="scin" class="col-sm-2 control-label">中调:</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="detailpfafter" value="" readonly="readonly" placeholder="请输入后调内容" />
+                            <input type="text" class="form-control" name="sc_in" id="detailscin" value="" readonly placeholder="请输入中调" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="detailpfsmell" class="col-sm-2 control-label">气味:</label>
+                        <label for="scafter" class="col-sm-2 control-label">后调:</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="detailpfsmell" value="" readonly="readonly" placeholder="请输入气味" />
+                            <input type="text" class="form-control" name="sc_after" id="detailscafter" value="" readonly placeholder="请输入后调" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="scsmell" class="col-sm-2 control-label">气味:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="sc_smell" id="detailscsmell" value="" readonly placeholder="请输入气味" />
                         </div>
                     </div>
                     <div class="text-right">
@@ -207,65 +201,65 @@
             <div class="modal-body">
                 <form id="updateform" class="form-horizontal" role="form">
                     <div class="form-group">
-                        <label for="updatepfid" class="col-sm-2 control-label">ID:</label>
+                        <label for="scid" class="col-sm-2 control-label">ID:</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control"  name="updatepfid" id="updatepfid" value="" readonly  placeholder="请输入香水名" />
+                            <input type="text" class="form-control"  name="sc_id" id="scid" value="" readonly  placeholder="请输入ID" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label   class="col-sm-2 control-label">调香师:</label>
+                        <label   class="col-sm-2 control-label">气味:</label>
                         <div class="col-sm-10">
-                            <select class="form-control"  name="updatepcname" id="updatepcname" >
+                            <select class="form-control"  name="s_name_ch" id="snamech" >
                                 <option value="" disabled selected hidden>--请选择--</option>
                             </select>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="updatepfname" class="col-sm-2 control-label">香水名:</label>
+                        <label for="sctitle" class="col-sm-2 control-label">产品名:</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" name="updatepfname" id="updatepfname" value=""  placeholder="请输入香水名" />
+                            <input type="text" class="form-control" name="sc_name" id="sctitle" value=""  placeholder="请输入产品名" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="updatepfimg" class="col-sm-2 control-label">作品图:</label>
+                        <label for="scimg" class="col-sm-2 control-label">产品图:</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" name="updatepfimg" id="updatepfimg" value=""  placeholder="请输入作品图的地址" />
+                            <input type="text" class="form-control" name="sc_img" id="scimg" value=""  placeholder="请输入图片地址" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="updatepfnum" class="col-sm-2 control-label">评价人数:</label>
+                        <label for="scnum" class="col-sm-2 control-label">评价人数:</label>
                         <div class="col-sm-10">
-                            <input type="number" class="form-control" name="updatepfnum" id="updatepfnum" value="" placeholder="请输入评价人数" />
+                            <input type="number" class="form-control" name="sc_num" id="scnum" value="" placeholder="请输入评价人数" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="updatepfscore" class="col-sm-2 control-label">评分:</label>
+                        <label for="scscore" class="col-sm-2 control-label">评分:</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" name="updatepfscore" id="updatepfscore" value="" placeholder="请输入评分" />
+                            <input type="text" class="form-control" name="sc_score" id="scscore" value="" placeholder="请输入评分" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="updatepffirst" class="col-sm-2 control-label">前调:</label>
+                        <label for="scfirst" class="col-sm-2 control-label">前调:</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" name="updatepffirst" id="updatepffirst" value="" placeholder="请输入前调" />
+                            <input type="text" class="form-control" name="sc_first" id="scfirst" value="" placeholder="请输入前调" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="updatepfin" class="col-sm-2 control-label">中调:</label>
+                        <label for="scin" class="col-sm-2 control-label">中调:</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" name="updatepfin" id="updatepfin" value="" placeholder="请输入中调" />
+                            <input type="text" class="form-control" name="sc_in" id="scin" value="" placeholder="请输入中调" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="updatepfafter" class="col-sm-2 control-label">后调:</label>
+                        <label for="scafter" class="col-sm-2 control-label">后调:</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" name="updatepfafter" id="updatepfafter" value="" placeholder="请输入后调" />
+                            <input type="text" class="form-control" name="sc_after" id="scafter" value="" placeholder="请输入后调" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="updatepfsmell" class="col-sm-2 control-label">气味:</label>
+                        <label for="scsmell" class="col-sm-2 control-label">气味:</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" name="updatepfsmell" id="updatepfsmell" value="" placeholder="请输入气味" />
+                            <input type="text" class="form-control" name="sc_smell" id="scsmell" value="" placeholder="请输入气味" />
                         </div>
                     </div>
                     <div class="text-right">
@@ -283,29 +277,29 @@
     // 查询
     $.ajax({
         type: 'post',
-        url: '/admin/perfumercon',
+        url: '/admin/smellcon',
         dataType: 'json',
         success: function(data) {
             var ht = ''
             if (data.code === 0) {
                 for (var i = 0; i < data.msg.length; i++) {
                     ht += "<tr>" +
-                        "<td >" + data.msg[i].pf_id + "</td>" +
-                        "<td >" + data.msg[i].pf_name + "</td>" +
-                        "<td ><img alt='暂无图片' src=" + data.msg[i].pf_img + "></td>" +
-                        "<td >" + data.msg[i].pc_name + "</td>" +
-                        "<td >" + data.msg[i].pf_num + "</td>" +
-                        "<td >" + data.msg[i].pf_score + "</td>" +
-                        "<td >" + data.msg[i].pf_first + "</td>" +
-                        "<td >" + data.msg[i].pf_in + "</td>" +
-                        "<td >" + data.msg[i].pf_after + "</td>" +
-                        "<td >" + data.msg[i].pf_smell + "</td>" +
+                        "<td >" + data.msg[i].sc_id + "</td>" +
+                        "<td >" + data.msg[i].s_name_ch + "</td>" +
+                        "<td ><img alt='暂无图片' src=" + data.msg[i].sc_img + "></td>" +
+                        "<td >" + data.msg[i].sc_title + "</td>" +
+                        "<td >" + data.msg[i].sc_num + "</td>" +
+                        "<td >" + data.msg[i].sc_score + "</td>" +
+                        "<td >" + data.msg[i].sc_first + "</td>" +
+                        "<td >" + data.msg[i].sc_in + "</td>" +
+                        "<td >" + data.msg[i].sc_after + "</td>" +
+                        "<td >" + data.msg[i].sc_smell + "</td>" +
                         "<td >" +
-                        "<button id='detail' data-id='" + data.msg[i].pf_id +
+                        "<button id='detail' data-id='" + data.msg[i].sc_id +
                         "' class='btn btn-xs btn-success' data-toggle='modal' data-target='#detailModal'><a href='javascript:;'><i class='iconfont icon-sousuo'></i>查看</a></button>" +
-                        "<button id='update' data-id='" + data.msg[i].pf_id +
+                        "<button id='update' data-id='" + data.msg[i].sc_id +
                         "' class='btn btn-xs btn-success' data-toggle='modal' data-target='#updateModal'><a href='javascript:;'><i class='iconfont icon-web-icon-'></i>修改</a></button>" +
-                        "<button id='delete' data-id='" + data.msg[i].pf_id +
+                        "<button id='delete' data-id='" + data.msg[i].sc_id +
                         "' class='btn btn-xs btn-danger'><a href='#'><i class='iconfont icon-shanchu'></i>删除</a></button>" +
                         "</td>" +
                         "</tr>";
@@ -324,7 +318,7 @@
         } else {
             var ht = ''
             $.ajax({
-                url: '/admin/searchpercon',
+                url: '/admin/searchsmellcon',
                 type: 'post',
                 dataType: 'json',
                 data: data,
@@ -332,22 +326,22 @@
                     if (data.code == 0) {
                         for (var i = 0; i < data.msg.length; i++) {
                             ht += "<tr>" +
-                                "<td >" + data.msg[i].pf_id + "</td>" +
-                                "<td >" + data.msg[i].pf_name + "</td>" +
-                                "<td ><img alt='暂无图片' src=" + data.msg[i].pf_img + "></td>" +
-                                "<td >" + data.msg[i].pc_name + "</td>" +
-                                "<td >" + data.msg[i].pf_num + "</td>" +
-                                "<td >" + data.msg[i].pf_score + "</td>" +
-                                "<td >" + data.msg[i].pf_first + "</td>" +
-                                "<td >" + data.msg[i].pf_in + "</td>" +
-                                "<td >" + data.msg[i].pf_after + "</td>" +
-                                "<td >" + data.msg[i].pf_smell + "</td>" +
+                                "<td >" + data.msg[i].sc_id + "</td>" +
+                                "<td >" + data.msg[i].s_name_ch + "</td>" +
+                                "<td ><img alt='暂无图片' src=" + data.msg[i].sc_img + "></td>" +
+                                "<td >" + data.msg[i].sc_title + "</td>" +
+                                "<td >" + data.msg[i].sc_num + "</td>" +
+                                "<td >" + data.msg[i].sc_score + "</td>" +
+                                "<td >" + data.msg[i].sc_first + "</td>" +
+                                "<td >" + data.msg[i].sc_in + "</td>" +
+                                "<td >" + data.msg[i].sc_after + "</td>" +
+                                "<td >" + data.msg[i].sc_smell + "</td>" +
                                 "<td >" +
-                                "<button id='detail' data-id='" + data.msg[i].pf_id +
+                                "<button id='detail' data-id='" + data.msg[i].sc_id +
                                 "' class='btn btn-xs btn-success' data-toggle='modal' data-target='#detailModal'><a href='javascript:;'><i class='iconfont icon-sousuo'></i>查看</a></button>" +
-                                "<button id='update' data-id='" + data.msg[i].pf_id +
+                                "<button id='update' data-id='" + data.msg[i].sc_id +
                                 "' class='btn btn-xs btn-success' data-toggle='modal' data-target='#updateModal'><a href='javascript:;'><i class='iconfont icon-web-icon-'></i>修改</a></button>" +
-                                "<button id='delete' data-id='" + data.msg[i].pf_id +
+                                "<button id='delete' data-id='" + data.msg[i].sc_id +
                                 "' class='btn btn-xs btn-danger'><a href='#'><i class='iconfont icon-shanchu'></i>删除</a></button>" +
                                 "</td>" +
                                 "</tr>";
@@ -362,28 +356,28 @@
     // 添加
     // 获取下拉选择框的值
     $.ajax({
-        url: '/admin/perfumerconselect',
+        url: '/admin/smellconselect',
         type: 'post',
         dataType: 'json',
         success: function (data) {
             if (data.code == 0) {
                 var ht = '';
                 for (var i=0;i<data.msg.length; i++){
-                    ht += "<option value='"+data.msg[i].pc_id+"'>"+data.msg[i].pc_name+"</option>";
+                    ht += "<option value='"+data.msg[i].s_id+"'>"+data.msg[i].s_name_ch+"</option>";
                 }
-                $('#addpcname').append(ht);
+                $('#addsnamech').append(ht);
             }
         }
     })
     $("#add").click(function() {
         var data = $("#addform").serialize();
         $.ajax({
-            url: '/admin/perfumerconAdd',
+            url: '/admin/smellconAdd',
             type: 'post',
             dataType: 'json',
             data: data,
             success: function(data) {
-                if (data.code === 0) {
+                if (data.code == 0) {
                     alert(data.msg);
                     setTimeout(function() {
                         // 刷新模态框，不然会保留上次填写的数据
@@ -393,11 +387,9 @@
                         $('#addform input').val('');
                         location.reload();
                     }, 1000)
-                } else if (data.code === 1) {
-                    if (pc_name === '' || pc_name === null) {
-                        alert('内容不能为空')
-                    }
-                } else if (data.code === -1) {
+                } else if (data.code == 1) {
+                    alert('内容不能为空')
+                } else if (data.code == -1) {
                     alert(data.msg);
                     // 刷新模态框，不然会保留上次填写的数据
                     $("#addModal").on("hidden.bs.modal", function() {
@@ -412,23 +404,22 @@
     $(document).on('click', '#detail', function() {
         var id = $(this).attr("data-id");
         $.ajax({
-            url: '/admin/perfumerconId',
+            url: '/admin/smellconId',
             type: 'get',
             dataType: 'json',
             data: id,
             success: function(data) {
                 if (data.code == 0) {
-                    $("#detailpcimg").attr("src", data.msg[0].pc_img);
-                    $("#detailpcname").attr("value", data.msg[0].pc_name);
-                    $("#detailpfid").attr("value", data.msg[0].pf_id);
-                    $("#detailpfname").attr("value",data.msg[0].pf_name);
-                    $("#detailpfimg").attr("src", data.msg[0].pf_img);
-                    $("#detailpfnum").attr("value", data.msg[0].pf_num);
-                    $("#detailpfscore").attr("value",data.msg[0].pf_score);
-                    $("#detailpffirst").attr("value", data.msg[0].pf_first);
-                    $("#detailpfin").attr("value", data.msg[0].pf_in);
-                    $("#detailpfafter").attr("value", data.msg[0].pf_after);
-                    $("#detailpfsmell").attr("value", data.msg[0].pf_smell);
+                    $("#detailsnamech").attr("value", data.msg[0].s_name_ch);
+                    $("#detailscid").attr("value", data.msg[0].sc_id);
+                    $("#detailsctitle").attr("value",data.msg[0].sc_title);
+                    $("#detailscimg").attr("src", data.msg[0].sc_img);
+                    $("#detailscnum").attr("value", data.msg[0].sc_num);
+                    $("#detailscscore").attr("value",data.msg[0].sc_score);
+                    $("#detailscfirst").attr("value", data.msg[0].sc_first);
+                    $("#detailscin").attr("value", data.msg[0].sc_in);
+                    $("#detailscafter").attr("value", data.msg[0].sc_after);
+                    $("#detailscsmell").attr("value", data.msg[0].sc_smell);
                 }
             }
         })
@@ -438,7 +429,7 @@
         var id = $(this).attr("data-id");
         // 获取下拉选择框的值并赋值
         $.ajax({
-            url: '/admin/perfumerconselect',
+            url: '/admin/smellconselect',
             type: 'post',
             dataType: 'json',
             success: function (data) {
@@ -446,32 +437,32 @@
                 if (data.code == 0) {
                     var ht = '';
                     for (var i=0;i<data.msg.length; i++){
-                            ht += "<option value='"+data.msg[i].pc_id+"'";
-                            if (id == data.msg[i].pc_id) {
-                                ht += 'selected';
-                            }
-                            ht+=  ">"+data.msg[i].pc_name+"</option>";
+                        ht += "<option value='"+data.msg[i].s_id+"'";
+                        if (id == data.msg[i].s_id) {
+                            ht += 'selected';
+                        }
+                        ht+=  ">"+data.msg[i].s_name_ch+"</option>";
                     }
-                    $('#updatepcname').append(ht);
+                    $('#snamech').append(ht);
                 }
             }
         })
         $.ajax({
-            url: '/admin/perfumerconId',
+            url: '/admin/smellconId',
             type: 'get',
             dataType: 'json',
             data: id,
             success: function(data) {
                 if (data.code == 0) {
-                    $("#updatepfid").attr("value", data.msg[0].pf_id);
-                    $("#updatepfname").attr("value",data.msg[0].pf_name);
-                    $("#updatepfimg").attr("value", data.msg[0].pf_img);
-                    $("#updatepfnum").attr("value", data.msg[0].pf_num);
-                    $("#updatepfscore").attr("value",data.msg[0].pf_score);
-                    $("#updatepffirst").attr("value", data.msg[0].pf_first);
-                    $("#updatepfin").attr("value", data.msg[0].pf_in);
-                    $("#updatepfafter").attr("value", data.msg[0].pf_after);
-                    $("#updatepfsmell").attr("value", data.msg[0].pf_smell);
+                    $("#scid").attr("value", data.msg[0].sc_id);
+                    $("#sctitle").attr("value",data.msg[0].sc_title);
+                    $("#scimg").attr("value", data.msg[0].sc_img);
+                    $("#scnum").attr("value", data.msg[0].sc_num);
+                    $("#scscore").attr("value",data.msg[0].sc_score);
+                    $("#scfirst").attr("value", data.msg[0].sc_first);
+                    $("#scin").attr("value", data.msg[0].sc_in);
+                    $("#scafter").attr("value", data.msg[0].sc_after);
+                    $("#scsmell").attr("value", data.msg[0].sc_smell);
                 }
             }
         })
@@ -482,7 +473,7 @@
         console.log(data);
         // return;
         $.ajax({
-            url: '/admin/perfumerconupdate',
+            url: '/admin/smellconupdate',
             type: 'post',
             dataType: 'json',
             data: data,
@@ -504,7 +495,7 @@
     $(document).on('click', '#delete', function() {
         var id = $(this).attr('data-id');
         $.ajax({
-            url: '/admin/perfumercondelete/' + id,
+            url: '/admin/smellcondelete/' + id,
             type: 'get',
             dataType: 'json',
             success: function(data) {

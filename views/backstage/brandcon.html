@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>品牌详情</title>
+    <link rel="stylesheet" type="text/css" href="/public/bootstrap-3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/public/css/table.css" />
+    <link rel="stylesheet" type="text/css" href="/public/fonticon/iconfont.css" />
+    <style type="text/css">
+        .col-sm-3 {
+            width: 18%;
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+<div class="col-md-9">
+    <button type="button" class="btn btn-danger btn-xs active" data-toggle="modal" data-target="#addModal">
+        <a href="#"><i class="iconfont icon-tianjia"></i>添加</a>
+    </button>
+</div>
+<div class="col-md-3">
+    <form id="searchform" class="bs-example bs-example-form" role="form">
+        <input type="search" id="bc_name" class="input" name="bc_name" placeholder="请输入香水名" />
+        <button type="button" class="btn btn-success btn-sm" id="search">搜索</button>
+    </form>
+</div>
+<table id="table" border="1" cellspacing="0" cellpadding="0">
+    <thead>
+    <tr>
+        <th style="width: 1%">ID</th>
+        <th style="width: 1%">香水名</th>
+        <th style="width: 1%">产品图</th>
+        <th style="width: 1%">品牌名（中文）</th>
+        <th style="width: 1%">评价人数</th>
+        <th style="width: 1%">评分</th>
+        <th style="width: 1%">前调</th>
+        <th style="width: 1%">中调</th>
+        <th style="width: 1%">后调</th>
+        <th style="width: 1%">气味</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+
+<!-- 添加 -->
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabeladd" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabeladd">添加</h4>
+            </div>
+            <div class="modal-body">
+                <form id="addform" class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label   class="col-sm-2 control-label">品牌:</label>
+                        <div class="col-sm-10">
+                            <select class="form-control"  name="addbnamech"id="addbnamech" >
+                                <option value="" disabled selected hidden>--请选择--</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="addbcname" class="col-sm-2 control-label">香水:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="addbcname" id="addbcname" value="" placeholder="请输入香水名" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="addbcimg" class="col-sm-2 control-label">产品图:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="addbcimg" id="addbcimg" value="" placeholder="请输入产品图" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="addbcnum" class="col-sm-2 control-label">评价人数:</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" name="addbcnum" id="addbcnum" value="" placeholder="请输入评价人数" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="addbcscore" class="col-sm-2 control-label">评分:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="addbcscore" id="addbcscore" value="" placeholder="请输入评分" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="addbcfirst" class="col-sm-2 control-label">前调:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="addbcfirst" id="addbcfirst" value="" placeholder="请输入前调内容" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="addbcin" class="col-sm-2 control-label">中调:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="addbcin" id="addbcin" value="" placeholder="请输入中调内容" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="addbcafter" class="col-sm-2 control-label">后调:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="addbcafter" id="addbcafter" value="" placeholder="请输入后调内容" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="addbcsmell" class="col-sm-2 control-label">气味:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="addbcsmell" id="addbcsmell" value="" placeholder="请输入气味" />
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <button type="button" class="btn btn1 btn-success" id="add">添加</button>
+                        <button type="button" class="btn btn1 btn-danger" data-dismiss="modal">关闭</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 查看 -->
+<div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">查看</h4>
+            </div>
+            <div class="modal-body">
+                <form id="detailform" class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label for="detailbcid" class="col-sm-2 control-label">ID:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="detailbcid" value="" readonly="readonly" placeholder="请输入ID" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="detailbnamech" class="col-sm-2 control-label">品牌:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="detailbnamech" value="" readonly="readonly" placeholder="请输入品牌的中文名" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="detailbimg" class="col-sm-2 control-label">品牌图:</label>
+                        <div class="col-sm-5">
+                            <img src="" alt="暂无图片" id="detailbimg">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="detailbcname" class="col-sm-2 control-label">产品名:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="detailbcname" value="" readonly="readonly" placeholder="请输入产品名" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="detailbcimg" class="col-sm-2 control-label">产品图:</label>
+                        <div class="col-sm-5">
+                            <img src="" alt="暂无图片" id="detailbcimg">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="detailbcnum" class="col-sm-2 control-label">评价人数:</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" id="detailbcnum" value="" readonly="readonly" placeholder="请输入评价人数" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="detailbcscore" class="col-sm-2 control-label">评分:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="detailbcscore" value="" readonly="readonly" placeholder="请输入评分" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="detailbcfirst" class="col-sm-2 control-label">前调:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="detailbcfirst" value="" readonly="readonly" placeholder="请输入前调内容" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="detailbcin" class="col-sm-2 control-label">中调:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="detailbcin" value="" readonly="readonly" placeholder="请输入中调内容" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="detailbcafter" class="col-sm-2 control-label">后调:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="detailbcafter" value="" readonly="readonly" placeholder="请输入后调内容" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="detailbcsmell" class="col-sm-2 control-label">气味:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="detailbcsmell" value="" readonly="readonly" placeholder="请输入气味" />
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <button type="button" class="btn btn1 btn-danger" data-dismiss="modal">关闭</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 修改 -->
+<div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">修改</h4>
+            </div>
+            <div class="modal-body">
+                <form id="updateform" class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label for="updatebcid" class="col-sm-2 control-label">ID:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="updatebcid" id="updatebcid" value="" readonly placeholder="请输入ID" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label   class="col-sm-2 control-label">品牌:</label>
+                        <div class="col-sm-10">
+                            <select class="form-control"  name="updatebnamech"id="updatebnamech" >
+                                <option value="" disabled selected hidden>--请选择--</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="updatebcname" class="col-sm-2 control-label">香水:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="updatebcname" id="updatebcname" value="" placeholder="请输入香水名" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="updatebcimg" class="col-sm-2 control-label">产品图:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="updatebcimg" id="updatebcimg" value="" placeholder="请输入产品图" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="updatebcnum" class="col-sm-2 control-label">评价人数:</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" name="updatebcnum" id="updatebcnum" value="" placeholder="请输入评价人数" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="updatebcscore" class="col-sm-2 control-label">评分:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="updatebcscore" id="updatebcscore" value="" placeholder="请输入评分" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="updatebcfirst" class="col-sm-2 control-label">前调:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="updatebcfirst" id="updatebcfirst" value="" placeholder="请输入前调内容" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="updatebcin" class="col-sm-2 control-label">中调:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="updatebcin" id="updatebcin" value="" placeholder="请输入中调内容" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="updatebcafter" class="col-sm-2 control-label">后调:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="updatebcafter" id="updatebcafter" value="" placeholder="请输入后调内容" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="updatebcsmell" class="col-sm-2 control-label">气味:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="updatebcsmell" id="updatebcsmell" value="" placeholder="请输入气味" />
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <button type="button" class="btn btn1 btn-success" id="update">修改</button>
+                        <button type="button" class="btn btn1 btn-danger" data-dismiss="modal">关闭</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/public/js/jquery-3.3.1.min.js"></script>
+<script src="/public/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+    // 查询
+    $.ajax({
+        url: '/admin/brandcon',
+        type: 'post',
+        dataType: 'json',
+        success: function(data) {
+            var ht = '';
+            if (data.code == 0) {
+                // console.log(data.msg);
+                for (var i = 0; i < data.msg.length; i++) {
+                    ht += "<tr>" +
+                        "<td>" + data.msg[i].bc_id + "</td>" +
+                        "<td>" + data.msg[i].bc_name + "</td>" +
+                        "<td ><img alt='暂无图片' src=" + data.msg[i].bc_img + "></td>" +
+                        "<td>" + data.msg[i].b_name_ch + "</td>" +
+                        "<td>" + data.msg[i].bc_num + "</td>" +
+                        "<td>" + data.msg[i].bc_score + "</td>" +
+                        "<td>" + data.msg[i].bc_first + "</td>" +
+                        "<td>" + data.msg[i].bc_in + "</td>" +
+                        "<td>" + data.msg[i].bc_after + "</td>" +
+                        "<td>" + data.msg[i].bc_smell + "</td>" +
+                        "<td >" +
+                        "<button id='detail' class='btn btn-xs btn-success' data-id='" + data.msg[i].bc_id +
+                        "' data-toggle='modal' data-target='#detailModal'><a href='#'><i class='iconfont icon-web-icon-'></i>查看</a></button>" +
+                        "<button id='update' class='btn btn-xs btn-success' data-id='" + data.msg[i].bc_id +
+                        "' data-toggle='modal' data-target='#updateModal'><a href='#'><i class='iconfont icon-web-icon-'></i>修改</a></button>" +
+                        "<button id='delete' class='btn btn-xs btn-danger' data-id='" + data.msg[i].bc_id +
+                        "'><a href='#'><i class='iconfont icon-shanchu'></i>删除</a></button>" +
+                        "</td>" +
+                        "</tr>";
+                }
+                $('tbody').append(ht);
+            }
+        }
+    })
+    // 搜索
+    $('#search').click(function() {
+        var data = $('#searchform').serialize();
+        if ($('.input').val() == '') {
+            alert("内容不能为空")
+            return false;
+        } else {
+            var ht = ''
+            $.ajax({
+                url: '/admin/searchbrandcon',
+                type: 'post',
+                dataType: 'json',
+                data: data,
+                success: function(data) {
+                    if (data.code == 0) {
+                        for (var i = 0; i < data.msg.length; i++) {
+                            ht += "<tr>" +
+                                "<td>" + data.msg[i].bc_id + "</td>" +
+                                "<td>" + data.msg[i].bc_name + "</td>" +
+                                "<td ><img alt='暂无图片' src=" + data.msg[i].bc_img + "></td>" +
+                                "<td>" + data.msg[i].b_name_ch + "</td>" +
+                                "<td>" + data.msg[i].bc_num + "</td>" +
+                                "<td>" + data.msg[i].bc_score + "</td>" +
+                                "<td>" + data.msg[i].bc_first + "</td>" +
+                                "<td>" + data.msg[i].bc_in + "</td>" +
+                                "<td>" + data.msg[i].bc_after + "</td>" +
+                                "<td>" + data.msg[i].bc_smell + "</td>" +
+                                "<td >" +
+                                "<button id='detail' class='btn btn-xs btn-success' data-id='" + data.msg[i].bc_id +
+                                "' data-toggle='modal' data-target='#detailModal'><a href='#'><i class='iconfont icon-web-icon-'></i>查看</a></button>" +
+                                "<button id='update' class='btn btn-xs btn-success' data-id='" + data.msg[i].bc_id +
+                                "' data-toggle='modal' data-target='#updateModal'><a href='#'><i class='iconfont icon-web-icon-'></i>修改</a></button>" +
+                                "<button id='delete' class='btn btn-xs btn-danger' data-id='" + data.msg[i].bc_id +
+                                "'><a href='#'><i class='iconfont icon-shanchu'></i>删除</a></button>" +
+                                "</td>" +
+                                "</tr>";
+                        }
+                        $('tbody').html(ht);
+                        $('.input').val(""); // 清空
+                    }
+                }
+            })
+        }
+    })
+
+    // 添加
+    // 获取下拉选择框的值
+    $.ajax({
+        url: '/admin/brandconselect',
+        type: 'post',
+        dataType: 'json',
+        success: function (data) {
+            if (data.code == 0) {
+                var ht = '';
+                for (var i=0;i<data.msg.length; i++){
+                    ht += "<option value='"+data.msg[i].b_id+"'>"+data.msg[i].b_name_ch+"</option>";
+                }
+                $('#addbnamech').append(ht);
+            }
+        }
+    })
+    $('#add').click(function() {
+        var data = $('#addform').serialize();
+        $.ajax({
+            url: '/admin/brandconAdd',
+            type: 'post',
+            dataType: 'json',
+            data: data,
+            success: function(data) {
+                if (data.code == 0) {
+                    alert(data.msg);
+                    setTimeout(function() {
+                        location.reload();
+                        // 刷新模态框，不然会保留上次填写的数据
+                        $("#addModal").on("hidden.bs.modal", function() {
+                            $(this).removeData("bs.modal");
+                        })
+                        $('#addform input').val('');
+                    }, 1000)
+                } else if (data.code == 1) {
+                    alert(data.msg);
+                } else if (data.code == -1) {
+                    alert(data.msg);
+                    // 刷新模态框，不然会保留上次填写的数据
+                    $("#addModal").on("hidden.bs.modal", function() {
+                        $(this).removeData("bs.modal");
+                    })
+                    $('#addform input').val('');
+                }
+            }
+        })
+    })
+    // 查询
+    $(document).on('click', '#detail', function() {
+        var id = $(this).attr("data-id");
+        $.ajax({
+            url: '/admin/brandclassconId',
+            type: 'get',
+            dataType: 'json',
+            data: id,
+            success: function(data) {
+                if (data.code == 0) {
+                    $("#detailbimg").attr("src", data.msg[0].b_img);
+                    $("#detailbnamech").attr("value", data.msg[0].b_name_ch);
+                    $("#detailbcid").attr("value", data.msg[0].bc_id);
+                    $("#detailbcname").attr("value",data.msg[0].bc_name);
+                    $("#detailbcimg").attr("src", data.msg[0].bc_img);
+                    $("#detailbcnum").attr("value", data.msg[0].bc_num);
+                    $("#detailbcscore").attr("value",data.msg[0].bc_score);
+                    $("#detailbcfirst").attr("value", data.msg[0].bc_first);
+                    $("#detailbcin").attr("value", data.msg[0].bc_in);
+                    $("#detailbcafter").attr("value", data.msg[0].bc_after);
+                    $("#detailbcsmell").attr("value", data.msg[0].bc_smell);
+                }
+            }
+        })
+    })
+    // 查询单条数据
+    $(document).on('click', '#update', function() {
+        var id = $(this).attr("data-id");
+        // 获取下拉选择框的值
+        $.ajax({
+            url: '/admin/brandconselect',
+            type: 'post',
+            dataType: 'json',
+            success: function (data) {
+                if (data.code == 0) {
+                    var ht = '';
+                    for (var i=0;i<data.msg.length; i++){
+                        ht += "<option value='"+data.msg[i].b_id+"'";
+                        if (id == data.msg[i].b_id) {
+                            ht += 'selected';
+                        }
+                        ht+=  ">"+data.msg[i].b_name_ch+"</option>";
+                    }
+                    $('#updatebnamech').append(ht);
+                }
+            }
+        })
+        $.ajax({
+            url: '/admin/brandclassconId',
+            type: 'get',
+            dataType: 'json',
+            data: id,
+            success: function(data) {
+                if (data.code == 0) {
+                    $("#updatebnamech").attr("value", data.msg[0].b_name_ch);
+                    $("#updatebcid").attr("value", data.msg[0].bc_id);
+                    $("#updatebcname").attr("value",data.msg[0].bc_name);
+                    $("#updatebcimg").attr("value", data.msg[0].bc_img);
+                    $("#updatebcnum").attr("value", data.msg[0].bc_num);
+                    $("#updatebcscore").attr("value",data.msg[0].bc_score);
+                    $("#updatebcfirst").attr("value", data.msg[0].bc_first);
+                    $("#updatebcin").attr("value", data.msg[0].bc_in);
+                    $("#updatebcafter").attr("value", data.msg[0].bc_after);
+                    $("#updatebcsmell").attr("value", data.msg[0].bc_smell);
+                }
+            }
+        })
+    })
+    // 修改
+    $('#update').click(function() {
+        var data = $('#updateform').serialize();
+        $.ajax({
+            url: '/admin/brandconupdate',
+            type: 'post',
+            dataType: 'json',
+            data: data,
+            success: function(data) {
+                if (data.code == 0) {
+                    alert(data.msg);
+                    setTimeout(function() {
+                        location.reload();
+                    }, 1000)
+                } else if (data.code == 1) {
+                    alert(data.msg);
+                } else if (data.code == -1) {
+                    alert(data.msg);
+                }
+            }
+        })
+    })
+    // 删除
+    $(document).on('click', '#delete', function() {
+        var id = $(this).attr("data-id");
+        $.ajax({
+            url: '/admin/brandcondelete/' + id,
+            /* 不能忘记/*/
+            type: 'get',
+            dataType: 'json',
+            success: function(data) {
+                if (data.code == 0) {
+                    if (!confirm('确定删除此记录吗？')) {
+                        location.reload();
+                        alert(data.msg);
+                        return false;
+                    } else {
+                        alert(data.msg);
+                        setTimeout(function() {
+                            location.reload();
+                            return true;
+                        }, 1000);
+                    }
+                }
+            }
+        })
+    })
+</script>
+</body>
+</html>

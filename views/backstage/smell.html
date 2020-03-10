@@ -2,9 +2,346 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>气味</title>
+		<title>气味分类</title>
+		<link rel="stylesheet" type="text/css" href="/public/bootstrap-3.3.7/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="/public/fonticon/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="/public/css/table.css" />
 	</head>
 	<body>
-		气味
+		<div class="col-md-9">
+			<button type="button" class="btn btn-danger btn-xs active" data-toggle="modal" data-target="#addModal">
+				<a href="#"><i class="iconfont icon-tianjia"></i>添加类别</a>
+			</button>
+		</div>
+		<div class="col-md-3">
+			<form id="searchform" class="bs-example bs-example-form" role="form">
+				<input type="search" id="s_name_ch" class="input" name="s_name_ch" placeholder="请输入分类产品（中文名）" />
+				<button type="button" class="btn btn-success btn-sm" id="search">搜索</button>
+			</form>
+		</div>
+		<table id="table" border="1" cellspacing="0" cellpadding="0">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>类别</th>
+					<th>图片</th>
+					<th>中文名</th>
+					<th>英文名</th>
+					<th>内容</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody></tbody>
+		</table>
+		<!-- 添加 -->
+		<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabeladd" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabeladd">添加</h4>
+					</div>
+					<div class="modal-body">
+						<form id="addform" class="form-horizontal" role="form">
+							<div class="form-group">
+								<label for="ss_title_add" class="col-sm-2 control-label">类别名:</label>
+								<div class="col-sm-10">
+									<select class="form-control"  name="ss_title" id="ss_title_add">
+										<option value="" disabled selected hidden>--请选择--</option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="s_img" class="col-sm-2 control-label">图片:</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" name="s_img" id="s_img" placeholder="请输入图片地址" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="s_name_chadd" class="col-sm-2 control-label">中文名:</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" name="s_name_chadd" id="s_name_chadd" placeholder="请输入中文名" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="s_name_ehadd" class="col-sm-2 control-label">英文名:</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" name="s_name_ehadd" id="s_name_ehadd" placeholder="请输入英文名" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="s_content_add" class="col-sm-2 control-label">内容:</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" name="s_content_add" id="s_content_add" placeholder="请输入内容" />
+								</div>
+							</div>
+							<div class="text-right">
+								<button type="button" class="btn btn1 btn-success" id="add">添加</button>
+								<button type="button" class="btn btn1 btn-danger" data-dismiss="modal">关闭</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 修改 -->
+		<div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabelupdate" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabelupdate">修改</h4>
+					</div>
+					<div class="modal-body">
+						<form id="updateform" class="form-horizontal" role="form">
+							<div class="form-group">
+								<label for="sidupdate" class="col-sm-2 control-label">ID:</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" name="s_id" id="sidupdate" value="" readonly placeholder="请输入ID" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="sstitleupdate" class="col-sm-2 control-label">类别名:</label>
+								<div class="col-sm-10">
+									<select class="form-control"  name="ss_title" id="sstitleupdate">
+										<option value="" disabled selected hidden>--请选择--</option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="simgupdate" class="col-sm-2 control-label">图片:</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" name="s_img" id="simgupdate" placeholder="请输入图片地址" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="snamechupdate" class="col-sm-2 control-label">中文名:</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" name="s_name_ch" id="snamechupdate" placeholder="请输入中文名" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="snameehupdate" class="col-sm-2 control-label">英文名:</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" name="s_name_eh" id="snameehupdate" placeholder="请输入英文名" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="scontentupdate" class="col-sm-2 control-label">内容:</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" name="s_content" id="scontentupdate" placeholder="请输入内容" />
+								</div>
+							</div>
+							<div class="text-right">
+								<button type="button" class="btn btn1 btn-success" id="update">修改</button>
+								<button type="button" class="btn btn1 btn-danger" data-dismiss="modal">关闭</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="/public/js/jquery-3.3.1.min.js"></script>
+		<script src="/public/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+		<script type="text/javascript">
+			// 查询
+			$.ajax({
+				type: 'post',
+				url: '/admin/smell',
+				dataType: 'json',
+				success: function(data) {
+					var ht = ''
+					if (data.code == 0) {
+						for (var i = 0; i < data.msg.length; i++) {
+							ht += "<tr>" +
+								"<td >" + data.msg[i].s_id + "</td>" +
+								"<td >" + data.msg[i].ss_title + "</td>" +
+								"<td ><img src='" + data.msg[i].s_img + "' alt='暂无图片'></td>" +
+								"<td >" + data.msg[i].s_name_ch + "</td>" +
+								"<td >" + data.msg[i].s_name_eh + "</td>" +
+								"<td >" + data.msg[i].s_content + "</td>" +
+								"<td >" +
+								"<button id='update' data-id='" + data.msg[i].s_id +
+								"' class='btn btn-xs btn-success' data-toggle='modal' data-target='#updateModal'><a href='#'><i class='iconfont icon-web-icon-'></i>修改</a></button>" +
+								"<button id='delete' data-id='" + data.msg[i].s_id +
+								"' class='btn btn-xs btn-danger'><a href='#'><i class='iconfont icon-shanchu'></i>删除</a></button>" +
+								"</td>" +
+								"</tr>";
+						}
+						$('tbody').append(ht);
+					}
+				}
+			})
+
+			// 搜索
+			$('#search').click(function() {
+				var data = $('#searchform').serialize();
+				if ($('.input').val() == '') {
+					alert('内容不能为空')
+					return false;
+				} else {
+					var ht = ''
+					$.ajax({
+						url: '/admin/searchsmell',
+						type: 'post',
+						dataType: 'json',
+						data: data,
+						success: function(data) {
+							if (data.code == 0) {
+								for (var i = 0; i < data.msg.length; i++) {
+									ht += "<tr>" +
+										"<td >" + data.msg[i].s_id + "</td>" +
+										"<td >" + data.msg[i].ss_title + "</td>" +
+										"<td ><img src='" + data.msg[i].s_img + "' alt='暂无图片'></td>" +
+										"<td >" + data.msg[i].s_name_ch + "</td>" +
+										"<td >" + data.msg[i].s_name_eh + "</td>" +
+										"<td >" + data.msg[i].s_content + "</td>" +
+										"<td >" +
+										"<button id='update' data-id='" + data.msg[i].s_id +
+										"' class='btn btn-xs btn-success' data-toggle='modal' data-target='#updateModal'><a href='#'><i class='iconfont icon-web-icon-'></i>修改</a></button>" +
+										"<button id='delete' data-id='" + data.msg[i].s_id +
+										"' class='btn btn-xs btn-danger'><a href='#'><i class='iconfont icon-shanchu'></i>删除</a></button>" +
+										"</td>" +
+										"</tr>";
+								}
+								$('tbody').html(ht);
+								$('.input').val('');
+							}
+						}
+					})
+				}
+			})
+			// 添加
+			// 获取下拉选择框的值
+			$.ajax({
+				url: '/admin/smellselect',
+				type: 'post',
+				dataType: 'json',
+				success: function (data) {
+					if (data.code == 0) {
+						var ht = '';
+						for (var i=0;i<data.msg.length; i++){
+							ht += "<option value='"+data.msg[i].ss_id+"'>"+data.msg[i].ss_title+"</option>";
+						}
+						$('#ss_title_add').append(ht);
+					}
+				}
+			})
+			$('#add').click(function() {
+				var data = $('#addform').serialize();
+				$.ajax({
+					url: '/admin/smelladd',
+					type: 'post',
+					dataType: 'json',
+					data: data,
+					success: function(data) {
+						if (data.code == 0) {
+							alert(data.msg);
+							setTimeout(function() {
+								// 刷新模态框，不然会保留上次填写的数据
+								$("#addModal").on("hidden.bs.modal", function() {
+									$(this).removeData("bs.modal");
+								})
+								$('#addform input').val('');
+								location.reload();
+							}, 1000)
+						} else if (data.code == 1) {
+							alert(data.msg);
+						} else if (data.code == 2) {
+							alert(data.msg);
+						} else if (data.code == 3) {
+							alert(data.msg);
+						} else if (data.code == -1) {
+							alert(data.msg);
+							// 刷新模态框，不然会保留上次填写的数据
+							$("#addModal").on("hidden.bs.modal", function() {
+								$(this).removeData("bs.modal");
+							})
+							$('#addform input').val('');
+						}
+					}
+				})
+			})
+			// 查询单条数据
+			$(document).on('click', '#update', function() {
+				var id = $(this).attr("data-id");
+				// 获取下拉选择框的值
+				$.ajax({
+					url: '/admin/smellselect',
+					type: 'post',
+					dataType: 'json',
+					success: function (data) {
+						if (data.code == 0) {
+							var ht = '';
+							for (var i=0;i<data.msg.length; i++){
+								ht += "<option value='"+data.msg[i].ss_id+"'";
+								if (id == data.msg[i].ss_id) {
+									ht += 'selected';
+								}
+								ht+=  ">"+data.msg[i].ss_title+"</option>";
+							}
+							$('#sstitleupdate').append(ht);
+						}
+					}
+				})
+				$.ajax({
+					url: '/admin/smellId/' + id,
+					type: 'post',
+					dataType: 'json',
+					success: function(data) {
+						if (data.code == 0) {
+							$("#sidupdate").attr("value", data.msg[0].s_id);
+							$("#sstitleupdate").attr("value", data.msg[0].ss_title);
+							$("#simgupdate").attr("value", data.msg[0].s_img);
+							$("#snamechupdate").attr("value", data.msg[0].s_name_ch);
+							$("#snameehupdate").attr("value", data.msg[0].s_name_eh);
+							$("#scontentupdate").attr("value", data.msg[0].s_content);
+						}
+					}
+				})
+			})
+			// 修改
+			$('#update').click(function() {
+				var data = $("#updateform").serialize();
+				$.ajax({
+					url: '/admin/smellupdate',
+					type: 'post',
+					dataType: 'json',
+					data: data,
+					success: function(data) {
+						if (data.code == 0) {
+							alert(data.msg);
+							setTimeout(function() {
+								location.reload(true);
+							}, 1000)
+						} else if (data.code == 1) {
+							alert(data.msg);
+						} else if (data.code == -1) {
+							alert(data.msg);
+						}
+					}
+				})
+			})
+			// 删除
+			$(document).on('click', '#delete', function() {
+				var id = $(this).attr('data-id');
+				$.ajax({
+					url: '/admin/smelldelete/' + id,
+					type: 'get',
+					dataType: 'json',
+					success: function(data) {
+						if (data.code == 0) {
+							setTimeout(function() {
+								confirm('确定删除信息吗？');
+								alert(data.msg);
+								location.reload();
+							})
+						} else if (data.code == -1) {
+							alert(data.msg);
+						}
+					}
+				})
+			})
+		</script>
 	</body>
 </html>

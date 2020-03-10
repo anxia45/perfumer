@@ -20,7 +20,7 @@
 	<script src="/public/bootstrap-3.3.7/js/bootstrap.min.js"></script>
 	<script type="text/javascript">
 		$.ajax({
-			url: '/api/brandclasscontent',
+			url: '/api/brand',
 			type: 'post',
 			dataType: 'json',
 			success: function(data) {
@@ -28,11 +28,11 @@
 				if (data.code == 0) {
 					for (var i = 0; i < data.msg.length; i++) {
 						ht += "<li> " +
-							"<a href = '#' class = 'imgborder' >" +
-							"<img src = '" + data.msg[i].bcc_img + "' >" +
+							"<a href = '/api/brandcon?b_id="+data.msg[i].b_id+"' class = 'imgborder' >" +
+							"<img src = '" + data.msg[i].b_img + "' >" +
 							"</a>" +
-							"<a href = '#' ><p>" + data.msg[i].bcc_name_ch + "</p></a>" +
-							"<a href = '#' ><p>" + data.msg[i].bcc_name_eh + "</p></a>" +
+							"<a href = '/api/brandcon?b_id="+data.msg[i].b_id+"' ><p>" + data.msg[i].b_name_ch + "</p></a>" +
+							"<a href = '/api/brandcon?b_id="+data.msg[i].b_id+"' ><p>" + data.msg[i].b_name_eh + "</p></a>" +
 							"</li>";
 					}
 					$('.home').append(ht);

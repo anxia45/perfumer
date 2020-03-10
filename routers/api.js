@@ -13,18 +13,24 @@ router.use(function(req, res, next) {
 	next();
 })
 
-// ----------------------------------跳转目录路径---------------------------------------//
+// ================================================= 路径 =================================================
 router.get('/homepage', function(req, res, next) {
 	res.render('frontend/homepage');
 })
 router.get('/brand', function(req, res, next) {
 	res.render('frontend/brand');
 })
+router.get('/brandcon', function(req, res, next) {
+	res.render('frontend/brandcon');
+})
 router.get('/fragrancenotes', function(req, res, next) {
 	res.render('frontend/fragrancenotes');
 })
 router.get('/smell', function(req, res, next) {
 	res.render('frontend/smell');
+})
+router.get('/smellcon', function(req, res, next) {
+	res.render('frontend/smellcon');
 })
 router.get('/perfumer', function(req, res, next) {
 	res.render('frontend/perfumer');
@@ -46,7 +52,8 @@ router.get('/register', function(req, res, next) {
 router.get('/registerpc', function(req, res, next) {
 	res.render('frontend/registerpc');
 })
-// ---------------------------------------登录------------------------------------------//
+// ================================================= 注册登录 =================================================
+// ---------------------- 登录 ------------------------//
 router.post('/login', function(req, res, next) {
 	var name = req.body.user_name;
 	var pwd = req.body.user_pwd;
@@ -96,7 +103,7 @@ router.post('/login', function(req, res, next) {
 		}
 	})
 });
-// ----------------------------------------退出登录---------------------------------------//
+// ---------------------- 退出登录 ------------------------//
 router.get('/logout', function(req, res, next) {
 	// 销毁session
 	req.session.destroy(function (err) {
@@ -109,7 +116,8 @@ router.get('/logout', function(req, res, next) {
 	})
 
 })
-// ---------------------------------------注册------------------------------------------//
+
+// ---------------------- 注册 ------------------------//
 router.post('/register', function(req, res, next) {
 	var name = req.body.user_name;
 	var pwd = req.body.user_pwd;
@@ -191,7 +199,8 @@ router.post('/register', function(req, res, next) {
 		})
 	}
 });
-// -------------------------------------查询目录----------------------------------------//
+
+// ---------------------- 查询目录 ------------------------//
 router.post('/catalog', function(req, res, next) {
 	var sqlAll = 'select * from catalog';
 	pool.query(sqlAll, function(err, data) {
@@ -203,8 +212,8 @@ router.post('/catalog', function(req, res, next) {
 		res.json(responseData);
 	})
 });
-// -----------------------------------------------首页------------------------------------------
-// --------------------------------------轮播----------------------------------------//
+// ================================================= 首页 =================================================
+// ---------------------- 轮播 ------------------------//
 router.post('/homecarousel', function(req, res, next) {
 	var sqlAll = 'select * from homecarousel';
 	pool.query(sqlAll, function(err, data) {
@@ -217,7 +226,8 @@ router.post('/homecarousel', function(req, res, next) {
 		res.json(responseData);
 	})
 })
-// --------------------------------------新品----------------------------------------//
+
+// ---------------------- 新品 ------------------------//
 router.post('/productsnew', function(req, res, next) {
 	var sqlAll = 'select * from productsnew ORDER BY time desc';
 	pool.query(sqlAll, function(err, data) {
@@ -231,7 +241,8 @@ router.post('/productsnew', function(req, res, next) {
 	})
 
 })
-// --------------------------------------热门话题----------------------------------------//
+
+// ---------------------- 热门话题 ------------------------//
 router.post('/tipic', function(req, res, next) {
 	var sqlAll = 'select * from tipic';
 	pool.query(sqlAll, function(err, data) {
@@ -245,7 +256,8 @@ router.post('/tipic', function(req, res, next) {
 	})
 
 })
-// --------------------------------------常见问题----------------------------------------//
+
+// ---------------------- 常见问题 ------------------------//
 router.post('/answer', function(req, res, next) {
 	var sqlAll = 'select * from answer';
 	pool.query(sqlAll, function(err, data) {
@@ -259,7 +271,8 @@ router.post('/answer', function(req, res, next) {
 	})
 
 })
-// --------------------------------------香评达人----------------------------------------//
+
+// ---------------------- 香评达人 ------------------------//
 router.post('/member', function(req, res, next) {
 	var sqlAll = 'select * from member ORDER BY time desc';
 	pool.query(sqlAll, function(err, data) {
@@ -272,42 +285,24 @@ router.post('/member', function(req, res, next) {
 		res.json(responseData);
 	})
 })
-// -----------------------------------------------品牌------------------------------------------
-// ----------------------------------------分类列表-------------------------------------------//
-router.post('/brandClass', function(req, res, next) {
-	var sqlAll = 'select * from brandClass ORDER BY bc_id asc';
-	pool.query(sqlAll, function(err, data) {
-		if (err) {
-			console.log(err);
-		} else {
-			console.log('查询成功');
-		}
-		responseData.msg = data;
-		res.json(responseData);
-	})
-})
-// ----------------------------------------分类内容-------------------------------------------//
-router.post('/brandclasscontent', function(req, res, next) {
-	var sqlAll = 'select * from brandclasscontent';
-	pool.query(sqlAll, function(err, data) {
-		if (err) {
-			console.log(err);
-		} else {
-			console.log('查询成功');
-		}
-		responseData.msg = data;
-		res.json(responseData);
-	})
-})
-router.post('/brandclasscontent1', function(req, res, next) {
+// ================================================= 品牌 =================================================
 
-	var name = req.body;
-	var strname = JSON.stringify(req.body);
-	console.log(name)
-	console.log(strname)
-
-	var sqlAll = 'select * from brandClass a join brandclasscontent b on a.bc_id = b.bc_id where a.bc_name = ' + strname +
-		' ORDER BY a.bc_id asc';
+// ---------------------- 分类列表 ------------------------//
+// router.post('/brandClass', function(req, res, next) {
+// // 	var sqlAll = 'select * from brandClass ORDER BY bc_id asc';
+// // 	pool.query(sqlAll, function(err, data) {
+// // 		if (err) {
+// // 			console.log(err);
+// // 		} else {
+// // 			console.log('查询成功');
+// // 		}
+// // 		responseData.msg = data;
+// // 		res.json(responseData);
+// // 	})
+// // })
+// ---------------------- 分类内容 ------------------------//
+router.post('/brand', function(req, res, next) {
+	var sqlAll = 'select * from brand';
 	pool.query(sqlAll, function(err, data) {
 		if (err) {
 			console.log(err);
@@ -318,10 +313,85 @@ router.post('/brandclasscontent1', function(req, res, next) {
 		res.json(responseData);
 	})
 })
-// -----------------------------------------------香调------------------------------------------
-// -----------------------------------------------气味------------------------------------------
-// ----------------------------------------------调香师-----------------------------------------
-// 调香师简介
+// router.post('/brandclasscontent1', function(req, res, next) {
+//
+// 	var name = req.body;
+// 	var strname = JSON.stringify(req.body);
+// 	console.log(name)
+// 	console.log(strname)
+//
+// 	var sqlAll = 'select * from brandClass a join brandclasscontent b on a.bc_id = b.bc_id where a.bc_name = ' + strname +
+// 		' ORDER BY a.bc_id asc';
+// 	pool.query(sqlAll, function(err, data) {
+// 		if (err) {
+// 			console.log(err);
+// 		} else {
+// 			console.log('查询成功');
+// 		}
+// 		responseData.msg = data;
+// 		res.json(responseData);
+// 	})
+// })
+// ---------------------- 品牌的详情页 ------------------------//
+router.post('/brandcon1',function (req,res,next) {
+	var id = JSON.stringify(req.body).substr(2, 1);
+	var sqlAll = "select * from brand a join brandclasscon b on a.b_id = b.b_id where b.b_id ='" + id + "'";
+	pool.query(sqlAll, function(err, data) {
+		if (err) {
+			console.log(err);
+		} else {
+			responseData.msg = data;
+			res.json(responseData);
+		}
+	})
+})
+// ================================================= 香调 =================================================
+// ================================================= 气味 =================================================
+//目录
+router.post('/smellclass',function(req,res,next){
+	var sqlAll = "select * from smellclass";
+	pool.query(sqlAll,function(err,data){
+		if (err) {
+			responseData.code = -1;
+			responseData.msg = '查询失败';
+			res.json(responseData);
+		} else {
+			responseData.msg = data;
+			res.json(responseData);
+		}
+	});
+});
+// 分类产品
+router.get('/smell/:name',function(req,res,next){
+	var name = req.params.name;
+	console.log(name);
+	var sqlAll = "select * from smell a join smellclass b on a.ss_id = b.ss_id where b.ss_title = '"+name+"'";
+	pool.query(sqlAll,function(err,data){
+		if (err) {
+			responseData.code = -1;
+			responseData.msg = '查询失败';
+			res.json(responseData);
+		} else {
+			responseData.msg = data;
+			res.json(responseData);
+		}
+	});
+});
+// 详情内容
+router.post('/smellcon1', function(req, res, next) {
+	var id = JSON.stringify(req.body).substr(2, 1);
+	var sqlAll = "select * from smellcon a join smell b on a.s_id = b.s_id where b.s_id = '" + id + "'";
+	pool.query(sqlAll, function(err, data) {
+		if (err) {
+			console.log(err);
+		} else {
+			responseData.msg = data;
+			res.json(responseData);
+		}
+	})
+})
+// ================================================= 调香师 =================================================
+// ---------------------- 调香师简介 ------------------------//
 router.post('/perfumerIntroduce', function(req, res, next) {
 	var sqlAll = 'select * from perfumerIntroduce';
 	pool.query(sqlAll, function(err, data) {
@@ -335,7 +405,7 @@ router.post('/perfumerIntroduce', function(req, res, next) {
 		res.json(responseData);
 	})
 });
-// 调香师
+// ---------------------- 调香师 ------------------------//
 router.post('/perfumer', function(req, res, next) {
 	var sqlAll = 'select * from perfumer';
 	pool.query(sqlAll, function(err, data) {
@@ -349,7 +419,7 @@ router.post('/perfumer', function(req, res, next) {
 	})
 })
 
-// 调香师详细页
+// ---------------------- 调香师详情页 ------------------------//
 router.post('/perfumercon1', function(req, res, next) {
 	var id = JSON.stringify(req.body).substr(2, 1);
 	var sqlAll = "select * from perfumercon a inner join perfumer b on a.pc_id =b.pc_id where b.pc_id ='" + id + "'";

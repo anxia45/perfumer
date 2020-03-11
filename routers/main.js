@@ -1,11 +1,11 @@
 var express = require('express');
 var router = express.Router();
 
-router.get('/',function(req,res,next){
+router.get('/', function(req, res, next) {
 	res.render('frontend/index');
 })
 
-router.get('/backstage',function(req,res,next){
+router.get('/backstage', function(req, res, next) {
 	res.render('backstage/index');
 })
 //------------------------------------------后端管理--------------------------------------//
@@ -53,7 +53,7 @@ router.get('/fragrancenotes', function(req, res, next) {
 	res.render('backstage/fragrancenotes');
 })
 
-router.get('/fragrancenotescon',function (req,res,next) {
+router.get('/fragrancenotescon', function(req, res, next) {
 	res.render('backstage/fragrancenotescon')
 })
 
@@ -75,8 +75,8 @@ router.get('/perfumer', function(req, res, next) {
 	res.render('backstage/perfumer');
 });
 // 调香师内容
-router.get('/perfumercon', function(req,res,next) {
-		res.render('backstage/perfumercon');
+router.get('/perfumercon', function(req, res, next) {
+	res.render('backstage/perfumercon');
 });
 // 登录
 router.get('/login', function(req, res, next) {
@@ -85,7 +85,7 @@ router.get('/login', function(req, res, next) {
 
 // ===============================================================
 // 测试
-router.get('/file',function(req,res,next){
+router.get('/file', function(req, res, next) {
 	res.render('backstage/file');
 })
 

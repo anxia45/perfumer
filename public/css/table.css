@@ -16,13 +16,15 @@
 .col-md-9 {
 	padding-left: 0;
 }
+
 .col-md-3 {
 	padding-right: 0;
 }
 
-.btn-group-xs > .btn, .btn-xs {
+.btn-group-xs>.btn,
+.btn-xs {
 	padding: 2px 5px;
-} 
+}
 
 .input {
 	outline: none;
@@ -31,6 +33,7 @@
 	border: 1px solid gray;
 	padding: 5px 5px;
 }
+
 table {
 	width: 100%;
 }
@@ -57,10 +60,14 @@ table tbody td {
 table tbody td img {
 	width: 30px;
 }
+
 table td {
-	max-width:10px;
-	white-space:nowrap;overflow:hidden;text-overflow: ellipsis;
+	max-width: 10px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
+
 #detailform img {
 	width: 80px;
 }
@@ -75,9 +82,10 @@ table td {
 	box-shadow: 0 0 5px #000;
 }
 
- .display {
-	 display: none;
- }
- textarea {
-	 resize: none;
- }
+.display {
+	display: none;
+}
+
+textarea {
+	resize: none;
+}

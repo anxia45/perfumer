@@ -80,10 +80,12 @@
 										for (var i = 0; i < data.msg.length; i++) {
 											console.log(data.msg)
 											coll += "\t\t\t\t\t\t<div class=\"col-md-2\">\n" +
-												"\t\t\t\t\t\t\t<a class=\"imgborder\" href='/api/smellcon?s_id="+data.msg[i].s_id+"' style=\"text-decoration: none;\">\n" +
+												"\t\t\t\t\t\t\t<a class=\"imgborder\" href='/api/smellcon?s_id=" + data.msg[i].s_id +
+												"' style=\"text-decoration: none;\">\n" +
 												"\t\t\t\t\t\t\t\t<img src='" + data.msg[i].s_img + "' alt=\"\">\n" +
 												"\t\t\t\t\t\t\t</a>\n" +
-												"\t\t\t\t\t\t\t<a class=\"txt\" href='/api/smellcon?s_id="+data.msg[i].s_id+"' style=\"text-decoration: none;color: #F18085;font-size: 14px;\">\n" +
+												"\t\t\t\t\t\t\t<a class=\"txt\" href='/api/smellcon?s_id=" + data.msg[i].s_id +
+												"' style=\"text-decoration: none;color: #F18085;font-size: 14px;\">\n" +
 												"\t\t\t\t\t\t\t\t" + data.msg[i].s_name_ch + "<br>\n" +
 												"\t\t\t\t\t\t\t\t" + data.msg[i].s_name_eh + "\n" +
 												"\t\t\t\t\t\t</div>\n" +
@@ -143,10 +145,12 @@
 								if (data.code == 0) {
 									for (var i = 0; i < data.msg.length; i++) {
 										coll += "\t\t\t\t\t\t<div class=\"col-md-2\">\n" +
-											"\t\t\t\t\t\t\t<a class=\"imgborder\" href='/api/smellcon?s_id="+data.msg[i].s_id+"' style=\"text-decoration: none;\">\n" +
+											"\t\t\t\t\t\t\t<a class=\"imgborder\" href='/api/smellcon?s_id=" + data.msg[i].s_id +
+											"' style=\"text-decoration: none;\">\n" +
 											"\t\t\t\t\t\t\t\t<img src='" + data.msg[i].s_img + "' alt=\"\">\n" +
 											"\t\t\t\t\t\t\t</a>\n" +
-											"\t\t\t\t\t\t\t<a class=\"txt\" href='/api/smellcon?s_id="+data.msg[i].s_id+"' style=\"text-decoration: none;color: #F18085;font-size: 14px;\">\n" +
+											"\t\t\t\t\t\t\t<a class=\"txt\" href='/api/smellcon?s_id=" + data.msg[i].s_id +
+											"' style=\"text-decoration: none;color: #F18085;font-size: 14px;\">\n" +
 											"\t\t\t\t\t\t\t\t" + data.msg[i].s_name_ch + "<br>\n" +
 											"\t\t\t\t\t\t\t\t" + data.msg[i].s_name_eh + "\n" +
 											"\t\t\t\t\t\t</div>\n" +

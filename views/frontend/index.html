@@ -37,9 +37,9 @@
 						<!-- 未登录之前 -->
 						<ul id="state_before" class='nav navbar-nav navbar-right'>
 							<li><a id="login" class="login" href="">
-								<i class="iconfont icon-zhanghaodenglu"></i>登录</a></li>
+									<i class="iconfont icon-zhanghaodenglu"></i>登录</a></li>
 							<li><a id="register" class="register" href="">
-								<i class="iconfont icon-zhuanjifenxinzhuce"></i>注册</a></li>
+									<i class="iconfont icon-zhuanjifenxinzhuce"></i>注册</a></li>
 						</ul>
 						<!-- 登录后 -->
 						<ul id="post_state" class='nav navbar-nav navbar-right'></ul>
@@ -91,8 +91,8 @@
 				$('.register').attr("href", "api/registerpc");
 			}
 		});
-		
-		function  login_data() {
+
+		function login_data() {
 			// 获取登录后的值
 			var name = window.sessionStorage.getItem("user_name");
 			if (name === null || name === "") {
@@ -138,6 +138,5 @@
 		// 		})
 		// 	})
 		// // }
-		
 	</script>
 </html>

@@ -28,7 +28,7 @@
 				if (data.code == 0) {
 					var ht = "<div class='col-md-6 txsl'>" + data.msg[0].p_content + "</div>" +
 						"<div class='col-md-6 txsl'>" +
-						"<img style='width: 100%;height: 385px;' src='"+data.msg[0].p_imgurl+"'>" +
+						"<img style='width: 100%;height: 385px;' src='" + data.msg[0].p_imgurl + "'>" +
 						"</div>";
 					$('#head').append(ht);
 				}
@@ -44,7 +44,7 @@
 					for (var i = 0; i < data.msg.length; i++) {
 						ht +=
 							"<div id= 'perfumercon' class='col-md-2'>" +
-							"<a href='api/perfumercon?id="+data.msg[i].pc_id+"'>" +
+							"<a href='api/perfumercon?id=" + data.msg[i].pc_id + "'>" +
 							"<img src=" + data.msg[i].pc_img + ">" +
 							"<h3>" + data.msg[i].pc_name + "</h3>" +
 							"</a>" +

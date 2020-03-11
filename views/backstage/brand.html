@@ -178,18 +178,18 @@
 							if (data.code == 0) {
 								for (var i = 0; i < data.msg.length; i++) {
 									ht += "<tr>" +
-											"<td>" + data.msg[i].b_id + "</td>" +
-											"<td ><img alt='暂无图片' src=" + data.msg[i].b_img + "></td>" +
-											"<td>" + data.msg[i].b_name_ch + "</td>" +
-											"<td>" + data.msg[i].b_name_eh + "</td>" +
-											"<td>" + data.msg[i].b_content + "</td>" +
-											"<td >" +
-											"<button id='update' class='btn btn-xs btn-success' data-id='" + data.msg[i].b_id +
-											"' data-toggle='modal' data-target='#updateModal'><a href='#'><i class='iconfont icon-web-icon-'></i>修改</a></button>" +
-											"<button id='delete' class='btn btn-xs btn-danger' data-id='" + data.msg[i].b_id +
-											"'><a href='#'><i class='iconfont icon-shanchu'></i>删除</a></button>" +
-											"</td>" +
-											"</tr>";
+										"<td>" + data.msg[i].b_id + "</td>" +
+										"<td ><img alt='暂无图片' src=" + data.msg[i].b_img + "></td>" +
+										"<td>" + data.msg[i].b_name_ch + "</td>" +
+										"<td>" + data.msg[i].b_name_eh + "</td>" +
+										"<td>" + data.msg[i].b_content + "</td>" +
+										"<td >" +
+										"<button id='update' class='btn btn-xs btn-success' data-id='" + data.msg[i].b_id +
+										"' data-toggle='modal' data-target='#updateModal'><a href='#'><i class='iconfont icon-web-icon-'></i>修改</a></button>" +
+										"<button id='delete' class='btn btn-xs btn-danger' data-id='" + data.msg[i].b_id +
+										"'><a href='#'><i class='iconfont icon-shanchu'></i>删除</a></button>" +
+										"</td>" +
+										"</tr>";
 								}
 								$('tbody').html(ht);
 								$('.input').val(""); // 清空

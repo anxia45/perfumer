@@ -46,7 +46,7 @@
 							<div class="form-group">
 								<label for="ss_title_add" class="col-sm-2 control-label">类别名:</label>
 								<div class="col-sm-10">
-									<select class="form-control"  name="ss_title" id="ss_title_add">
+									<select class="form-control" name="ss_title" id="ss_title_add">
 										<option value="" disabled selected hidden>--请选择--</option>
 									</select>
 								</div>
@@ -103,7 +103,7 @@
 							<div class="form-group">
 								<label for="sstitleupdate" class="col-sm-2 control-label">类别名:</label>
 								<div class="col-sm-10">
-									<select class="form-control"  name="ss_title" id="sstitleupdate">
+									<select class="form-control" name="ss_title" id="sstitleupdate">
 										<option value="" disabled selected hidden>--请选择--</option>
 									</select>
 								</div>
@@ -217,11 +217,11 @@
 				url: '/admin/smellselect',
 				type: 'post',
 				dataType: 'json',
-				success: function (data) {
+				success: function(data) {
 					if (data.code == 0) {
 						var ht = '';
-						for (var i=0;i<data.msg.length; i++){
-							ht += "<option value='"+data.msg[i].ss_id+"'>"+data.msg[i].ss_title+"</option>";
+						for (var i = 0; i < data.msg.length; i++) {
+							ht += "<option value='" + data.msg[i].ss_id + "'>" + data.msg[i].ss_title + "</option>";
 						}
 						$('#ss_title_add').append(ht);
 					}
@@ -270,15 +270,15 @@
 					url: '/admin/smellselect',
 					type: 'post',
 					dataType: 'json',
-					success: function (data) {
+					success: function(data) {
 						if (data.code == 0) {
 							var ht = '';
-							for (var i=0;i<data.msg.length; i++){
-								ht += "<option value='"+data.msg[i].ss_id+"'";
+							for (var i = 0; i < data.msg.length; i++) {
+								ht += "<option value='" + data.msg[i].ss_id + "'";
 								if (id == data.msg[i].ss_id) {
 									ht += 'selected';
 								}
-								ht+=  ">"+data.msg[i].ss_title+"</option>";
+								ht += ">" + data.msg[i].ss_title + "</option>";
 							}
 							$('#sstitleupdate').append(ht);
 						}

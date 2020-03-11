@@ -88,10 +88,10 @@ router.post('/login', function(req, res, next) {
 				var response = data[0];
 				if (response.user_name == name && response.user_pwd == pwd) {
 					responseData.pre = '登录成功';
-						responseData.msg = user;
-						req.session.user = user;
-						// login_data();
-						res.json(responseData);
+					responseData.msg = user;
+					req.session.user = user;
+					// login_data();
+					res.json(responseData);
 					return;
 				} else {
 					responseData.code = -2
@@ -106,7 +106,7 @@ router.post('/login', function(req, res, next) {
 // ---------------------- 退出登录 ------------------------//
 router.get('/logout', function(req, res, next) {
 	// 销毁session
-	req.session.destroy(function (err) {
+	req.session.destroy(function(err) {
 		if (err) {
 			console.log(err);
 		} else {
@@ -333,7 +333,7 @@ router.post('/brand', function(req, res, next) {
 // 	})
 // })
 // ---------------------- 品牌的详情页 ------------------------//
-router.post('/brandcon1',function (req,res,next) {
+router.post('/brandcon1', function(req, res, next) {
 	var id = JSON.stringify(req.body).substr(2, 1);
 	var sqlAll = "select * from brand a join brandclasscon b on a.b_id = b.b_id where b.b_id ='" + id + "'";
 	pool.query(sqlAll, function(err, data) {
@@ -347,9 +347,9 @@ router.post('/brandcon1',function (req,res,next) {
 })
 // ================================================= 香调 =================================================
 //目录
-router.post('/fragrantclass',function(req,res,next){
+router.post('/fragrantclass', function(req, res, next) {
 	var sqlAll = "select * from fragrantclass";
-	pool.query(sqlAll,function(err,data){
+	pool.query(sqlAll, function(err, data) {
 		if (err) {
 			responseData.code = -1;
 			responseData.msg = '查询失败';
@@ -361,11 +361,12 @@ router.post('/fragrantclass',function(req,res,next){
 	});
 });
 // 产品
-router.get('/fragrantcon/:name',function(req,res,next){
+router.get('/fragrantcon/:name', function(req, res, next) {
 	var name = req.params.name;
 	console.log(name);
-	var sqlAll = "select * from fragrantcon a join fragrantclass b on a.fc_id = b.fc_id where b.fc_title = '"+name+"'";
-	pool.query(sqlAll,function(err,data){
+	var sqlAll = "select * from fragrantcon a join fragrantclass b on a.fc_id = b.fc_id where b.fc_title = '" + name +
+		"'";
+	pool.query(sqlAll, function(err, data) {
 		if (err) {
 			responseData.code = -1;
 			responseData.msg = '查询失败';
@@ -379,9 +380,9 @@ router.get('/fragrantcon/:name',function(req,res,next){
 
 // ================================================= 气味 =================================================
 //目录
-router.post('/smellclass',function(req,res,next){
+router.post('/smellclass', function(req, res, next) {
 	var sqlAll = "select * from smellclass";
-	pool.query(sqlAll,function(err,data){
+	pool.query(sqlAll, function(err, data) {
 		if (err) {
 			responseData.code = -1;
 			responseData.msg = '查询失败';
@@ -393,11 +394,11 @@ router.post('/smellclass',function(req,res,next){
 	});
 });
 // 分类产品
-router.get('/smell/:name',function(req,res,next){
+router.get('/smell/:name', function(req, res, next) {
 	var name = req.params.name;
 	console.log(name);
-	var sqlAll = "select * from smell a join smellclass b on a.ss_id = b.ss_id where b.ss_title = '"+name+"'";
-	pool.query(sqlAll,function(err,data){
+	var sqlAll = "select * from smell a join smellclass b on a.ss_id = b.ss_id where b.ss_title = '" + name + "'";
+	pool.query(sqlAll, function(err, data) {
 		if (err) {
 			responseData.code = -1;
 			responseData.msg = '查询失败';

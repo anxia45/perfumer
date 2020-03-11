@@ -213,8 +213,8 @@ router.post('/catalogAdd', function(req, res, next) {
 	var cg_alias = req.body.cg_alias;
 	var cg_url = req.body.cg_url;
 	var data = {
-		cg_alias:cg_alias,
-		cg_url:cg_url
+		cg_alias: cg_alias,
+		cg_url: cg_url
 	};
 
 	// 判断是否为空
@@ -245,7 +245,7 @@ router.post('/catalogId/:id', function(req, res, next) {
 			console.log(err);
 		} else {
 			responseData.msg = data;
-				res.json(responseData);
+			res.json(responseData);
 		}
 	})
 })
@@ -321,7 +321,7 @@ router.post('/searchtipic', function(req, res, next) {
 router.post('/tipicAdd', function(req, res, next) {
 	var title = req.body.title;
 	var data = {
-		title:title
+		title: title
 	};
 
 	// 判断是否为空
@@ -353,7 +353,7 @@ router.post('/tipicId/:id', function(req, res, next) {
 			console.log(err);
 		} else {
 			responseData.msg = data;
-				res.json(responseData);
+			res.json(responseData);
 		}
 	})
 })
@@ -429,8 +429,8 @@ router.post('/brandAdd', function(req, res, next) {
 	var b_name_eh = req.body.b_name_eh;
 	var b_content = req.body.b_content;
 	var data = {
-		b_name_ch:b_name_ch,
-		b_name_eh:b_name_eh,
+		b_name_ch: b_name_ch,
+		b_name_eh: b_name_eh,
 		b_img: b_img,
 		b_content: b_content
 	};
@@ -463,7 +463,7 @@ router.post('/brandId/:id', function(req, res, next) {
 			console.log(err);
 		} else {
 			responseData.msg = data;
-				res.json(responseData);
+			res.json(responseData);
 		}
 	})
 })
@@ -514,9 +514,9 @@ router.get('/branddelete/:id', function(req, res, next) {
 
 // ================================================= 品牌详情页 =================================================
 //查询
-router.post('/brandcon',function (req,res,next) {
+router.post('/brandcon', function(req, res, next) {
 	var sqlAll = "select * from brand a join brandclasscon b on a.b_id = b.b_id ORDER BY b.b_id asc";
-	pool.query(sqlAll,function (err,data) {
+	pool.query(sqlAll, function(err, data) {
 		if (err) {
 			responseData.code = -1;
 			responseData.msg = '查询失败';
@@ -528,10 +528,10 @@ router.post('/brandcon',function (req,res,next) {
 	})
 })
 // 查询下拉选择框
-router.post('/brandconselect',function (req,res,nexxt) {
+router.post('/brandconselect', function(req, res, nexxt) {
 	var sqlname = 'select b_id,b_name_ch from brand';
-	pool.query(sqlname,function (err,data) {
-		if(err) {
+	pool.query(sqlname, function(err, data) {
+		if (err) {
 			console.log(err);
 			responseData.msg = '查询失败';
 			res.json(responseData);
@@ -587,8 +587,9 @@ router.post('/brandconAdd', function(req, res, next) {
 	};
 
 	// 判断是否为空
-	if (b_name_ch === '' || bc_name === '' || bc_img === '' || bc_num === '' || bc_score === '' || bc_first === '' || bc_in === '' || bc_after === ''
-		|| bc_smell === '') {
+	if (b_name_ch === '' || bc_name === '' || bc_img === '' || bc_num === '' || bc_score === '' || bc_first === '' ||
+		bc_in === '' || bc_after === '' ||
+		bc_smell === '') {
 		responseData.code = 1,
 			responseData.msg = '内容不能为空';
 		res.json(responseData);
@@ -609,8 +610,8 @@ router.post('/brandconAdd', function(req, res, next) {
 })
 // 查看 && 查询单条数据
 router.get('/brandclassconId', function(req, res, next) {
-	var id = JSON.stringify(req.query).substr(2,1);
-	var sqlAll = "select * from brand a join brandclasscon b on a.b_id = b.b_id where b.b_id ='"+id+"'";
+	var id = JSON.stringify(req.query).substr(2, 1);
+	var sqlAll = "select * from brand a join brandclasscon b on a.b_id = b.b_id where b.b_id ='" + id + "'";
 	pool.query(sqlAll, function(err, data) {
 		if (err) {
 			console.log(err);
@@ -633,16 +634,18 @@ router.post('/brandconupdate', function(req, res, next) {
 	var bc_smell = req.body.updatebcsmell;
 	var b_name_ch = req.body.updatebnamech;
 	// 判断是否为空
-	if (b_name_ch === '' || bc_name === '' || bc_img === '' || bc_num === '' || bc_score === '' || bc_first === '' || bc_in === '' || bc_after === ''
-		|| bc_smell === '' || bc_id === '') {
+	if (b_name_ch === '' || bc_name === '' || bc_img === '' || bc_num === '' || bc_score === '' || bc_first === '' ||
+		bc_in === '' || bc_after === '' ||
+		bc_smell === '' || bc_id === '') {
 		responseData.code = 1,
 			responseData.msg = '内容不能为空';
 		res.json(responseData);
 		return;
 	}
 	var sqlupdate = "update brandclasscon set bc_name = '" + bc_name + "',bc_img = '" + bc_img + "',bc_num = '" + bc_num +
-		"',bc_score = '"+bc_score+"',bc_first = '"+bc_first+"',bc_in = '"+bc_in+"',bc_after = '"+bc_after+"'" +
-		",bc_smell = '"+bc_smell+"',b_id = '" + b_name_ch + "' where bc_id ='" + bc_id + "'";
+		"',bc_score = '" + bc_score + "',bc_first = '" + bc_first + "',bc_in = '" + bc_in + "',bc_after = '" + bc_after +
+		"'" +
+		",bc_smell = '" + bc_smell + "',b_id = '" + b_name_ch + "' where bc_id ='" + bc_id + "'";
 	pool.query(sqlupdate, function(err, data) {
 		if (err) {
 			console.log(err);
@@ -721,7 +724,8 @@ router.post('/fragrantupdate', function(req, res, next) {
 		res.json(responseData);
 		return;
 	}
-	var sqlupdate = "update fragrantclass set fc_title = '" + fc_title + "',fc_title_eh = '" + fc_title_eh + "',fc_img = '" + fc_img + "',fc_tip ='"+fc_tip+"',fc_content = '" + fc_content +
+	var sqlupdate = "update fragrantclass set fc_title = '" + fc_title + "',fc_title_eh = '" + fc_title_eh +
+		"',fc_img = '" + fc_img + "',fc_tip ='" + fc_tip + "',fc_content = '" + fc_content +
 		"' where fc_id ='" + fc_id + "'";
 	pool.query(sqlupdate, function(err, data) {
 		if (err) {
@@ -752,9 +756,9 @@ router.get('/fragrantclassdelete/:id', function(req, res, next) {
 })
 // =============================================== 香调详细内容 ==============================================
 // 查询
-router.post('/fragrantcon',function(req,res,next){
+router.post('/fragrantcon', function(req, res, next) {
 	var sqlAll = "select a.*,b.fc_title from fragrantcon a join fragrantclass b on a.fc_id = b.fc_id";
-	pool.query(sqlAll,function(err,data){
+	pool.query(sqlAll, function(err, data) {
 		if (err) {
 			responseData.code = -1;
 			responseData.msg = '查询失败';
@@ -788,10 +792,10 @@ router.post('/searchfragrantcon', function(req, res, next) {
 	})
 })
 // 查询下拉选择框
-router.post('/fragrantconselect',function (req,res,next) {
+router.post('/fragrantconselect', function(req, res, next) {
 	var sqlname = 'select * from fragrantclass';
-	pool.query(sqlname,function (err,data) {
-		if(err) {
+	pool.query(sqlname, function(err, data) {
+		if (err) {
 			console.log(err);
 			responseData.msg = '查询失败';
 			res.json(responseData);
@@ -813,19 +817,20 @@ router.post('/fragrantconadd', function(req, res, next) {
 	var f_smell = req.body.f_smell;
 	var fc_title = req.body.fc_title;
 	var data = {
-		f_title:f_title,
-		f_img:f_img,
-		f_num:f_num,
-		f_score:f_score,
+		f_title: f_title,
+		f_img: f_img,
+		f_num: f_num,
+		f_score: f_score,
 		f_first: f_first,
-		f_in:f_in,
+		f_in: f_in,
 		f_after: f_after,
-		f_smell:f_smell,
+		f_smell: f_smell,
 		fc_id: fc_title
 	};
 
 	// 判断是否为空
-	if (f_title == '' || f_img == '' || f_num == '' || f_score == '' || f_first == '' || f_in == '' || f_after == '' || f_smell == '' || fc_title == '') {
+	if (f_title == '' || f_img == '' || f_num == '' || f_score == '' || f_first == '' || f_in == '' || f_after == '' ||
+		f_smell == '' || fc_title == '') {
 		responseData.code = 1,
 			responseData.msg = '内容不能为空';
 		res.json(responseData);
@@ -870,13 +875,16 @@ router.post('/fragrantconupdate', function(req, res, next) {
 	var f_smell = req.body.f_smell;
 	var fc_title = req.body.fc_title;
 	// 判断是否为空
-	if (f_title == '' || f_img == '' || f_num == '' || f_score == '' || f_first == '' || f_in == '' || f_after == '' || f_smell == '' || fc_title == '') {
+	if (f_title == '' || f_img == '' || f_num == '' || f_score == '' || f_first == '' || f_in == '' || f_after == '' ||
+		f_smell == '' || fc_title == '') {
 		responseData.code = 1,
 			responseData.msg = '内容不能为空';
 		res.json(responseData);
 		return;
 	}
-	var sqlupdate = "update fragrantcon set f_title = '" + f_title + "',f_img = '" + f_img + "',f_num = '" + f_num + "',f_score = '" + f_score + "',f_first = '" + f_first + "',f_in = '" + f_in + "',f_after ='"+f_after+"',f_smell = '" + f_smell +
+	var sqlupdate = "update fragrantcon set f_title = '" + f_title + "',f_img = '" + f_img + "',f_num = '" + f_num +
+		"',f_score = '" + f_score + "',f_first = '" + f_first + "',f_in = '" + f_in + "',f_after ='" + f_after +
+		"',f_smell = '" + f_smell +
 		"',fc_id = '" + fc_title + "' where f_id ='" + f_id + "'";
 	pool.query(sqlupdate, function(err, data) {
 		if (err) {
@@ -955,7 +963,8 @@ router.post('/smellclassupdate', function(req, res, next) {
 		res.json(responseData);
 		return;
 	}
-	var sqlupdate = "update smellclass set ss_img = '" + ss_img + "',ss_title = '" + ss_title + "',ss_content = '" + ss_content +
+	var sqlupdate = "update smellclass set ss_img = '" + ss_img + "',ss_title = '" + ss_title + "',ss_content = '" +
+		ss_content +
 		"' where ss_id ='" + ss_id + "'";
 	pool.query(sqlupdate, function(err, data) {
 		if (err) {
@@ -987,9 +996,9 @@ router.get('/smellclassdelete/:id', function(req, res, next) {
 // ================================================= 气味 =================================================
 // 分类产品
 // 查询
-router.post('/smell',function(req,res,next){
+router.post('/smell', function(req, res, next) {
 	var sqlAll = "select * from smell a join smellclass b on a.ss_id = b.ss_id";
-	pool.query(sqlAll,function(err,data){
+	pool.query(sqlAll, function(err, data) {
 		if (err) {
 			responseData.code = -1;
 			responseData.msg = '查询失败';
@@ -1023,10 +1032,10 @@ router.post('/searchsmell', function(req, res, next) {
 	})
 })
 // 查询下拉选择框
-router.post('/smellselect',function (req,res,next) {
+router.post('/smellselect', function(req, res, next) {
 	var sqlname = 'select ss_id,ss_title from smellclass';
-	pool.query(sqlname,function (err,data) {
-		if(err) {
+	pool.query(sqlname, function(err, data) {
+		if (err) {
 			console.log(err);
 			responseData.msg = '查询失败';
 			res.json(responseData);
@@ -1045,9 +1054,9 @@ router.post('/smelladd', function(req, res, next) {
 	var s_content_add = req.body.s_content_add;
 	var data = {
 		s_name_ch: s_name_chadd,
-		s_name_eh:s_name_ehadd,
+		s_name_eh: s_name_ehadd,
 		s_img: s_img,
-		s_content:s_content_add,
+		s_content: s_content_add,
 		ss_id: ss_title
 	};
 
@@ -1099,7 +1108,8 @@ router.post('/smellupdate', function(req, res, next) {
 		res.json(responseData);
 		return;
 	}
-	var sqlupdate = "update smell set s_name_ch = '" + s_name_ch + "',s_name_eh = '" + s_name_eh + "',s_img ='"+s_img+"',s_content = '" + s_content +
+	var sqlupdate = "update smell set s_name_ch = '" + s_name_ch + "',s_name_eh = '" + s_name_eh + "',s_img ='" + s_img +
+		"',s_content = '" + s_content +
 		"',ss_id = '" + ss_title + "' where s_id ='" + s_id + "'";
 	pool.query(sqlupdate, function(err, data) {
 		if (err) {
@@ -1131,9 +1141,9 @@ router.get('/smelldelete/:id', function(req, res, next) {
 })
 // ================================================= 气味详情页 =================================================
 //查询
-router.post('/smellcon',function (req,res,next) {
+router.post('/smellcon', function(req, res, next) {
 	var sqlAll = "select * from smellcon a join smell b on a.s_id = b.s_id";
-	pool.query(sqlAll,function (err,data) {
+	pool.query(sqlAll, function(err, data) {
 		if (err) {
 			responseData.code = -1;
 			responseData.msg = '查询失败';
@@ -1167,10 +1177,10 @@ router.post('/searchsmellcon', function(req, res, next) {
 	})
 })
 // 查询下拉选择框
-router.post('/smellconselect',function (req,res,nexxt) {
+router.post('/smellconselect', function(req, res, nexxt) {
 	var sqlname = 'select * from smell';
-	pool.query(sqlname,function (err,data) {
-		if(err) {
+	pool.query(sqlname, function(err, data) {
+		if (err) {
 			console.log(err);
 			responseData.msg = '查询失败';
 			res.json(responseData);
@@ -1204,8 +1214,9 @@ router.post('/smellconAdd', function(req, res, next) {
 	};
 
 	// 判断是否为空
-	if (sc_title === '' || s_name_ch === '' || sc_img === '' || sc_num === '' || sc_score === '' || sc_first === '' || sc_in === '' || sc_after === ''
-		|| sc_smell === '') {
+	if (sc_title === '' || s_name_ch === '' || sc_img === '' || sc_num === '' || sc_score === '' || sc_first === '' ||
+		sc_in === '' || sc_after === '' ||
+		sc_smell === '') {
 		responseData.code = 1,
 			responseData.msg = '内容不能为空';
 		res.json(responseData);
@@ -1226,8 +1237,8 @@ router.post('/smellconAdd', function(req, res, next) {
 })
 // 查看 && 查询单条数据
 router.get('/smellconId', function(req, res, next) {
-	var id = JSON.stringify(req.query).substr(2,1);
-	var sqlAll = "select * from smellcon a join smell b on a.s_id = b.s_id where a.sc_id ='"+id+"'";
+	var id = JSON.stringify(req.query).substr(2, 1);
+	var sqlAll = "select * from smellcon a join smell b on a.s_id = b.s_id where a.sc_id ='" + id + "'";
 	pool.query(sqlAll, function(err, data) {
 		if (err) {
 			console.log(err);
@@ -1251,16 +1262,18 @@ router.post('/smellconupdate', function(req, res, next) {
 	var s_name_ch = req.body.s_name_ch;
 
 	// 判断是否为空
-	if (sc_title == '' || s_name_ch == '' || sc_img == '' || sc_num == '' || sc_score == '' || sc_first == '' || sc_in == '' || sc_after == ''
-		|| sc_smell == '') {
+	if (sc_title == '' || s_name_ch == '' || sc_img == '' || sc_num == '' || sc_score == '' || sc_first == '' || sc_in ==
+		'' || sc_after == '' ||
+		sc_smell == '') {
 		responseData.code = 1,
 			responseData.msg = '内容不能为空';
 		res.json(responseData);
 		return;
 	}
 	var sqlupdate = "update smellcon set sc_title = '" + sc_title + "',sc_img = '" + sc_img + "',sc_num = '" + sc_num +
-		"',sc_score = '"+sc_score+"',sc_first = '"+sc_first+"',sc_in = '"+sc_in+"',sc_after = '"+sc_after+"'" +
-		",sc_smell = '"+sc_smell+"',s_id = '" + s_name_ch + "' where sc_id ='" + sc_id + "'";
+		"',sc_score = '" + sc_score + "',sc_first = '" + sc_first + "',sc_in = '" + sc_in + "',sc_after = '" + sc_after +
+		"'" +
+		",sc_smell = '" + sc_smell + "',s_id = '" + s_name_ch + "' where sc_id ='" + sc_id + "'";
 	pool.query(sqlupdate, function(err, data) {
 		if (err) {
 			console.log(err);
@@ -1367,7 +1380,8 @@ router.post('/perfumerupdate', function(req, res, next) {
 		res.json(responseData);
 		return;
 	}
-	var sqlupdate = "update perfumer set pc_img = '" + pc_img + "',pc_name = '" + pc_name + "',pc_introduce = '" + pc_introduce +
+	var sqlupdate = "update perfumer set pc_img = '" + pc_img + "',pc_name = '" + pc_name + "',pc_introduce = '" +
+		pc_introduce +
 		"' where pc_id ='" + pc_id + "'";
 	pool.query(sqlupdate, function(err, data) {
 		if (err) {
@@ -1398,9 +1412,9 @@ router.get('/perfumerdelete/:id', function(req, res, next) {
 })
 // ================================================= 调香师详情页 =================================================
 //查询
-router.post('/perfumercon',function (req,res,next) {
+router.post('/perfumercon', function(req, res, next) {
 	var sqlAll = "select * from perfumercon a join perfumer b on a.pc_id =b.pc_id ORDER BY b.pc_id asc";
-	pool.query(sqlAll,function (err,data) {
+	pool.query(sqlAll, function(err, data) {
 		if (err) {
 			responseData.code = -1;
 			responseData.msg = '查询失败';
@@ -1434,10 +1448,10 @@ router.post('/searchpercon', function(req, res, next) {
 	})
 })
 // 查询下拉选择框
-router.post('/perfumerconselect',function (req,res,nexxt) {
+router.post('/perfumerconselect', function(req, res, nexxt) {
 	var sqlname = 'select pc_id,pc_name from perfumer';
-	pool.query(sqlname,function (err,data) {
-		if(err) {
+	pool.query(sqlname, function(err, data) {
+		if (err) {
 			console.log(err);
 			responseData.msg = '查询失败';
 			res.json(responseData);
@@ -1471,8 +1485,9 @@ router.post('/perfumerconAdd', function(req, res, next) {
 	};
 
 	// 判断是否为空
-	if (pf_name === '' || pc_name === '' || pf_img === '' || pf_num === '' || pf_score === '' || pf_first === '' || pf_in === '' || pf_after === ''
-		|| pf_smell === '') {
+	if (pf_name === '' || pc_name === '' || pf_img === '' || pf_num === '' || pf_score === '' || pf_first === '' ||
+		pf_in === '' || pf_after === '' ||
+		pf_smell === '') {
 		responseData.code = 1,
 			responseData.msg = '内容不能为空';
 		res.json(responseData);
@@ -1493,8 +1508,8 @@ router.post('/perfumerconAdd', function(req, res, next) {
 })
 // 查看 && 查询单条数据
 router.get('/perfumerconId', function(req, res, next) {
-	var id = JSON.stringify(req.query).substr(2,1);
-	var sqlAll = "select * from perfumercon a join perfumer b on a.pc_id =b.pc_id where a.pf_id ='"+id+"'";
+	var id = JSON.stringify(req.query).substr(2, 1);
+	var sqlAll = "select * from perfumercon a join perfumer b on a.pc_id =b.pc_id where a.pf_id ='" + id + "'";
 	pool.query(sqlAll, function(err, data) {
 		if (err) {
 			console.log(err);
@@ -1518,16 +1533,18 @@ router.post('/perfumerconupdate', function(req, res, next) {
 	var pc_name = req.body.updatepcname;
 
 	// 判断是否为空
-	if (pf_id === '' || pf_name === '' || pc_name === '' || pf_img === '' || pf_num === '' || pf_score === '' || pf_first === '' || pf_in === '' || pf_after === ''
-		|| pf_smell === '') {
+	if (pf_id === '' || pf_name === '' || pc_name === '' || pf_img === '' || pf_num === '' || pf_score === '' ||
+		pf_first === '' || pf_in === '' || pf_after === '' ||
+		pf_smell === '') {
 		responseData.code = 1,
 			responseData.msg = '内容不能为空';
 		res.json(responseData);
 		return;
 	}
 	var sqlupdate = "update perfumercon set pf_name = '" + pf_name + "',pf_img = '" + pf_img + "',pf_num = '" + pf_num +
-		"',pf_score = '"+pf_score+"',pf_first = '"+pf_first+"',pf_in = '"+pf_in+"',pf_after = '"+pf_after+"'" +
-		",pf_smell = '"+pf_smell+"',pc_id = '" + pc_name + "' where pf_id ='" + pf_id + "'";
+		"',pf_score = '" + pf_score + "',pf_first = '" + pf_first + "',pf_in = '" + pf_in + "',pf_after = '" + pf_after +
+		"'" +
+		",pf_smell = '" + pf_smell + "',pc_id = '" + pc_name + "' where pf_id ='" + pf_id + "'";
 	pool.query(sqlupdate, function(err, data) {
 		if (err) {
 			console.log(err);

@@ -35,11 +35,13 @@
 	border-radius: 15px;
 	padding-bottom: 50px;
 }
-.form-group span{
+
+.form-group span {
 	font-size: 12px;
 	padding-left: 10px;
 	color: #F18085;
 }
+
 label {
 	color: #F18085;
 }

@@ -17,9 +17,11 @@
 	color: #6c6c6c;
 	font-size: 13px;
 }
+
 .container img {
 	width: 100%;
 }
+
 .imgborder {
 	width: 150px;
 	height: 150px;
@@ -44,4 +46,3 @@
 	border-width: 0;
 	background: none;
 }
-

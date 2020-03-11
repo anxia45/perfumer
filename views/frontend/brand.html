@@ -28,11 +28,11 @@
 				if (data.code == 0) {
 					for (var i = 0; i < data.msg.length; i++) {
 						ht += "<li> " +
-							"<a href = '/api/brandcon?b_id="+data.msg[i].b_id+"' class = 'imgborder' >" +
+							"<a href = '/api/brandcon?b_id=" + data.msg[i].b_id + "' class = 'imgborder' >" +
 							"<img src = '" + data.msg[i].b_img + "' >" +
 							"</a>" +
-							"<a href = '/api/brandcon?b_id="+data.msg[i].b_id+"' ><p>" + data.msg[i].b_name_ch + "</p></a>" +
-							"<a href = '/api/brandcon?b_id="+data.msg[i].b_id+"' ><p>" + data.msg[i].b_name_eh + "</p></a>" +
+							"<a href = '/api/brandcon?b_id=" + data.msg[i].b_id + "' ><p>" + data.msg[i].b_name_ch + "</p></a>" +
+							"<a href = '/api/brandcon?b_id=" + data.msg[i].b_id + "' ><p>" + data.msg[i].b_name_eh + "</p></a>" +
 							"</li>";
 					}
 					$('.home').append(ht);

@@ -50,7 +50,8 @@
 				var ht = '';
 				if (data.code == 0) {
 					for (var i = 0; i < data.msg.length; i++) {
-						ht += "<li><a id='name' name= 'name' href='"+data.msg[i].href+"' data-name ='"+data.msg[i].bc_name+"'>"+data.msg[i].bc_name+"</a></li>";
+						ht += "<li><a id='name' name= 'name' href='" + data.msg[i].href + "' data-name ='" + data.msg[i].bc_name +
+							"'>" + data.msg[i].bc_name + "</a></li>";
 					}
 					$('#myTab').append(ht);
 				}
@@ -78,14 +79,14 @@
 			}
 		});
 		$(document).on('click', '#name', function() {
-			var tabname =  $(this).attr("name");
+			var tabname = $(this).attr("name");
 			console.log(tabname)
 			$.ajax({
 				url: '/api/brandclasscontent1',
 				type: 'post',
 				dataType: 'json',
 				data: tabname,
-				success: function(data){
+				success: function(data) {
 					console.log(data);
 				}
 			});

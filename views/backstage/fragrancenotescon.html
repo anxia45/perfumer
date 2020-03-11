@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>香调详细内容</title>
+	<link rel="stylesheet" type="text/css" href="/public/bootstrap-3.3.7/css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="/public/fonticon/iconfont.css" />
+	<link rel="stylesheet" type="text/css" href="/public/css/table.css" />
+</head>
+<body>
+<div class="col-md-9">
+	<button type="button" class="btn btn-danger btn-xs active" data-toggle="modal" data-target="#addModal">
+		<a href="#"><i class="iconfont icon-tianjia"></i>添加</a>
+	</button>
+</div>
+<div class="col-md-3">
+	<form id="searchform" class="bs-example bs-example-form" role="form">
+		<input type="search" id="f_title" class="input" name="f_title" placeholder="请输入产品名称" />
+		<button type="button" class="btn btn-success btn-sm" id="search">搜索</button>
+	</form>
+</div>
+<table id="table" border="1" cellspacing="0" cellpadding="0">
+	<thead>
+	<tr>
+		<th style="width: 1%">ID</th>
+		<th style="width: 1%">类别</th>
+		<th style="width: 1%">产品名</th>
+		<th style="width: 1%">产品图片</th>
+		<th style="width: 1%">数量</th>
+		<th style="width: 1%">评分</th>
+		<th style="width: 1%">前调</th>
+		<th style="width: 1%">中调</th>
+		<th style="width: 1%">后调</th>
+		<th style="width: 1%">气味</th>
+		<th style="width: 2%">操作</th>
+	</tr>
+	</thead>
+	<tbody></tbody>
+</table>
+<!-- 添加 -->
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">添加</h4>
+			</div>
+			<div class="modal-body">
+				<form id="addform" class="form-horizontal" role="form">
+					<div class="form-group">
+						<label for="fctitle" class="col-sm-2 control-label">类别名:</label>
+						<div class="col-sm-10">
+							<select class="form-control"  name="fc_title" id="fctitle" >
+								<option value="" disabled selected hidden>--请选择--</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="ftitle" class="col-sm-2 control-label">产品名:</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" name="f_title" id="ftitle" placeholder="请输入产品名" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="fimg" class="col-sm-2 control-label">产品图片:</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" name="f_img" id="fimg" placeholder="请输入图片地址" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="fnum" class="col-sm-2 control-label">数量:</label>
+						<div class="col-sm-10">
+							<input type="number" class="form-control" name="f_num" id="fnum" placeholder="请输入数量" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="fscore" class="col-sm-2 control-label">评分:</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" name="f_score" id="fscore" placeholder="请输入评分" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="ffirst" class="col-sm-2 control-label">前调:</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" name="f_first" id="ffirst" placeholder="请输入前调" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="fin" class="col-sm-2 control-label">中调:</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" name="f_in" id="fin" placeholder="请输入中调" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="fafter" class="col-sm-2 control-label">后调:</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" name="f_after" id="fafter" placeholder="请输入后调" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="fsmell" class="col-sm-2 control-label">气味:</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" name="f_smell" id="fsmell" placeholder="请输入气味" />
+						</div>
+					</div>
+					<div class="text-right">
+						<span id="returnMessage" class="glyphicon"> </span>
+						<button type="button" class="btn btn1 btn-success" id="add">添加</button>
+						<button type="button" class="btn btn1 btn-danger" data-dismiss="modal">关闭</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- 修改 -->
+<div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabelupdate" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabelupdate">修改</h4>
+			</div>
+			<div class="modal-body">
+				<form id="updateform" class="form-horizontal" role="form">
+					<div class="form-group">
+						<label for="fid" class="col-sm-2 control-label">ID:</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" name="f_id" id="fidupdate" value="" readonly placeholder="请输入ID" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="fctitle" class="col-sm-2 control-label">类别名:</label>
+						<div class="col-sm-10">
+							<select class="form-control"  name="fc_title" id="fctitleupdate" >
+								<option value="" disabled selected hidden>--请选择--</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="ftitle" class="col-sm-2 control-label">产品名:</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" name="f_title" id="ftitleupdate" placeholder="请输入产品名" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="fimg" class="col-sm-2 control-label">产品图片:</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" name="f_img" id="fimgupdate" placeholder="请输入图片地址" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="fnum" class="col-sm-2 control-label">数量:</label>
+						<div class="col-sm-10">
+							<input type="number" class="form-control" name="f_num" id="fnumupdate" placeholder="请输入数量" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="fscore" class="col-sm-2 control-label">评分:</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" name="f_score" id="fscoreupdate" placeholder="请输入评分" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="ffirst" class="col-sm-2 control-label">前调:</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" name="f_first" id="ffirstupdate" placeholder="请输入前调" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="fin" class="col-sm-2 control-label">中调:</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" name="f_in" id="finupdate" placeholder="请输入中调" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="fafter" class="col-sm-2 control-label">后调:</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" name="f_after" id="fafterupdate" placeholder="请输入后调" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="fsmell" class="col-sm-2 control-label">气味:</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" name="f_smell" id="fsmellupdate" placeholder="请输入气味" />
+						</div>
+					</div>
+					<div class="text-right">
+						<button type="button" class="btn btn1 btn-success" id="update">修改</button>
+						<button type="button" class="btn btn1 btn-danger" data-dismiss="modal">关闭</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="/public/js/jquery-3.3.1.min.js"></script>
+<script src="/public/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+		// 查询
+		$.ajax({
+			type: 'post',
+			url: '/admin/fragrantcon',
+			dataType: 'json',
+			success: function(data) {
+				var ht = ''
+				if (data.code == 0) {
+					for (var i = 0; i < data.msg.length; i++) {
+						ht += "<tr>" +
+								"<td >" + data.msg[i].f_id + "</td>" +
+								"<td >" + data.msg[i].fc_title + "</td>" +
+								"<td >" + data.msg[i].f_title + "</td>" +
+								"<td ><img src='" + data.msg[i].f_img + "'></td>" +
+								"<td >" + data.msg[i].f_num + "</td>" +
+								"<td >" + data.msg[i].f_score + "</td>" +
+								"<td >" + data.msg[i].f_first + "</td>" +
+								"<td >" + data.msg[i].f_in + "</td>" +
+								"<td >" + data.msg[i].f_after + "</td>" +
+								"<td >" + data.msg[i].f_smell + "</td>" +
+								"<td >" +
+								"<button id='update' data-id='" + data.msg[i].f_id +
+								"' class='btn btn-xs btn-success' data-toggle='modal' data-target='#updateModal'><a href='#'><i class='iconfont icon-web-icon-'></i>修改</a></button>" +
+								"<button id='delete' data-id='" + data.msg[i].f_id +
+								"' class='btn btn-xs btn-danger'><a href='#'><i class='iconfont icon-shanchu'></i>删除</a></button>" +
+								"</td>" +
+								"</tr>";
+					}
+					$('tbody').append(ht);
+				}
+			}
+		})
+
+	// 搜索
+	$('#search').click(function() {
+		var data = $('#searchform').serialize();
+		if ($('.input').val() == '') {
+			alert('内容不能为空')
+			return false;
+		} else {
+			var ht = ''
+			$.ajax({
+				url: '/admin/searchfragrantcon',
+				type: 'post',
+				dataType: 'json',
+				data: data,
+				success: function(data) {
+					if (data.code == 0) {
+						for (var i = 0; i < data.msg.length; i++) {
+							ht += "<tr>" +
+									"<td >" + data.msg[i].f_id + "</td>" +
+									"<td >" + data.msg[i].fc_title + "</td>" +
+									"<td >" + data.msg[i].f_title + "</td>" +
+									"<td ><img src='" + data.msg[i].f_img + "'></td>" +
+									"<td >" + data.msg[i].f_num + "</td>" +
+									"<td >" + data.msg[i].f_score + "</td>" +
+									"<td >" + data.msg[i].f_first + "</td>" +
+									"<td >" + data.msg[i].f_in + "</td>" +
+									"<td >" + data.msg[i].f_after + "</td>" +
+									"<td >" + data.msg[i].f_smell + "</td>" +
+									"<td >" +
+									"<button id='update' data-id='" + data.msg[i].f_id +
+									"' class='btn btn-xs btn-success' data-toggle='modal' data-target='#updateModal'><a href='#'><i class='iconfont icon-web-icon-'></i>修改</a></button>" +
+									"<button id='delete' data-id='" + data.msg[i].f_id +
+									"' class='btn btn-xs btn-danger'><a href='#'><i class='iconfont icon-shanchu'></i>删除</a></button>" +
+									"</td>" +
+									"</tr>";
+						}
+						$('tbody').html(ht);
+						$('.input').val('');
+					}
+				}
+			})
+		}
+	})
+	// 查询下拉选择框
+		$.ajax({
+			url: '/admin/fragrantconselect',
+			type: 'post',
+			dataType: 'json',
+			success: function (data) {
+				console.log(data);
+				if (data.code == 0) {
+					var ht = '';
+					for (var i=0;i<data.msg.length; i++){
+						ht += "<option value='"+data.msg[i].fc_id+"'";
+						ht+=  ">"+data.msg[i].fc_title+"</option>";
+					}
+					$('#fctitle').append(ht);
+				}
+			}
+		})
+	// 添加
+		$("#add").click(function() {
+			var data = $("#addform").serialize();
+			console.log(data);
+			$.ajax({
+				url: '/admin/fragrantconadd',
+				type: 'post',
+				dataType: 'json',
+				data: data,
+				success: function(data) {
+					if (data.code == 0) {
+						alert(data.msg);
+						setTimeout(function() {
+							// 刷新模态框，不然会保留上次填写的数据
+							$("#addModal").on("hidden.bs.modal", function() {
+								$(this).removeData("bs.modal");
+							})
+							$('#addform input').val('');
+							location.reload();
+						}, 1000)
+					} else if (data.code == 1) {
+						alert('内容不能为空')
+					} else if (data.code == -1) {
+						alert(data.msg);
+						// 刷新模态框，不然会保留上次填写的数据
+						$("#addModal").on("hidden.bs.modal", function() {
+							$(this).removeData("bs.modal");
+						})
+						$('#addform input').val('');
+					}
+				}
+			})
+		})
+	// 查询单条数据
+	$(document).on('click', '#update', function() {
+		var id = $(this).attr("data-id");
+		$.ajax({
+			url: '/admin/fragrantconselect',
+			type: 'post',
+			dataType: 'json',
+			success: function (data) {
+				console.log(data);
+				if (data.code == 0) {
+					var ht = '';
+					for (var i=0;i<data.msg.length; i++){
+						ht += "<option value='"+data.msg[i].fc_id+"'";
+						if (id == data.msg[i].fc_id) {
+							ht += 'selected';
+						}
+						ht+=  ">"+data.msg[i].fc_title+"</option>";
+					}
+					$('#fctitleupdate').append(ht);
+				}
+			}
+		})
+		$.ajax({
+			url: '/admin/fragrantconId/' + id,
+			type: 'post',
+			dataType: 'json',
+			success: function(data) {
+				if (data.code == 0) {
+					console.log(data.msg)
+					$("#fidupdate").attr("value", data.msg[0].f_id);
+					$("#fctitleupdate").attr("value", data.msg[0].fc_title);
+					$("#ftitleupdate").attr("value", data.msg[0].f_title);
+					$("#fimgupdate").attr("value", data.msg[0].f_img);
+					$("#fnumupdate").attr("value", data.msg[0].f_num);
+					$("#fscoreupdate").attr("value", data.msg[0].f_score);
+					$("#ffirstupdate").attr("value", data.msg[0].f_first);
+					$("#finupdate").attr("value", data.msg[0].f_in);
+					$("#fafterupdate").attr("value", data.msg[0].f_after);
+					$("#fsmellupdate").attr("value", data.msg[0].f_smell);
+				}
+			}
+		})
+	})
+	// 修改
+	$('#update').click(function() {
+		var data = $("#updateform").serialize();
+		$.ajax({
+			url: '/admin/fragrantconupdate',
+			type: 'post',
+			dataType: 'json',
+			data: data,
+			success: function(data) {
+				if (data.code == 0) {
+					alert(data.msg);
+					setTimeout(function() {
+						location.reload(true);
+					}, 1000)
+				} else if (data.code == 1) {
+					alert(data.msg);
+				} else if (data.code == -1) {
+					alert(data.msg);
+				}
+			}
+		})
+	})
+	// 删除
+	$(document).on('click', '#delete', function() {
+		var id = $(this).attr('data-id');
+		$.ajax({
+			url: '/admin/fragrantcondelete/' + id,
+			type: 'get',
+			dataType: 'json',
+			success: function(data) {
+				if (data.code == 0) {
+					setTimeout(function() {
+						confirm('确定删除信息吗？');
+						alert(data.msg);
+						location.reload();
+					})
+				} else if (data.code == -1) {
+					alert(data.msg);
+				}
+			}
+		})
+	})
+</script>
+</body>
+</html>

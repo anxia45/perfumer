@@ -670,6 +670,242 @@ router.get('/brandcondelete/:id', function(req, res, next) {
 		}
 	})
 })
+// ================================================= 香调 =================================================
+// 搜索
+router.post('/searchfragrant', function(req, res, next) {
+	// 模糊查询两种方法直接在SQL语句后加 mysql.escape("%"+req.body.name+"%")
+	// sql += " WHERE product_name LIKE "+mysql.escape("%"+req.body.name+"%")
+	var sqlsearch = "select * from fragrantclass"
+	if (req.body.fc_title) {
+		sqlsearch += " where fc_title like ?"; //'%1%';"
+	}
+
+	// sql+= ' limit ? offset ?';
+	// let param = [ "%"+req.body.name+"%",pageNum, (page - 1) * pageNum ]
+
+	var data = ["%" + req.body.fc_title + "%"]
+	pool.query(sqlsearch, data, function(err, data) {
+		if (err) {
+			console.log(err);
+		} else {
+			responseData.msg = data
+			res.json(responseData);
+		}
+	})
+})
+// 查询单条数据
+router.post('/fragrantId/:id', function(req, res, next) {
+	var id = req.params.id;
+	var sqlId = "select * from fragrantclass where fc_id = '" + id + "'";
+	pool.query(sqlId, function(err, data) {
+		if (err) {
+			console.log(err);
+		} else {
+			responseData.msg = data;
+			res.json(responseData);
+		}
+	})
+})
+// 修改
+router.post('/fragrantupdate', function(req, res, next) {
+	var fc_id = req.body.fc_id;
+	var fc_title = req.body.fc_title;
+	var fc_title_eh = req.body.fc_title_eh;
+	var fc_img = req.body.fc_img;
+	var fc_tip = req.body.fc_tip;
+	var fc_content = req.body.fc_content;
+	// 判断是否为空
+	if (fc_id == '' || fc_title == '' || fc_title_eh == '' || fc_img == '' || fc_content == '') {
+		responseData.code = 1,
+			responseData.msg = '内容不能为空';
+		res.json(responseData);
+		return;
+	}
+	var sqlupdate = "update fragrantclass set fc_title = '" + fc_title + "',fc_title_eh = '" + fc_title_eh + "',fc_img = '" + fc_img + "',fc_tip ='"+fc_tip+"',fc_content = '" + fc_content +
+		"' where fc_id ='" + fc_id + "'";
+	pool.query(sqlupdate, function(err, data) {
+		if (err) {
+			responseData.code = -1;
+			responseData.msg = '修改失败';
+			res.json(responseData);
+		} else {
+			responseData.msg = '修改成功';
+			res.json(responseData);
+		}
+	})
+})
+// 删除
+router.get('/fragrantclassdelete/:id', function(req, res, next) {
+	var id = req.params.id;
+	var sqldel = 'delete from fragrantclass where fc_id = ' + id;
+	pool.query(sqldel, function(err, data) {
+		if (err) {
+			console.log(err);
+			responseData.code = -1;
+			responseData.msg = '删除失败';
+			res.json(responseData);
+		} else {
+			responseData.msg = '删除成功';
+			res.json(responseData);
+		}
+	})
+})
+// =============================================== 香调详细内容 ==============================================
+// 查询
+router.post('/fragrantcon',function(req,res,next){
+	var sqlAll = "select a.*,b.fc_title from fragrantcon a join fragrantclass b on a.fc_id = b.fc_id";
+	pool.query(sqlAll,function(err,data){
+		if (err) {
+			responseData.code = -1;
+			responseData.msg = '查询失败';
+			res.json(responseData);
+		} else {
+			responseData.msg = data;
+			res.json(responseData);
+		}
+	})
+})
+// 搜索
+router.post('/searchfragrantcon', function(req, res, next) {
+	// 模糊查询两种方法直接在SQL语句后加 mysql.escape("%"+req.body.name+"%")
+	// sql += " WHERE product_name LIKE "+mysql.escape("%"+req.body.name+"%")
+	var sqlsearch = "select a.*,b.fc_title from fragrantcon a join fragrantclass b on a.fc_id = b.fc_id"
+	if (req.body.f_title) {
+		sqlsearch += " where f_title like ?"; //'%1%';"
+	}
+
+	// sql+= ' limit ? offset ?';
+	// let param = [ "%"+req.body.name+"%",pageNum, (page - 1) * pageNum ]
+
+	var data = ["%" + req.body.f_title + "%"]
+	pool.query(sqlsearch, data, function(err, data) {
+		if (err) {
+			console.log(err);
+		} else {
+			responseData.msg = data
+			res.json(responseData);
+		}
+	})
+})
+// 查询下拉选择框
+router.post('/fragrantconselect',function (req,res,next) {
+	var sqlname = 'select * from fragrantclass';
+	pool.query(sqlname,function (err,data) {
+		if(err) {
+			console.log(err);
+			responseData.msg = '查询失败';
+			res.json(responseData);
+		} else {
+			responseData.msg = data;
+			res.json(responseData);
+		}
+	})
+})
+// 添加
+router.post('/fragrantconadd', function(req, res, next) {
+	var f_title = req.body.f_title;
+	var f_img = req.body.f_img;
+	var f_num = req.body.f_num;
+	var f_score = req.body.f_score;
+	var f_first = req.body.f_first;
+	var f_in = req.body.f_in;
+	var f_after = req.body.f_after;
+	var f_smell = req.body.f_smell;
+	var fc_title = req.body.fc_title;
+	var data = {
+		f_title:f_title,
+		f_img:f_img,
+		f_num:f_num,
+		f_score:f_score,
+		f_first: f_first,
+		f_in:f_in,
+		f_after: f_after,
+		f_smell:f_smell,
+		fc_id: fc_title
+	};
+
+	// 判断是否为空
+	if (f_title == '' || f_img == '' || f_num == '' || f_score == '' || f_first == '' || f_in == '' || f_after == '' || f_smell == '' || fc_title == '') {
+		responseData.code = 1,
+			responseData.msg = '内容不能为空';
+		res.json(responseData);
+		return;
+	}
+	var sqlAdd = 'insert into fragrantcon set ?';
+	pool.query(sqlAdd, data, function(err, data) {
+		if (err) {
+			responseData.code = -1;
+			responseData.msg = '添加失败';
+			res.json(responseData);
+			console.log(err);
+		} else {
+			responseData.msg = '添加成功';
+			res.json(responseData);
+		}
+	})
+})
+// 查询单条数据
+router.post('/fragrantconId/:id', function(req, res, next) {
+	var id = req.params.id;
+	var sqlId = "select * from fragrantcon a join fragrantclass b on a.fc_id = b.fc_id where a.f_id = '" + id + "'";
+	pool.query(sqlId, function(err, data) {
+		if (err) {
+			console.log(err);
+		} else {
+			responseData.msg = data;
+			res.json(responseData);
+		}
+	})
+})
+// 修改
+router.post('/fragrantconupdate', function(req, res, next) {
+	var f_id = req.body.f_id;
+	var f_title = req.body.f_title;
+	var f_img = req.body.f_img;
+	var f_num = req.body.f_num;
+	var f_score = req.body.f_score;
+	var f_first = req.body.f_first;
+	var f_in = req.body.f_in;
+	var f_after = req.body.f_after;
+	var f_smell = req.body.f_smell;
+	var fc_title = req.body.fc_title;
+	// 判断是否为空
+	if (f_title == '' || f_img == '' || f_num == '' || f_score == '' || f_first == '' || f_in == '' || f_after == '' || f_smell == '' || fc_title == '') {
+		responseData.code = 1,
+			responseData.msg = '内容不能为空';
+		res.json(responseData);
+		return;
+	}
+	var sqlupdate = "update fragrantcon set f_title = '" + f_title + "',f_img = '" + f_img + "',f_num = '" + f_num + "',f_score = '" + f_score + "',f_first = '" + f_first + "',f_in = '" + f_in + "',f_after ='"+f_after+"',f_smell = '" + f_smell +
+		"',fc_id = '" + fc_title + "' where f_id ='" + f_id + "'";
+	pool.query(sqlupdate, function(err, data) {
+		if (err) {
+			responseData.code = -1;
+			responseData.msg = '修改失败';
+			res.json(responseData);
+			console.log(err);
+		} else {
+			responseData.msg = '修改成功';
+			res.json(responseData);
+		}
+	})
+})
+// 删除
+router.get('/fragrantcondelete/:id', function(req, res, next) {
+	var id = req.params.id;
+	var sqldel = 'delete from fragrantcon where f_id = ' + id;
+	pool.query(sqldel, function(err, data) {
+		if (err) {
+			console.log(err);
+			responseData.code = -1;
+			responseData.msg = '删除失败';
+			res.json(responseData);
+		} else {
+			responseData.msg = '删除成功';
+			res.json(responseData);
+		}
+	})
+})
 // ================================================= 气味分类 =================================================
 // 搜索
 router.post('/searchsmellclass', function(req, res, next) {
@@ -762,7 +998,7 @@ router.post('/smell',function(req,res,next){
 			responseData.msg = data;
 			res.json(responseData);
 		}
-	});
+	})
 })
 // 搜索
 router.post('/searchsmell', function(req, res, next) {

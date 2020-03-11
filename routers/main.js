@@ -53,6 +53,10 @@ router.get('/fragrancenotes', function(req, res, next) {
 	res.render('backstage/fragrancenotes');
 })
 
+router.get('/fragrancenotescon',function (req,res,next) {
+	res.render('backstage/fragrancenotescon')
+})
+
 // 气味分类
 router.get('/smellclass', function(req, res, next) {
 	res.render('backstage/smellclass');

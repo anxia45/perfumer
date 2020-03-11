@@ -346,6 +346,37 @@ router.post('/brandcon1',function (req,res,next) {
 	})
 })
 // ================================================= 香调 =================================================
+//目录
+router.post('/fragrantclass',function(req,res,next){
+	var sqlAll = "select * from fragrantclass";
+	pool.query(sqlAll,function(err,data){
+		if (err) {
+			responseData.code = -1;
+			responseData.msg = '查询失败';
+			res.json(responseData);
+		} else {
+			responseData.msg = data;
+			res.json(responseData);
+		}
+	});
+});
+// 产品
+router.get('/fragrantcon/:name',function(req,res,next){
+	var name = req.params.name;
+	console.log(name);
+	var sqlAll = "select * from fragrantcon a join fragrantclass b on a.fc_id = b.fc_id where b.fc_title = '"+name+"'";
+	pool.query(sqlAll,function(err,data){
+		if (err) {
+			responseData.code = -1;
+			responseData.msg = '查询失败';
+			res.json(responseData);
+		} else {
+			responseData.msg = data;
+			res.json(responseData);
+		}
+	});
+});
+
 // ================================================= 气味 =================================================
 //目录
 router.post('/smellclass',function(req,res,next){

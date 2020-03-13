@@ -1,111 +1,233 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="utf-8">
-		<title>气味详情页</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>香水网站</title>
 		<link rel="stylesheet" type="text/css" href="/public/bootstrap-3.3.7/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="/public/css/index.css" />
 		<link rel="stylesheet" type="text/css" href="/public/css/perfumer.css" />
-		<style>
+		<style type="text/css">
+			.user {
+				padding-left: 8px;
+			}
+
 			.col-md-3 {
-            width: 18%;
-        }
-        .imgborder {
-            width: 194px;
-            height: 194px;
-            font-size: 110px;
-            text-align: center;
-            vertical-align: middle;
-            display: table-cell;
-            margin: 20px 10px 10px;
-        }
-        #f_row .separator {
-            clear: both;
-            height: 10px;
-            margin-bottom: 10px;
-            border-bottom: 1px solid #F19BAA;
-        }
-        .content {
-            line-height:30px;
-        }
-        .content p {
-            font-size: 12px;
-        }
-    </style>
+				width: 18%;
+			}
+
+			.imgborder {
+				width: 194px;
+				height: 194px;
+				font-size: 110px;
+				text-align: center;
+				vertical-align: middle;
+				display: table-cell;
+				margin: 20px 10px 10px;
+			}
+
+			#f_row .separator {
+				clear: both;
+				height: 10px;
+				margin-bottom: 10px;
+				border-bottom: 1px solid #F19BAA;
+			}
+
+			.content {
+				line-height: 30px;
+			}
+
+			.content p {
+				font-size: 12px;
+			}
+		</style>
 	</head>
 	<body>
-		<!-- <img style="width: 100%;height: 50px;" src="/public/images/banner.png" > -->
-		<div class="backcolor"></div>
-		<div id="percon" class="container percon">
-			<div id="h_row" class="row"></div>
-			<div id="f_row" class="row">
-				<div class="separator"></div>
+		<!--导航-->
+		<nav class='navbar navbar-inverse'>
+			<div class="container-fluid">
+				<div class="nav-logo">
+					<a class="" href="#">
+						<img class="img-responsive" src="/public/images/logo.png" alt="logo" style="height: 100%;width: auto;" />
+					</a>
+				</div>
+				<div class='navbar-header'>
+					<button class='navbar-toggle' data-toggle='collapse' data-target='#demo'>
+						<span class='icon-bar'></span>
+						<span class='icon-bar'></span>
+						<span class='icon-bar'></span>
+					</button>
+					<!-- <a href="" class='navbar-brand'>菜鸟教程</a> -->
+				</div>
+				<!--  -->
+				<div class='collapse navbar-collapse' id='demo'>
+					<!-- 专题、试香中心、排行榜、更多 -->
+					<ul class='nav navbar-nav nav1'></ul>
+					<div>
+						<!-- 未登录之前 -->
+						<ul id="state_before" class='nav navbar-nav navbar-right'>
+							<li><a id="login" class="login" href="">
+									<i class="iconfont icon-zhanghaodenglu"></i>登录</a></li>
+							<li><a id="register" class="register" href="">
+									<i class="iconfont icon-zhuanjifenxinzhuce"></i>注册</a></li>
+						</ul>
+						<!-- 登录后 -->
+						<ul id="post_state" class='nav navbar-nav navbar-right'></ul>
+					</div>
+					<form class='navbar-form navbar-right col-lg-3' role='search'>
+						<div class='form-group'>
+							<input type="text" class="form-control" placeholder="香水 品牌 气味 帖子...">
+							<button type="button" class="btn">
+								<span class="glyphicon glyphicon-search"></span>搜索
+							</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</nav>
+		<!-- 内容 -->
+		<div id="content" class="content">
+			<!-- <img style="width: 100%;height: 50px;" src="/public/images/banner.png" > -->
+			<!-- <div class="backcolor"></div> -->
+			<div id="percon" class="container percon">
+				<div id="h_row" class="row"></div>
+				<div id="f_row" class="row">
+					<div class="separator"></div>
+				</div>
 			</div>
 		</div>
-		<script src="/public/js/jquery-3.3.1.min.js"></script>
-		<script src="/public/bootstrap-3.3.7/js/bootstrap.min.js"></script>
-		<script type="text/javascript">
-			function getUrlParam(id) {
-				var reg = new RegExp("(^|&)" + id + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
-				var r = window.location.search.substr(1).match(reg); //匹配目标参数
-				if (r != null) return unescape(r[2]);
-				return null; //返回参数值
+		<!-- 底部 -->
+		<footer class="text-center">
+			<div class="footer">
+				<br /> 此香水网所有产品设计及其展示形式，独家文字，均已受版权或产权保护。
+				<br /> 官方产品图及商标知识产权归品牌所有。香水评论均为本网会员上传，著作权归原作者所有，不代表本站立场。
+				<br /> 未经授权禁止转载、摘编、复制或建立镜像，违者将依法追究责任，特此声明。
+			</div>
+			<div class="terms">
+				<a href="#" target="_blank">使用协议</a>|
+				<a href="#" target="_blank">陇ICP备12000430号-8</a>|
+				<a href="#" target="_blank">陇公网安备 41010302002571号</a>
+			</div>
+		</footer>
+	</body>
+	<script src="/public/js/jquery-3.3.1.min.js"></script>
+	<script src="/public/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+	<script src="/public/js/index.js"></script>
+	<script type="text/javascript">
+		$('.login').click(function() {
+			var sUserAgent = navigator.userAgent.toLowerCase();
+			if (/ipad|iphone|midp|rv:1.2.3.4|ucweb|android|windows ce|windows mobile/.test(sUserAgent)) {
+				$('.login').attr("href", "api/login");
+			} else {
+				$('.login').attr("href", "api/loginpc");
 			}
-			//接收URL中的参数id
-			var id = getUrlParam('s_id');
-			console.log(id);
+		});
+		$('.register').click(function() {
+			var sUserAgent = navigator.userAgent.toLowerCase();
+			if (/ipad|iphone|midp|rv:1.2.3.4|ucweb|android|windows ce|windows mobile/.test(sUserAgent)) {
+				$('.register').attr("href", "api/register");
+			} else {
+				$('.register').attr("href", "api/registerpc");
+			}
+		});
+
+		// 获取登录后的值
+		var name = sessionStorage.getItem("user_name");
+		if (name === null || name === "") {
+			$('#state_before').show();
+			$('#post_state').html('');
+		} else {
+			console.log(name);
+			$('#state_before').hide();
+			var htcol = "<li class='dropdown'>" +
+				"<a href='' id='users' class='dropdown-toggle' data-toggle='dropdown'>" +
+				"<span>用户信息&nbsp;:&nbsp;</span><span>" + name + "</span>" +
+				"<b class='aret'></b>" +
+				"</a>" +
+				"<ul class='dropdown-menu'>" +
+				"<li><a href='javascript:;'>查看用户信息</a></li>" +
+				"<li class='divider'></li>" +
+				"<li><a id='esc' href='#'>退出</a></li>" +
+				"</ul>" +
+				"</li>";
+			$('#post_state').html(htcol);
+		}
+		$("#esc").on("click", function() {
 			$.ajax({
-				type: 'post',
-				url: '/api/smellcon1',
-				dataType: 'json',
-				data: id,
+				url: '/api/logout',
+				type: 'get',
 				success: function(data) {
-					var h_ht = '';
-					var f_ht = '';
+					console.log(data);
 					if (data.code == 0) {
-						console.log(data.msg);
-						h_ht +=
-							"<div class=\"col-md-3\">\n" +
-							"            <div class=\"imgborder img\">\n" +
-							"                <img src= '" + data.msg[0].s_img + "'  alt=\"暂无图片\">\n" +
-							"            </div>\n" +
-							"        </div>\n" +
-							"        <div class=\"col-md-9 desc\">" +
-							"            <h1>" + data.msg[0].s_name_ch + "(" + data.msg[0].s_name_eh + ")" + "</h1>" +
-							"<div class='content' style='font-size: 10px;'>" + data.msg[0].s_content + "</div>" +
-							"        </div>";
-						f_ht += "<div class=\"col-md-3\"></div>";
-						f_ht += "<div class=\"col-md-9 works\">";
-						f_ht += "<h3>TA的作品</h3>";
-						f_ht += "<div id=\"items\" class=\"items\">";
-						for (var i = 0; i < data.msg.length; i++) {
-							f_ht += "\t\t\t\t\t\t<div class=\"item\">\n" +
-								"\t\t\t\t\t\t\t<a href=\"#\" class=\"imgborder\">\n" +
-								"\t\t\t\t\t\t\t\t<img alt='暂无图片' src='" + data.msg[i].sc_img + "' >\n" +
-								"\t\t\t\t\t\t\t</a>\n" +
-								"\t\t\t\t\t\t\t<div class=\"detail\">\n" +
-								"\t\t\t\t\t\t\t\t<a href=\"#\">\n" +
-								"\t\t\t\t\t\t\t\t\t<h2>" + data.msg[i].sc_title + "</h2>\n" +
-								"\t\t\t\t\t\t\t\t</a>\n" +
-								"\t\t\t\t\t\t\t\t<div class=\"score\">\n" +
-								"\t\t\t\t\t\t\t\t\t<span class=\"sa8\"></span>\n" +
-								"\t\t\t\t\t\t\t\t\t " + data.msg[i].sc_score + " 分 " + data.msg[i].sc_num + " 人评价\n" +
-								"\t\t\t\t\t\t\t\t</div>\n" +
-								"\t\t\t\t\t\t\t\t<div class=\"info\">\n" +
-								"\t\t\t\t\t\t\t\t\t前调：" + data.msg[i].sc_first + "<br>\n" +
-								"\t\t\t\t\t\t\t\t\t中调：" + data.msg[i].sc_in + "<br>\n" +
-								"\t\t\t\t\t\t\t\t\t后调：" + data.msg[i].sc_after + "\n" +
-								// 气味：香根草,麝香,檀香木,广藿香,橡木苔,琥珀,香草,麝猫香
-								"\t\t\t\t\t\t\t\t</div>\n" +
-								"\t\t\t\t\t\t\t</div>\n" +
-								"\t\t\t\t\t\t</div>\n";
-						}
-						f_ht += "</div>";
-						f_ht += "</div>";
-						$('#h_row').append(h_ht);
-						$('#f_row').append(f_ht);
+						alert(data.msg);
+						$('#state_before').show();
+						$('#post_state').html('');
 					}
 				}
 			})
-		</script>
-	</body>
+		})
+
+		function getUrlParam(id) {
+			var reg = new RegExp("(^|&)" + id + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+			var r = window.location.search.substr(1).match(reg); //匹配目标参数
+			if (r != null) return unescape(r[2]);
+			return null; //返回参数值
+		}
+		//接收URL中的参数id
+		var id = getUrlParam('s_id');
+		console.log(id);
+		$.ajax({
+			type: 'post',
+			url: '/api/smellcon1',
+			dataType: 'json',
+			data: id,
+			success: function(data) {
+				var h_ht = '';
+				var f_ht = '';
+				if (data.code == 0) {
+					console.log(data.msg);
+					h_ht +=
+						"<div class=\"col-md-3\">\n" +
+						"            <div class=\"imgborder img\">\n" +
+						"                <img src= '" + data.msg[0].s_img + "'  alt=\"暂无图片\">\n" +
+						"            </div>\n" +
+						"        </div>\n" +
+						"        <div class=\"col-md-9 desc\">" +
+						"            <h1>" + data.msg[0].s_name_ch + "(" + data.msg[0].s_name_eh + ")" + "</h1>" +
+						"<div class='content' style='font-size: 10px;'>" + data.msg[0].s_content + "</div>" +
+						"        </div>";
+					f_ht += "<div class=\"col-md-3\"></div>";
+					f_ht += "<div class=\"col-md-9 works\">";
+					f_ht += "<h3>TA的作品</h3>";
+					f_ht += "<div id=\"items\" class=\"items\">";
+					for (var i = 0; i < data.msg.length; i++) {
+						f_ht += "\t\t\t\t\t\t<div class=\"item\">\n" +
+							"\t\t\t\t\t\t\t<a href='/api/productconsmell?id=" + data.msg[i].sc_id + "' class=\"imgborder\">\n" +
+							"\t\t\t\t\t\t\t\t<img alt='暂无图片' src='" + data.msg[i].sc_img + "' >\n" +
+							"\t\t\t\t\t\t\t</a>\n" +
+							"\t\t\t\t\t\t\t<div class=\"detail\">\n" +
+							"\t\t\t\t\t\t\t\t<a href='/api/productconsmell?id=" + data.msg[i].sc_id + "'>\n" +
+							"\t\t\t\t\t\t\t\t\t<h2>" + data.msg[i].sc_title + "</h2>\n" +
+							"\t\t\t\t\t\t\t\t</a>\n" +
+							"\t\t\t\t\t\t\t\t<div class=\"score\">\n" +
+							"\t\t\t\t\t\t\t\t\t<span class=\"sa8\"></span>\n" +
+							"\t\t\t\t\t\t\t\t\t " + data.msg[i].sc_score + " 分 " + data.msg[i].sc_num + " 人评价\n" +
+							"\t\t\t\t\t\t\t\t</div>\n" +
+							"\t\t\t\t\t\t\t\t<div class=\"info\">\n" +
+							"\t\t\t\t\t\t\t\t\t前调：" + data.msg[i].sc_first + "<br>\n" +
+							"\t\t\t\t\t\t\t\t\t中调：" + data.msg[i].sc_in + "<br>\n" +
+							"\t\t\t\t\t\t\t\t\t后调：" + data.msg[i].sc_after + "\n" +
+							// 气味：香根草,麝香,檀香木,广藿香,橡木苔,琥珀,香草,麝猫香
+							"\t\t\t\t\t\t\t\t</div>\n" +
+							"\t\t\t\t\t\t\t</div>\n" +
+							"\t\t\t\t\t\t</div>\n";
+					}
+					f_ht += "</div>";
+					f_ht += "</div>";
+					$('#h_row').append(h_ht);
+					$('#f_row').append(f_ht);
+				}
+			}
+		})
+	</script>
 </html>

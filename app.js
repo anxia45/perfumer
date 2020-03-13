@@ -24,6 +24,7 @@ var app = express();
 var userRouter = require('./routers/admin')
 var mainRouter = require('./routers/main')
 var apiRouter = require('./routers/api')
+var cartRouter = require('./routers/cart');
 
 app.listen(8088, function(err) {
 	if(!err){
@@ -115,6 +116,7 @@ app.use(bodyParser.urlencoded({
 app.use('/admin', userRouter);
 app.use('/api', apiRouter);
 app.use('/', mainRouter);
+app.use('/cart', cartRouter);
 
 ////////////////////// 所有路由定义完之后，最后做404处理 /////////////////////////////  无效
 router.use('*', function (req, res){

@@ -5,9 +5,13 @@ router.get('/', function(req, res, next) {
 	res.render('frontend/index');
 })
 
+router.get('/backstage/login', function(req, res, next) {
+	res.render('backstage/login');
+})
 router.get('/backstage', function(req, res, next) {
 	res.render('backstage/index');
 })
+
 //------------------------------------------后端管理--------------------------------------//
 // 用户
 router.get('/user', function(req, res, next) {
@@ -25,6 +29,10 @@ router.get('/catalog', function(req, res, next) {
 // 轮播
 router.get('/carousel', function(req, res, next) {
 	res.render('backstage/carousel');
+});
+// 商品（新品）
+router.get('/product', function(req, res, next) {
+	res.render('backstage/product');
 });
 // 热门话题
 router.get('/tipic', function(req, res, next) {
@@ -79,10 +87,24 @@ router.get('/perfumercon', function(req, res, next) {
 	res.render('backstage/perfumercon');
 });
 // 登录
-router.get('/login', function(req, res, next) {
+router.get('/backstage/login', function(req, res, next) {
 	res.render('backstage/login');
 });
-
+// =============================================== 后台用户 ===============================================
+// router.use(function(req,res,next){
+// 	if(req.url != "/backstage/login" && req.url != "/check") {
+// 		if (req.session.islogin && req.session.username) {
+// 			next();
+// 		} else{
+// 			 res.send("<script>alert('请登录');location.href='/backstage/login'</script>");
+// 		}
+// 	} else {
+// 		next();
+// 	}
+// })
+// router.post("/check",function(req,res,next){
+	
+// })
 // ===============================================================
 // 测试
 router.get('/file', function(req, res, next) {

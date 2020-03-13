@@ -46,8 +46,9 @@ $.ajax({
 		var ht3 = '';
 		if (data.code == 0) {
 			for (var i = 0; i < 4; i++) {
+				console.log(data.msg[i])
 				ht += "<div class='col-md-3 col-xs-3 col-4'>" +
-					"<a href='#'>" +
+					"<a href='/api/productcon?id="+data.msg[i].id+"'>" +
 					"<img src='" + data.msg[i].imgurl + "'>" +
 					"<div class='con'>" +
 					"<p>" + data.msg[i].tags + "</p>" +
@@ -61,34 +62,40 @@ $.ajax({
 			}
 			$('#productnew').append(ht);
 			// --------------------------------------------------------------------
-			ht1 += "<img src='" + data.msg[0].imgurl + "'>" +
+			ht1 +="<a href='/api/productcon?id="+data.msg[i].id+"'>" +
+				"<img src='" + data.msg[0].imgurl + "'>" +
 				"<div class='con'>" +
 				"<p>" + data.msg[0].tags + "</p>" +
 				"<div class=''>" + data.msg[0].text + "</div>" +
 				"<div class='' style='padding-top: 1px;'>" + data.msg[0].text_type + "</div>" +
 				"<div class='' style='padding-top: 7px;'>浓度</div>" +
 				"<div class='price'>￥" + data.msg[i].price + "起 - 喷装" + data.msg[0].capacity + "ml</div>" +
-				"</div>";
+				"</div>"+
+				"</a>";
 			$('#product1').append(ht1);
 			// --------------------------------------------------------------------
-			ht2 += "<img src='" + data.msg[2].imgurl + "'>" +
+			ht2 += "<a href='/api/productcon?id="+data.msg[i].id+"'>" +
+				"<img src='" + data.msg[2].imgurl + "'>" +
 				"<div class='con'>" +
 				"<p>" + data.msg[2].tags + "</p>" +
 				"<div class=''>" + data.msg[2].text + "</div>" +
 				"<div class='' style='padding-top: 1px;'>" + data.msg[2].text_type + "</div>" +
 				"<div class='' style='padding-top: 7px;'>浓度</div>" +
 				"<div class='price'>￥" + data.msg[i].price + "起 - 喷装" + data.msg[2].capacity + "ml</div>" +
-				"</div>";
+				"</div>"+
+				"</a>";
 			$('#product2').append(ht2);
 			// --------------------------------------------------------------------
-			ht3 += "<img src='" + data.msg[3].imgurl + "'>" +
+			ht3 +="<a href='/api/productcon?id="+data.msg[i].id+"'>" +
+				"<img src='" + data.msg[3].imgurl + "'>" +
 				"<div class='con'>" +
 				"<p>" + data.msg[3].tags + "</p>" +
 				"<div class=''>" + data.msg[3].text + "</div>" +
 				"<div class='' style='padding-top: 1px;'>" + data.msg[3].text_type + "</div>" +
 				"<div class='' style='padding-top: 7px;'>浓度</div>" +
 				"<div class='price'>￥" + data.msg[i].price + "起 - 喷装" + data.msg[3].capacity + "ml</div>" +
-				"</div>";
+				"</div>"+
+				"</a>";
 			$('#product3').append(ht3);
 			//------------------------------------------------------------------------
 			$("#lunbotu2").empty();
@@ -96,6 +103,7 @@ $.ajax({
 			for (var i = 0; i < 5; i++) {
 				if (i == 1) {
 					$("#lunbotu2").append("<div class='item active'>" +
+						"<a href='/api/productcon?id="+data.msg[i].id+"'>" +
 						"<img src='" + data.msg[i].imgurl + "' alt='' width='100%'>" +
 						"<div class='con'>" +
 						"<p> " + data.msg[i].tags + "</p>" +
@@ -104,9 +112,11 @@ $.ajax({
 						"<div class='' style='padding-top: 7px;'>浓度</div>" +
 						"<div class='price'>￥" + data.msg[i].price + "起 - 喷装" + data.msg[i].capacity + "ml</div>" +
 						"</div>" +
-						"</div>");
+						"</div>"+
+						"</a>");
 				} else {
 					$("#lunbotu2").append("<div class='item'>" +
+						"<a href='/api/productcon?id="+data.msg[i].id+"'>" +
 						"<img src='" + data.msg[i].imgurl + "' alt='' width='100%'>" +
 						"<div class='con'>" +
 						"<p> " + data.msg[i].tags + "</p>" +
@@ -115,7 +125,8 @@ $.ajax({
 						"<div class='' style='padding-top: 7px;'>浓度</div>" +
 						"<div class='price'>￥" + data.msg[i].price + "起 - 喷装" + data.msg[i].capacity + "ml</div>" +
 						"</div>" +
-						"</div>");
+						"</div>"+
+						"</a>");
 				}
 			}
 		}

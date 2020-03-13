@@ -92,51 +92,40 @@
 			}
 		});
 
-		function login_data() {
-			// 获取登录后的值
-			var name = window.sessionStorage.getItem("user_name");
-			if (name === null || name === "") {
-				$('#state_before').show();
-				$('#post_state').html('');
-			} else {
-				console.log(name);
-				$('#state_before').hide();
-				$('#post_state').html(name);
-			}
+		// 获取登录后的值
+		var name = sessionStorage.getItem("user_name");
+		if (name === null || name === "") {
+			$('#state_before').show();
+			$('#post_state').html('');
+		} else {
+			console.log(name);
+			$('#state_before').hide();
+			var htcol = "<li class='dropdown'>" +
+				"<a href='' id='users' class='dropdown-toggle' data-toggle='dropdown'>" +
+				"<span>用户信息&nbsp;:&nbsp;</span><span>" + name + "</span>" +
+				"<b class='aret'></b>" +
+				"</a>" +
+				"<ul class='dropdown-menu'>" +
+				"<li><a href='javascript:;'>查看用户信息</a></li>" +
+				"<li class='divider'></li>" +
+				"<li><a id='esc' href='#'>退出</a></li>" +
+				"</ul>" +
+				"</li>";
+			$('#post_state').html(htcol);
 		}
-
-
-		// if (name !== null ) {
-		// 	$("#post_state").html("<li class='dropdown'>" +
-		// 			"<a href='' id='users' class='dropdown-toggle' data-toggle='dropdown'>" +
-		// 			"<span>用户信息&nbsp;:&nbsp;</span><span>" + name + "</span>" +
-		// 			"<b class='aret'></b>" +
-		// 			"</a>" +
-		// 			"<ul class='dropdown-menu'>" +
-		// 			"<li><a href='javascript:;'>查看用户信息</a></li>" +
-		// 			"<li class='divider'></li>" +
-		// 			"<li><a id='esc' href='#'>退出</a></li>" +
-		// 			"</ul>" +
-		// 			"</li>");
-		// 	// $("#state_before").css('display', 'none');
-		// 	// $("#post_state").css('display', 'block');
-		// }
-		//
-		//
-		// 	$("#esc").on("click", function() {
-		// 		alert(111)
-		// 		$.ajax({
-		// 			url: '/api/logout',
-		// 			type: 'get',
-		// 			success: function(data) {
-		// 				if (data.code == 0) {
-		// 					alert(data.msg);
-		// 					$("#post_state").css('display', 'none');
-		// 					$("#state_before").css('display', 'block');
-		// 				}
-		// 			}
-		// 		})
-		// 	})
-		// // }
+			$("#esc").on("click", function() {
+				$.ajax({
+					url: '/api/logout',
+					type: 'get',
+					success: function(data) {
+						console.log(data);
+						if (data.code == 0) {
+							alert(data.msg);
+							$('#state_before').show();
+							$('#post_state').html('');
+						}
+					}
+				})
+			})
 	</script>
 </html>

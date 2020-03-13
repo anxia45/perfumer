@@ -52,23 +52,46 @@ router.get('/register', function(req, res, next) {
 router.get('/registerpc', function(req, res, next) {
 	res.render('frontend/registerpc');
 })
+
+router.get('/productcon',function (req,res,next) {
+	res.render('frontend/productcon')
+})
+router.get('/productconbrand',function (req,res,next) {
+	res.render('frontend/productconbrand')
+})
+router.get('/productconfragrance',function (req,res,next) {
+	res.render('frontend/productconfragrance')
+})
+router.get('/productconsmell',function (req,res,next) {
+	res.render('frontend/productconsmell')
+})
+router.get('/productconperfumer',function (req,res,next) {
+	res.render('frontend/productconperfumer')
+})
+router.get('/cartsuccess',function (req,res,next) {
+	res.render('frontend/cartsuccess')
+})
+router.get('/cart',function (req,res,next) {
+	res.render('frontend/cart')
+})
 // ================================================= 注册登录 =================================================
 // ---------------------- 登录 ------------------------//
 router.post('/login', function(req, res, next) {
 	var name = req.body.user_name;
 	var pwd = req.body.user_pwd;
+	console.log(name+pwd);
 	var user = {
 		user_name: name,
 		user_pwd: pwd
 	}
-	// 非空判断
+	// // 非空判断
 	if (name == '') {
 		responseData.code = 1,
 			responseData.msg = '用户名不能为空',
 			res.json(responseData);
 		return;
 	}
-
+	//
 	if (pwd == '') {
 		responseData.code = 2,
 			responseData.msg = '密码不能为空',
@@ -77,8 +100,9 @@ router.post('/login', function(req, res, next) {
 	}
 	var selSql = "select * from users where user_name = '" + name + "' and user_pwd = '" + pwd + "'";
 	pool.query(selSql, user, function(err, data) {
-		if (err) throw err
-		else {
+		if (err) {
+			console.log(err);
+		} else {
 			if (data.length == 0) {
 				responseData.code = -1,
 					responseData.msg = '用户名不存在',
@@ -89,32 +113,27 @@ router.post('/login', function(req, res, next) {
 				if (response.user_name == name && response.user_pwd == pwd) {
 					responseData.pre = '登录成功';
 					responseData.msg = user;
+					req.session.islogin = true;
 					req.session.user = user;
-					// login_data();
 					res.json(responseData);
 					return;
-				} else {
-					responseData.code = -2
-					responseData.msg = '用户名或密码有错误',
-						res.json(responseData)
-					return;
 				}
+				// if (response.user_name != name && response.user_pwd != pwd) {
+				// 	responseData.code = -2
+				// 	responseData.msg = '用户名或密码有错误',
+				// 		res.json(responseData)
+				// 	return;
+				// }
 			}
 		}
 	})
 });
 // ---------------------- 退出登录 ------------------------//
 router.get('/logout', function(req, res, next) {
-	// 销毁session
-	req.session.destroy(function(err) {
-		if (err) {
-			console.log(err);
-		} else {
-			responseData.msg = '退出登录成功'
-			res.json(responseData);
-		}
-	})
-
+	console.log(req.session)
+		req.session.islogin = false;
+		responseData.msg = '退出登录成功';
+		res.json(responseData);
 })
 
 // ---------------------- 注册 ------------------------//
@@ -464,6 +483,70 @@ router.post('/perfumercon1', function(req, res, next) {
 		}
 	})
 })
+
+
+// 产品详情信息
+router.post('/productconId',function(req,res,next){
+	var id = JSON.stringify(req.body).substr(2, 1);
+	var sqlAll = "select * from productsnew where id='" + id + "'";
+	pool.query(sqlAll, function(err, data) {
+		if (err) {
+			console.log(err);
+		} else {
+			responseData.msg = data;
+			res.json(responseData);
+		}
+	})
+})
+router.post('/productcon1Id',function(req,res,next){
+	var id = JSON.stringify(req.body).substr(2, 1);
+	var sqlAll = "select * from brand a join brandclasscon b on a.b_id = b.b_id where b.b_id ='" + id + "'";
+	pool.query(sqlAll, function(err, data) {
+		if (err) {
+			console.log(err);
+		} else {
+			responseData.msg = data;
+			res.json(responseData);
+		}
+	})
+})
+router.post('/productcon2Id',function(req,res,next){
+	var id = JSON.stringify(req.body).substr(2, 1);
+	var sqlAll = "select * from fragrantcon a join fragrantclass b on a.fc_id = b.fc_id where a.f_id ='" + id + "'";
+	pool.query(sqlAll, function(err, data) {
+		if (err) {
+			console.log(err);
+		} else {
+			responseData.msg = data;
+			res.json(responseData);
+		}
+	})
+})
+router.post('/productcon3Id',function(req,res,next){
+	var id = JSON.stringify(req.body).substr(2, 1);
+	var sqlAll = "select * from smellcon a join smell b on a.s_id = b.s_id where a.sc_id ='" + id + "'";
+	pool.query(sqlAll, function(err, data) {
+		if (err) {
+			console.log(err);
+		} else {
+			responseData.msg = data;
+			res.json(responseData);
+		}
+	})
+})
+router.post('/productcon4Id',function(req,res,next){
+	var id = JSON.stringify(req.body).substr(2, 1);
+	var sqlAll = "select * from perfumercon a join perfumer b on a.pc_id =b.pc_id where a.pf_id='" + id + "'";
+	pool.query(sqlAll, function(err, data) {
+		if (err) {
+			console.log(err);
+		} else {
+			responseData.msg = data;
+			res.json(responseData);
+		}
+	})
+})
+
 
 
 module.exports = router;

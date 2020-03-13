@@ -290,6 +290,288 @@ router.get('/catalogdelete/:id', function(req, res, next) {
 		}
 	})
 })
+// ---------------------- 轮播 ------------------------//
+// 添加
+router.post('/carouseladd', function(req, res, next) {
+	var imgurl = req.body.imgurl;
+	var data = {
+		imgurl: imgurl
+	};
+
+	// 判断是否为空
+	if (imgurl == '') {
+		responseData.code = 1,
+			responseData.msg = '内容不能为空';
+		res.json(responseData);
+		return;
+	}
+	var sqlAdd = 'insert into homecarousel set ?';
+	pool.query(sqlAdd, data, function(err, data) {
+		if (err) {
+			responseData.code = -1;
+			responseData.msg = '添加失败';
+			res.json(responseData);
+		} else {
+			responseData.msg = '添加成功';
+			res.json(responseData);
+		}
+	})
+})
+// 查询单条数据
+router.post('/carouselId/:id', function(req, res, next) {
+	var id = req.params.id;
+	var sqlId = "select * from homecarousel where c_id = '" + id + "'";
+	pool.query(sqlId, function(err, data) {
+		if (err) {
+			console.log(err);
+		} else {
+			responseData.msg = data;
+			res.json(responseData);
+		}
+	})
+})
+// 修改
+router.post('/carouselupdate', function(req, res, next) {
+	var c_id = req.body.c_id;
+	var imgurl = req.body.imgurl;
+	// 判断是否为空
+	if (c_id == '' || imgurl == '') {
+		responseData.code = 1,
+			responseData.msg = '内容不能为空';
+		res.json(responseData);
+		return;
+	}
+	var sqlupdate = "update homecarousel set imgurl = '" + imgurl + "'where c_id ='" + c_id + "'";
+	pool.query(sqlupdate, function(err, data) {
+		if (err) {
+			responseData.code = -1;
+			responseData.msg = '修改失败';
+			res.json(responseData);
+			console.log(err);
+		} else {
+			responseData.msg = '修改成功';
+			res.json(responseData);
+		}
+	})
+})
+// 删除
+router.get('/carouseldelete/:id', function(req, res, next) {
+	var id = req.params.id;
+	var sqldel = 'delete from homecarousel where c_id = ' + id;
+	pool.query(sqldel, function(err, data) {
+		if (err) {
+			responseData.code = -1;
+			responseData.msg = '删除失败';
+			res.json(responseData);
+		} else {
+			responseData.msg = '删除成功';
+			res.json(responseData);
+		}
+	})
+})
+// ------------------------  新品  -----------------------------//
+// 搜索
+router.post('/searchproductsnew', function(req, res, next) {
+	// 模糊查询两种方法直接在SQL语句后加 mysql.escape("%"+req.body.name+"%")
+	// sql += " WHERE product_name LIKE "+mysql.escape("%"+req.body.name+"%")
+	var sqlsearch = "select * from productsnew"
+	if (req.body.name) {
+		sqlsearch += " where text like ?"; //'%1%';"
+	}
+
+	// sql+= ' limit ? offset ?';
+	// let param = [ "%"+req.body.name+"%",pageNum, (page - 1) * pageNum ]
+
+	var data = ["%" + req.body.name + "%"]
+	pool.query(sqlsearch, data, function(err, data) {
+		if (err) {
+			responseData.code = -1;
+			responseData.pre = '搜索失败';
+			responseData.msg = data;
+			res.json(responseData);
+		} else {
+			responseData.pre = '搜索成功';
+			responseData.msg = data;
+			res.json(responseData);
+		}
+	})
+})
+// 添加
+router.post('/productAdd', function(req, res, next) {
+	var text = req.body.text;
+	var imgurl = req.body.imgurl;
+	var capacity = req.body.capacity;
+	var price = req.body.price;
+	var tags = req.body.tags;
+	var text_type = req.body.text_type;
+	var time = req.body.time;
+	var data = {
+		text:text,
+		imgurl: imgurl,
+		capacity:capacity,
+		price:price,
+		tags:tags,
+		text_type:text_type,
+		time:time
+	};
+
+	// 判断是否为空
+	if (text == '' || imgurl == '' || capacity == '' || price == '' || tags == '' || text_type == '' || time == '') {
+		responseData.code = 1,
+			responseData.msg = '内容不能为空';
+		res.json(responseData);
+		return;
+	}
+	var sqlAdd = 'insert into productsnew set ?';
+	pool.query(sqlAdd, data, function(err, data) {
+		if (err) {
+			responseData.code = -1;
+			responseData.msg = '添加失败';
+			res.json(responseData);
+		} else {
+			responseData.msg = '添加成功';
+			res.json(responseData);
+		}
+	})
+})
+// 查询单条数据
+router.post('/productId/:id', function(req, res, next) {
+	var id = req.params.id;
+	var sqlId = "select * from productsnew where id = '" + id + "'";
+	pool.query(sqlId, function(err, data) {
+		if (err) {
+			console.log(err);
+		} else {
+			responseData.msg = data;
+			res.json(responseData);
+		}
+	})
+})
+// 修改
+router.post('/productupdate', function(req, res, next) {
+	var id = req.body.id;
+	var text = req.body.text;
+	var imgurl = req.body.imgurl;
+	var capacity = req.body.capacity;
+	var price = req.body.price;
+	var tags = req.body.tags;
+	var text_type = req.body.text_type;
+	var time = req.body.time;
+	// 判断是否为空
+	if (id == '' || text == '' || imgurl == '' || capacity == '' || price == '' || tags == '' || text_type == '' || time == '') {
+		responseData.code = 1,
+			responseData.msg = '内容不能为空';
+		res.json(responseData);
+		return;
+	}
+	var sqlupdate = "update productsnew set text = '" + text + "',imgurl = '" + imgurl + "',tags = '" + tags + "',capacity = '" + capacity + "'," +
+		"price = '" + price + "',text_type = '" + text_type + "' where id ='" + id + "'";
+	pool.query(sqlupdate, function(err, data) {
+		if (err) {
+			responseData.code = -1;
+			responseData.msg = '修改失败';
+			res.json(responseData);
+			console.log(err);
+		} else {
+			responseData.msg = '修改成功';
+			res.json(responseData);
+		}
+	})
+})
+// 删除
+router.get('/productdelete/:id', function(req, res, next) {
+	var id = req.params.id;
+	var sqldel = 'delete from productsnew where id = ' + id;
+	pool.query(sqldel, function(err, data) {
+		if (err) {
+			responseData.code = -1;
+			responseData.msg = '删除失败';
+			res.json(responseData);
+		} else {
+			responseData.msg = '删除成功';
+			res.json(responseData);
+		}
+	})
+})
+// ------------------------常见问题-----------------------------//
+// 添加
+router.post('/answeradd', function(req, res, next) {
+	var title = req.body.title;
+	var data = {
+		title: title
+	};
+
+	// 判断是否为空
+	if (title == '') {
+		responseData.code = 1,
+			responseData.msg = '内容不能为空';
+		res.json(responseData);
+		return;
+	}
+	var sqlAdd = 'insert into answer set ?';
+	pool.query(sqlAdd, data, function(err, data) {
+		if (err) {
+			responseData.code = -1;
+			responseData.msg = '添加失败';
+			res.json(responseData);
+		} else {
+			responseData.msg = '添加成功';
+			res.json(responseData);
+		}
+	})
+})
+// 查询单条数据
+router.post('/answerId/:id', function(req, res, next) {
+	var id = req.params.id;
+	var sqlId = "select * from answer where id = '" + id + "'";
+	pool.query(sqlId, function(err, data) {
+		if (err) {
+			console.log(err);
+		} else {
+			responseData.msg = data;
+			res.json(responseData);
+		}
+	})
+})
+// 修改
+router.post('/answerupdate', function(req, res, next) {
+	var id = req.body.id;
+	var title = req.body.title;
+	// 判断是否为空
+	if (id == '' || title == '') {
+		responseData.code = 1,
+			responseData.msg = '内容不能为空';
+		res.json(responseData);
+		return;
+	}
+	var sqlupdate = "update answer set title = '" + title + "'where id ='" + id + "'";
+	pool.query(sqlupdate, function(err, data) {
+		if (err) {
+			responseData.code = -1;
+			responseData.msg = '修改失败';
+			res.json(responseData);
+			console.log(err);
+		} else {
+			responseData.msg = '修改成功';
+			res.json(responseData);
+		}
+	})
+})
+// 删除
+router.get('/answerdelete/:id', function(req, res, next) {
+	var id = req.params.id;
+	var sqldel = 'delete from answer where id = ' + id;
+	pool.query(sqldel, function(err, data) {
+		if (err) {
+			responseData.code = -1;
+			responseData.msg = '删除失败';
+			res.json(responseData);
+		} else {
+			responseData.msg = '删除成功';
+			res.json(responseData);
+		}
+	})
+})
 // ---------------------- 话题 ------------------------//
 // 搜索
 router.post('/searchtipic', function(req, res, next) {
@@ -343,7 +625,6 @@ router.post('/tipicAdd', function(req, res, next) {
 		}
 	})
 })
-
 // 查询单条数据
 router.post('/tipicId/:id', function(req, res, next) {
 	var id = req.params.id;

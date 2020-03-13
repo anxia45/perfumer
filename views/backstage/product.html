@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>商品管理</title>
+		<link rel="stylesheet" type="text/css" href="/public/bootstrap-3.3.7/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="/public/css/table.css" />
+		<link rel="stylesheet" type="text/css" href="/public/fonticon/iconfont.css" />
+		<link rel="stylesheet" href="/public/css/summernote.min.css">
+		<link rel="stylesheet" type="text/css" href="/public/js/bootstrap-datetimepicker.css"/>
+	</head>
+	<body>
+		<div class="col-md-9">
+			<button type="button" class="btn btn-danger btn-xs active" data-toggle="modal" data-target="#addModal">
+				<a href="#"><i class="iconfont icon-tianjia"></i>添加</a>
+			</button>
+		</div>
+		<div class="col-md-3">
+			<form id="searchform" class="bs-example bs-example-form" role="form">
+				<input type="search" id="name" class="input" name="name" placeholder="请输入产品名称" />
+				<button type="button" class="btn btn-success btn-sm" id="search">搜索</button>
+			</form>
+		</div>
+		<table id="table" border="1" cellspacing="0" cellpadding="0">
+			<thead>
+				<tr>
+					<th style="width: 1%;">ID</th>
+					<th>产品名称</th>
+					<th style="width: 1%;">照片</th>
+					<th style="width: 1%;">容量</th>
+                    <th style="width: 1%;">价格</th>
+					<th>标签</th>
+					<th>类型</th>
+					<th>时间</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody></tbody>
+		</table>
+
+		<!-- 添加 -->
+		<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabeladd" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabeladd">添加</h4>
+					</div>
+					<div class="modal-body">
+						<form id="addform" class="form-horizontal" role="form">
+							<div class="form-group">
+								<label class="col-sm-2 control-label">产品名称:</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" name="text" placeholder="请输入产品名称" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">图片:</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" name="imgurl" placeholder="请输入图片地址" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">容量:</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" name="capacity" placeholder="请输入容量" />
+								</div>
+							</div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">价格:</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="price" placeholder="请输入价格" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">标签:</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="tags" placeholder="请输入标签" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">类型:</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="text_type" placeholder="请输入类型" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">时间:</label>
+                                <div class="col-sm-10" >
+                                    <input type="text" id="datetimepicker" class="form-control datetimepicker datetimepicker-days" name="time" placeholder="请输入时间" />
+                                </div>
+                            </div>
+							<div class="text-right">
+								<button type="button" class="btn btn1 btn-success" id="add">添加</button>
+								<button type="button" class="btn btn1 btn-danger" data-dismiss="modal">关闭</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--修改-->
+		<div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabelupdate" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabelupdate">修改</h4>
+					</div>
+					<div class="modal-body">
+						<form id="updateform" class="form-horizontal" role="form">
+							<div class="form-group">
+								<label for="id" class="col-sm-2 control-label">ID:</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" name="id" id="id" readonly placeholder="请输入ID" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">产品名称:</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" name="text" id="text" placeholder="请输入产品名称" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">图片:</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" name="imgurl" id="imgurl" placeholder="请输入图片地址" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">容量:</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" name="capacity" id="capacity" placeholder="请输入容量" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">价格:</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" name="price" id="price" placeholder="请输入价格" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">标签:</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" name="tags" id="tags" placeholder="请输入标签" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">类型:</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" name="text_type" id="texttype" placeholder="请输入类型" />
+								</div>
+							</div>
+<!--							<div class="form-group">-->
+<!--								<label class="col-sm-2 control-label">时间:</label>-->
+<!--								<div class="col-sm-10" >-->
+<!--									<input type="text" id="datetimepicker1" class="form-control datetimepicker datetimepicker-days" name="time" placeholder="请输入时间" />-->
+<!--								</div>-->
+<!--							</div>-->
+							<div class="text-right">
+								<button type="button" class="btn btn1 btn-success" id="update">修改</button>
+								<button type="button" class="btn btn1 btn-danger" data-dismiss="modal">关闭</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="/public/js/jquery-3.3.1.min.js"></script>
+		<script src="/public/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+		<script src="/public/js/summernote.min.js"></script>
+		<script src="/public/js/bootstrap-datetimepicker.js"></script>
+		<script src="/public/js/bootstrap-datetimepicker.zh-CN.js"></script>
+		<script type="text/javascript">
+			// <!--    时间转换-->
+			function timeFommater(value) {
+				var dateee = new Date(value).toJSON();
+				var date = new Date(+new Date(dateee) + 8 * 3600 * 1000).toISOString().replace(/T/g, ' ').replace(/\.[\d]{3}Z/, '')
+				return date;
+			};
+            $('#datetimepicker').datetimepicker();
+			$('#datetimepicker1').datetimepicker();
+            // 查询
+			$.ajax({
+				url: '/api/productsnew',
+				type: 'post',
+				dataType: 'json',
+				success: function(data) {
+					if (data.code == 0) {
+						var ht = '';
+						for (var i = 0; i < data.msg.length; i++) {
+							ht += "<tr>" +
+								"<td>" + data.msg[i].id + "</td>" +
+								"<td>" + data.msg[i].text + "</td>" +
+								"<td><img src='" + data.msg[i].imgurl + "' alt='暂无照片'></td>" +
+								"<td>" + data.msg[i].capacity + "</td>" +
+                                "<td>" + data.msg[i].price + "</td>" +
+								"<td>" + data.msg[i].tags + "</td>" +
+								"<td>" + data.msg[i].text_type + "</td>" +
+								"<td>" + timeFommater(data.msg[i].time) + "</td>" +
+								"<td >" +
+								"<button id='update' class='btn btn-xs btn-success' data-id='" + data.msg[i].id +
+								"' data-toggle='modal' data-target='#updateModal'><a href='#'><i class='iconfont icon-web-icon-'></i>修改</a></button>" +
+								"<button id='delete' class='btn btn-xs btn-danger' data-id='" + data.msg[i].id +
+								"'><a href='#'><i class='iconfont icon-shanchu'></i>删除</a></button>" +
+								"</td>" +
+								"</tr>";
+						}
+						$('tbody').append(ht);
+					} else if (data.code == -1) {
+						alert(data.pre);
+					}
+				}
+			})
+			// 搜索
+			$('#search').click(function() {
+				var data = $('#searchform').serialize();
+				if ($('.input').val() == '') {
+					alert("内容不能为空")
+					return false;
+				} else {
+					var ht = ''
+					$.ajax({
+						url: '/admin/searchproductsnew',
+						type: 'post',
+						dataType: 'json',
+						data: data,
+						success: function(data) {
+							if (data.code == 0) {
+                                for (var i = 0; i < data.msg.length; i++) {
+                                    ht += "<tr>" +
+                                        "<td>" + data.msg[i].id + "</td>" +
+                                        "<td>" + data.msg[i].text + "</td>" +
+                                        "<td><img src='" + data.msg[i].imgurl + "' alt='暂无照片'></td>" +
+                                        "<td>" + data.msg[i].capacity + "</td>" +
+                                        "<td>" + data.msg[i].price + "</td>" +
+                                        "<td>" + data.msg[i].tags + "</td>" +
+                                        "<td>" + data.msg[i].text_type + "</td>" +
+                                        "<td>" + timeFommater(data.msg[i].time) + "</td>" +
+                                        "<td >" +
+                                        "<button id='detail' class='btn btn-xs btn-success'  data-id='" + data.msg[i].id +
+                                        " ' data-toggle='modal' data-target='#detailModal'><a href='#'><i class='iconfont icon-sousuo1'></i>查看</a></button>" +
+                                        "<button id='update' class='btn btn-xs btn-success' data-id='" + data.msg[i].id +
+                                        "' data-toggle='modal' data-target='#updateModal'><a href='#'><i class='iconfont icon-web-icon-'></i>修改</a></button>" +
+                                        "<button id='delete' class='btn btn-xs btn-danger' data-id='" + data.msg[i].id +
+                                        "'><a href='#'><i class='iconfont icon-shanchu'></i>删除</a></button>" +
+                                        "</td>" +
+                                        "</tr>";
+                                }
+								$('tbody').html(ht);
+								$('.input').val(""); // 清空
+							} else if (data.code == -1) {
+								alert(data.pre);
+							}
+						}
+					})
+				}
+			})
+
+			// 添加
+			$('#add').click(function() {
+				var data = $('#addform').serialize();
+				console.log(data);
+				$.ajax({
+					url: '/admin/productAdd',
+					type: 'post',
+					dataType: 'json',
+					data: data,
+					success: function(data) {
+						if (data.code == 0) {
+							alert(data.msg);
+							setTimeout(function() {
+								// 刷新模态框，不然会保留上次填写的数据
+								$("#addModal").on("hidden.bs.modal", function() {
+									$(this).removeData("bs.modal");
+								})
+								$('#addform input').val('');
+								location.reload();
+							}, 1000)
+						} else if (data.code == 1) {
+							alert(data.msg);
+						} else if (data.code == 2) {
+							alert(data.msg);
+						} else if (data.code == 3) {
+							alert(data.msg);
+						} else if (data.code == -1) {
+							alert(data.msg);
+							// 刷新模态框，不然会保留上次填写的数据
+							$("#addModal").on("hidden.bs.modal", function() {
+								$(this).removeData("bs.modal");
+							})
+							$('#addform input').val('');
+						}
+					}
+				})
+			})
+			// 查询单条数据
+			$(document).on('click', '#update', function() {
+				var id = $(this).attr("data-id");
+				$.ajax({
+					url: '/admin/productId/' + id,
+					type: 'post',
+					dataType: 'json',
+					success: function(data) {
+						$("#id").attr("value", data.msg[0].id);
+						$("#text").attr("value", data.msg[0].text);
+						$("#imgurl").attr("value", data.msg[0].imgurl);
+						$("#capacity").attr("value", data.msg[0].capacity);
+						$("#price").attr("value", data.msg[0].price);
+						$("#tags").attr("value", data.msg[0].tags);
+						$("#texttype").attr("value", data.msg[0].text_type);
+						// $("#datetimepicker1").attr("value", data.msg[0].time);
+					}
+				})
+			})
+			// 修改
+			$('#update').click(function() {
+				var data = $('#updateform').serialize();
+				$.ajax({
+					url: '/admin/productupdate',
+					type: 'post',
+					dataType: 'json',
+					data: data,
+					success: function(data) {
+						if (data.code == 0) {
+							alert(data.msg);
+							setTimeout(function() {
+								location.reload();
+							}, 1000)
+						} else if (data.code == 1) {
+							alert(data.msg);
+						} else if (data.code == 2) {
+							alert(data.msg);
+						} else if (data.code == 3) {
+							alert(data.msg);
+						} else if (data.code == -1) {
+							alert(data.msg);
+						}
+					}
+				})
+			})
+			// 删除
+			$(document).on('click', '#delete', function() {
+				var id = $(this).attr("data-id");
+				$.ajax({
+					url: '/admin/productdelete/' + id,
+					/* 不能忘记/*/
+					type: 'get',
+					dataType: 'json',
+					success: function(data) {
+						if (data.code == 0) {
+							if (!confirm('确定删除此记录吗？')) {
+								location.reload();
+								alert(data.msg);
+								return false;
+							} else {
+								location.reload();
+								alert(data.msg);
+							}
+						}
+					}
+				})
+			})
+
+			$(function() {
+				$('#detailpcintroduce').summernote({
+					toolbar: [
+						// [groupName, [list of button]]
+						['style', ['bold', 'italic', 'underline', 'clear']],
+						['font', ['strikethrough', 'superscript', 'subscript']],
+						['fontsize', ['fontsize']],
+						['color', ['color']],
+						['para', ['ul', 'ol', 'paragraph']],
+						['height', ['height']]
+					],
+					popover: {
+						air: [
+							['color', ['color']],
+							['font', ['bold', 'underline', 'clear']]
+						]
+					}
+				});
+			})
+		</script>
+	</body>
+</html>
